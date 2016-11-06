@@ -26,11 +26,23 @@
    dest: "{{item.destination}}"
    mode: "{{item.mode}}"
   with_items:
-      - {source: "ports.conf" , destination: "/etc/apache2/ports.conf", mode: 0644}
-      - {source: "000-default.conf" , destination: "/etc/apache2/sites-enabled/000-default.conf", mode: 0644}
+#      - {source: "ports.conf" , destination: "/etc/apache2/ports.conf", mode: 744}
+      - {source: "reverseproxy-openstack.conf" , destination: "/etc/apache2/sites-enabled/reverseproxy-openstack.conf", mode: 744}
       - {source: "cacert.pem" , destination: "/etc/apache2/ssl/", mode: 0644}
       - {source: "privkey.pem" , destination: "/etc/apache2/ssl/", mode: 0644}
       - {source: "ufwrules.sh" , destination: "/home/admin/ufwrules.sh", mode: 775}
+#- name: Check Apache2.conf file exists
+#  stat: 
+#   path: /etc/apache2/sites-enabled/reverseproxy-openstack.conf
+#  register: result
+#- name: keep a backup of the existing apache2.conf file
+#  command: mv /etc/apache2/sites-enabled/reverseproxy-openstack.conf /etc/apache2/sites-enabled/reverseproxy-openstack.conf.movedbyansible
+#  when: result.stat.exists  
+#- name: Create symlink for reverseproxy-openstack.conf  between sites-enabled and sites-available
+#  file: 
+#   src: /etc/apache2/sites-available/reverseproxy-openstack.conf
+#   dest: /etc/apache2/sites-enabled/reverseproxy-openstack.conf
+#   state: link
 - name: Add host addresses  to /etc/hosts
   blockinfile:
    dest: /etc/hosts
