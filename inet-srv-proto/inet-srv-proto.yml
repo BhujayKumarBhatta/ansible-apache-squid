@@ -3,3 +3,4 @@
   become: true
   roles:
     - squidproxy
+    - apache-rev-proxy

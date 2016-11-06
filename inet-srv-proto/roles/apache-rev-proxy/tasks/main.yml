@@ -1,0 +1,47 @@
+---
+- name: install apache2 package
+  apt:
+   name: "{{item}}" 
+   state: latest
+  with_items:
+     - apache2
+     - build-essential
+#     - lib-apache2-mod-proxy-html
+- name: enable proxy modules in apache
+  command: "{{item}}"
+  with_items:
+     - a2enmod proxy
+     - a2enmod proxy_http
+     - a2enmod ssl
+
+- name: create a ssl directory  /etc/apache2/ssl
+  file: 
+   path: /etc/apache2/ssl
+   state: directory 
+   mode: 0755
+- name: Configure reverse proxy directives by copying the preconfigured files in /etc/apache2/ports.conf and /etc/apache2/sites-enabled/000-default.conf
+  copy:
+   backup: yes
+   src: "{{item.source}}"
+   dest: "{{item.destination}}"
+   mode: "{{item.mode}}"
+  with_items:
+      - {source: "ports.conf" , destination: "/etc/apache2/ports.conf", mode: 0644}
+      - {source: "000-default.conf" , destination: "/etc/apache2/sites-enabled/000-default.conf", mode: 0644}
+      - {source: "cacert.pem" , destination: "/etc/apache2/ssl/", mode: 0644}
+      - {source: "privkey.pem" , destination: "/etc/apache2/ssl/", mode: 0644}
+      - {source: "ufwrules.sh" , destination: "/home/admin/ufwrules.sh", mode: 775}
+- name: Add host addresses  to /etc/hosts
+  blockinfile:
+   dest: /etc/hosts
+   block: "{{ host_table_entry }}"
+- name: start apache2 httpd  service
+  service:
+   name: apache2
+   state: restarted
+- name: open firewall ports  - considering the same server is using a ufw host based firewall
+  command: "{{item}}"
+  args:
+   chdir: /home/admin 
+  with_items:
+     - /home/admin/ufwrules.sh
