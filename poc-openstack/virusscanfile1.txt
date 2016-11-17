@@ -1,0 +1,14 @@
+/lib/libudev.so: Unix.Malware.Agent-1394906 FOUND
+/bin/ss: Unix.Trojan.Agent-37008 FOUND
+/bin/ps: Unix.Trojan.Agent-37008 FOUND
+/bin/netstat: Unix.Trojan.Agent-37008 FOUND
+/tmp/exe: Unix.Malware.Agent-1737691 FOUND
+/tmp/u2: Unix.Trojan.Agent-37008 FOUND
+/tmp/wo: Unix.Malware.Agent-1764548 FOUND
+/tmp/udp28: Unix.Trojan.Agent-37008 FOUND
+/tmp/syn28: Unix.Trojan.Agent-37008 FOUND
+/usr/bin/.sshd: Unix.Trojan.Agent-37008 FOUND
+/usr/bin/lsof: Unix.Trojan.Agent-37008 FOUND
+/usr/bin/bsd-port/getty: Unix.Trojan.Agent-37008 FOUND
+/usr/bin/tezrsxwljj: Unix.Trojan.DDoS_XOR-1 FOUND
+/usr/share/apache2/error/HTTP_NOT_FOUND.html.var: OK

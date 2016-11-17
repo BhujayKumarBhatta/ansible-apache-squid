@@ -1,0 +1,35 @@
+#cloud-config
+ssh_pwauth: yes
+disable_root: false
+groups:
+ - ubuntu
+ - users
+ - admin
+ - prasen
+users:
+ - default
+ - admin
+   sudo: ALL=(ALL) NOPASSWD:ALL
+   groups: users, admin
+   ssh-import-id: None
+   lock_passwd: false
+   plain_text_passwd: 'welcome@123'
+   homedir: /home/ubuntu
+   sudo:
+      - ALL=(ALL) NOPASSWD:/bin/mysql
+      - ALL=(ALL) ALL
+   ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC26IIM8i1/hi8X26R1JFEEFP7gWc25wQOrr8sxYJeQpmU7KYQvqaggl+uwx4An25wSHTQPl10I8jB7PANWpO0PSTua0FExYWrQd0Isd5smofr2W7BVeHeYzuQK2ULf6Gy2k8qtDH3bVEo8uneRzBUxA+MeyLAiW2GENWIatZbReQOjsvcCAOVU0Fksud3UgN2htfmieZ9bHpTvoXzyETHOexqnggffKv/SWqOkFqoMS8xTCkqhdvdW0p3akiGw80EIUwPASfTYELNfz7w2iqfFxYGI15xhzq2r+mWWzd3fJkjNnpxyYP3JSIwEp0GBpHURshrfxom1ZUD3gvB9ch23 admin@dcim
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCuGxL1N9ZRFxL0KUlrLw/JEyY0B4ufFldYRAQGMjR2+vzPsPKnRjVClyeVhGJBMkLapLQE3b2e1nfeI8M3A6Zw7oJ0AvLhbuRTrJEadpKryd13O/cWW6HnSXQm28ynLvM1Imkr5QY/ZKVMpPZvQhFaLscIcbU404quV7rp6oi9P5oVQHxX94BGtLuV8XG25PZb0x0W6toDke3HmRz9aF2D6PFvw/x0z+q9sUxapXdpmkTxSLEY/M7NtHiHpUXWLuLlsDfXrzSRUR/iMPCSupaiFmJdg6IGkg8NpaOZoAZYCtr8Uxv60ae0b1ReSQImuK3sF1mQgVELvHYGB6CmWiWx ubuntu@conrtoller2
+ - name: cloud
+   homedir: /home/cloud
+   lock_passwd: false
+   plain_text_passwd: 'welcome@123'
+write_files:
+ - content: Text Written by Cloud-Init - this is for testing...
+   owner: ubuntu:ubuntu
+   path:/home/cloud-init-file
+   permissions: '0777'
+packages:
+ - python
+final_message: 'yahoooooooo !!!!!!!!!'

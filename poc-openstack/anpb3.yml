@@ -1,0 +1,43 @@
+---
+- hosts: localhost
+#  vars_files:
+#     - vars-3.yml
+  become: true
+#  become_user: root
+#  become_method: sudo
+  tasks:
+  - name: launch an nova instance 
+    os_server: 
+       state: present
+       auth:
+          auth_url: http://controller:35357/v2.0
+          username: admin
+          password: admin123
+          project_name: admin
+       name: vm4-ubu
+       image: Sandipan-Ubuntu16 
+       key_name: ubuntu-controller2-key
+       timeout: 200
+       flavor: m1.standard
+       nics:
+          - net-id: 305c14fa-5c44-4cc6-969d-259333562249
+       auto_ip: yes
+#       floating_ip_pools: ext-net
+       security_groups: default
+       config_drive: yes
+
+       meta:
+          hostname: vm4-auto-ubuntu
+          group: uge_master
+       userdata: 
+          - our-user-data-v2.txt
+          - users: 
+            name: sandipan	
+            lock_passwd: false
+            plain_text_passwd: 'welcome@123'
+            home: /home/sandipan
+          - bootcmd:
+              - touch /etc/apt/apt.conf
+              - echo 'Acquire::http{proxy "http://14.142.104.120:3142"};' > /etc/apt/apt.conf
+          - packages:
+              - python

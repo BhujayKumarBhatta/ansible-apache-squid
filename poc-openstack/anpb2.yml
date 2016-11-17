@@ -1,0 +1,58 @@
+---
+- name: launch a compute instance
+  hosts: localhost
+  tasks:
+  - name: launch an instance
+    os_server:
+      state: present
+      auth:
+      auth_url: http://controller:35357/v2.0/
+      username: admin
+      password: admin123
+#     project_name: admin
+    name: vm3-auto-ubuntu
+    image: ubuntu16-with-gfish
+    key_name: ubuntu-controller2-key
+    timeout: 200
+    flavor: m1.standard
+    nics:
+      - net-id: 305c14fa-5c44-4cc6-969d-259333562249
+    auto_ip: yes
+    floating_ip_pool: ext-net
+    security_group: default
+    config_drive: yes
+
+    meta:
+      hostname: vm3-auto-ubuntu
+      group: uge_master
+    userdata:
+      - ssh_pwdauth: yes
+      - disable_root: false
+      - groups:
+          - users
+	  - admin
+	  - ubuntu
+      - users:
+			- name: admin
+				plain_text_password: 'welcome@123'
+				lock_passwd: false
+				home_dir: /home/admin
+				sudo:
+					- ALL=(ALL) NOPASSWD:ALL
+					- ALL=(ALL) ALL
+				group: users,admin
+				ssh_authorized_keys:
+					- ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCuGxL1N9ZRFxL0KUlrLw/JEyY0B4ufFldYRAQGMjR2+vzPsPKnRjVClyeVhGJBMkLapLQE3b2e1nfeI8M3A6Zw7oJ0AvLhbuRTrJEadpKryd13O/cWW6HnSXQm28ynLvM1Imkr5QY/ZKVMpPZvQhFaLscIcbU404quV7rp6oi9P5oVQHxX94BGtLuV8XG25PZb0x0W6toDke3HmRz9aF2D6PFvw/x0z+q9sUxapXdpmkTxSLEY/M7NtHiHpUXWLuLlsDfXrzSRUR/iMPCSupaiFmJdg6IGkg8NpaOZoAZYCtr8Uxv60ae0b1ReSQImuK3sF1mQgVELvHYGB6CmWiWx ubuntu@conrtoller2
+	
+			- name: testuser
+                                plain_text_password: 'welcome@123'
+                                home_dir: /home/testuser
+                                sudo:
+                                        - ALL=(ALL) NOPASSWD:ALL
+                                        - ALL=(ALL) ALL
+                                group: users,admin
+                                ssh_authorized_keys:
+                                        - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCuGxL1N9ZRFxL0KUlrLw/JEyY0B4ufFldYRAQGMjR2+vzPsPKnRjVClyeVhGJBMkLapLQE3b2e1nfeI8M3A6Zw7oJ0AvLhbuRTrJEadpKryd13O/cWW6HnSXQm28ynLvM1Imkr5QY/ZKVMpPZvQhFaLscIcbU404quV7rp6oi9P5oVQHxX94BGtLuV8XG25PZb0x0W6toDke3HmRz9aF2D6PFvw/x0z+q9sUxapXdpmkTxSLEY/M7NtHiHpUXWLuLlsDfXrzSRUR/iMPCSupaiFmJdg6IGkg8NpaOZoAZYCtr8Uxv60ae0b1ReSQImuK3sF1mQgVELvHYGB6CmWiWx ubuntu@conrtoller2
+			- write_files:
+				content: This is a test write 
+				path: /home/userdata_write_file	

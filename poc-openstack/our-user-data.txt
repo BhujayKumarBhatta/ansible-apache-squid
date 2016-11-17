@@ -1,0 +1,33 @@
+#cloud-config
+#hostname:vm3
+write_files:
+ - encoding: b64
+   content: Text written by babu through cloud init user data...
+   owner: root:root
+   path: /var/log/babu
+   permissions: '0644'
+groups:
+ - ubuntu
+ - users
+ - admin
+packages:
+ - python-pip
+users:
+ - ubuntu
+    gecos: admin user
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin
+    ssh-import-id: None
+    lock_passwd: false
+    plain_text_passwd: 'welcome@123'
+    homedir: /home/admin
+    sudo:
+      - ALL=(ALL) NOPASSWD:/bin/mysql
+      - ALL=(ALL) ALL
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCuGxL1N9ZRFxL0KUlrLw/JEyY0B4ufFldYRAQGMjR2+vzPsPKnRjVClyeVhGJBMkLapLQE3b2e1nfeI8M3A6Zw7oJ0AvLhbuRTrJEadpKryd13O/cWW6HnSXQm28ynLvM1Imkr5QY/ZKVMpPZvQhFaLscIcbU404quV7rp6oi9P5oVQHxX94BGtLuV8XG25PZb0x0W6toDke3HmRz9aF2D6PFvw/x0z+q9sUxapXdpmkTxSLEY/M7NtHiHpUXWLuLlsDfXrzSRUR/iMPCSupaiFmJdg6IGkg8NpaOZoAZYCtr8Uxv60ae0b1ReSQImuK3sF1mQgVELvHYGB6CmWiWx ubuntu@conrtoller2
+ - name: cloudy
+    gecos: Magic Cloud App Daemon User
+    inactive: true
+    system: true
+final_message: "yahoo !!!!!! the system is finally up, after $UPTIME seconds"

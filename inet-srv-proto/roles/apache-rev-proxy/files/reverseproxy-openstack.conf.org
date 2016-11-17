@@ -21,9 +21,9 @@ Listen 9696
 Listen 35357
 Listen 36151
 Listen 443
-<VirtualHost dcim2:80>
+<VirtualHost dcim:80>
 
-        ServerName dcimi2
+        ServerName dcim
         ServerAdmin webmaster@localhost
         DocumentRoot /var/www/html
         ErrorLog ${APACHE_LOG_DIR}/error.log
@@ -35,9 +35,9 @@ Listen 443
         ProxyPassReverse /  http://controller-org/
 </VirtualHost>
 
-<VirtualHost dcim2:443>
+<VirtualHost dcim:443>
 
-        ServerName dcim2
+        ServerName dcim
         ServerAdmin webmaster@localhost
         DocumentRoot /var/www/html
         ErrorLog ${APACHE_LOG_DIR}/error.log
