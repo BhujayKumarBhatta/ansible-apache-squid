@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+#  connection: local  , don't use this it is casuing the second playbook run to fail during SSH connection
+  become: true
+  roles:
+    - create-nova-vm
+- hosts: webservers
+  become: true
+  tasks:
+  - name: do something on the newly created VM
+    command: 'hostname -I'
+  roles:
+    - apply-common-config
