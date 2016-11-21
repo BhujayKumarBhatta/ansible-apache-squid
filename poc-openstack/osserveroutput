@@ -1,0 +1,644 @@
+Using /etc/ansible/ansible.cfg as config file
+Loading callback plugin default of type stdout, v2.0 from /usr/lib/python2.7/dist-packages/ansible/plugins/callback/__init__.pyc
+
+PLAYBOOK: anpb5.yml ************************************************************
+2 plays in anpb5.yml
+
+PLAY [localhost] ***************************************************************
+
+TASK [setup] *******************************************************************
+Using module file /usr/lib/python2.7/dist-packages/ansible/modules/core/system/setup.py
+<localhost> ESTABLISH LOCAL CONNECTION FOR USER: admin
+<localhost> EXEC /bin/sh -c '( umask 77 && mkdir -p "` echo $HOME/.ansible/tmp/ansible-tmp-1479707938.69-6884328338486 `" && echo ansible-tmp-1479707938.69-6884328338486="` echo $HOME/.ansible/tmp/ansible-tmp-1479707938.69-6884328338486 `" ) && sleep 0'
+<localhost> PUT /tmp/tmpxjg2KA TO /home/admin/.ansible/tmp/ansible-tmp-1479707938.69-6884328338486/setup.py
+<localhost> EXEC /bin/sh -c 'chmod u+x /home/admin/.ansible/tmp/ansible-tmp-1479707938.69-6884328338486/ /home/admin/.ansible/tmp/ansible-tmp-1479707938.69-6884328338486/setup.py && sleep 0'
+<localhost> EXEC /bin/sh -c 'sudo -H -S -n -u root /bin/sh -c '"'"'echo BECOME-SUCCESS-yvqvwvfvnwzhavyynmhesrpxagxwgqlk; /usr/bin/python /home/admin/.ansible/tmp/ansible-tmp-1479707938.69-6884328338486/setup.py; rm -rf "/home/admin/.ansible/tmp/ansible-tmp-1479707938.69-6884328338486/" > /dev/null 2>&1'"'"' && sleep 0'
+ok: [localhost]
+
+TASK [launch an nova instance] *************************************************
+task path: /home/admin/ansible-projects/poc-openstack/anpb5.yml:10
+File lookup using /home/admin/ansible-projects/poc-openstack/our-user-data-v3.txt as file
+Using module file /usr/lib/python2.7/dist-packages/ansible/modules/core/cloud/openstack/os_server.py
+<localhost> ESTABLISH LOCAL CONNECTION FOR USER: admin
+<localhost> EXEC /bin/sh -c '( umask 77 && mkdir -p "` echo $HOME/.ansible/tmp/ansible-tmp-1479707939.7-83252859250264 `" && echo ansible-tmp-1479707939.7-83252859250264="` echo $HOME/.ansible/tmp/ansible-tmp-1479707939.7-83252859250264 `" ) && sleep 0'
+<localhost> PUT /tmp/tmpp8U5Pa TO /home/admin/.ansible/tmp/ansible-tmp-1479707939.7-83252859250264/os_server.py
+<localhost> EXEC /bin/sh -c 'chmod u+x /home/admin/.ansible/tmp/ansible-tmp-1479707939.7-83252859250264/ /home/admin/.ansible/tmp/ansible-tmp-1479707939.7-83252859250264/os_server.py && sleep 0'
+<localhost> EXEC /bin/sh -c 'sudo -H -S -n -u root /bin/sh -c '"'"'echo BECOME-SUCCESS-dgmaxgbyqyiwumyidhccetgrkbgctykw; /usr/bin/python /home/admin/.ansible/tmp/ansible-tmp-1479707939.7-83252859250264/os_server.py; rm -rf "/home/admin/.ansible/tmp/ansible-tmp-1479707939.7-83252859250264/" > /dev/null 2>&1'"'"' && sleep 0'
+ok: [localhost] => {
+    "changed": false, 
+    "id": "6bfb8774-b050-493b-897e-6c3a73af8dce", 
+    "invocation": {
+        "module_args": {
+            "api_timeout": null, 
+            "auth": {
+                "auth_url": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER", 
+                "password": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER", 
+                "project_name": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER", 
+                "username": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER"
+            }, 
+            "auth_type": null, 
+            "auto_ip": true, 
+            "availability_zone": null, 
+            "boot_from_volume": false, 
+            "boot_volume": null, 
+            "cacert": null, 
+            "cert": null, 
+            "cloud": null, 
+            "config_drive": true, 
+            "delete_fip": false, 
+            "endpoint_type": "public", 
+            "flavor": "m1.r1d2", 
+            "flavor_include": null, 
+            "flavor_ram": null, 
+            "floating_ip_pools": null, 
+            "floating_ips": null, 
+            "image": "Sandipan-Ubuntu16", 
+            "image_exclude": "(deprecated)", 
+            "key": null, 
+            "key_name": "ubuntu-controller2-key", 
+            "meta": null, 
+            "name": "vm8", 
+            "network": null, 
+            "nics": [
+                {
+                    "net-id": "305c14fa-5c44-4cc6-969d-259333562249"
+                }
+            ], 
+            "region_name": null, 
+            "reuse_ips": true, 
+            "scheduler_hints": null, 
+            "security_groups": [
+                "default"
+            ], 
+            "state": "present", 
+            "terminate_volume": false, 
+            "timeout": 1500, 
+            "user_data": "#cloud-config\nusers:\n - default\n - name: cloudy\n   sudo: ALL=(ALL) NOPASSWD:ALL\n   ssh-authorized-keys:\n    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC26IIM8i1/hi8X26R1JFEEFP7gWc25wQOrr8sxYJeQpmU7KYQvqaggl+uwx4An25wSHTQPl10I8jB7PANWpO0PSTua0FExYWrQd0Isd5smofr2W7BVeHeYzuQK2ULf6Gy2k8qtDH3bVEo8uneRzBUxA+MeyLAiW2GENWIatZbReQOjsvcCAOVU0Fksud3UgN2htfmieZ9bHpTvoXzyETHOexqnggffKv/SWqOkFqoMS8xTCkqhdvdW0p3akiGw80EIUwPASfTYELNfz7w2iqfFxYGI15xhzq2r+mWWzd3fJkjNnpxyYP3JSIwEp0GBpHURshrfxom1ZUD3gvB9ch23 ********@dcim\n   homedir: /home/cloudy\n   shell: /bin/bash\n - name: ********\n   sudo: ALL=(ALL) NOPASSWD:ALL\n   ssh-authorized-keys:\n    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC26IIM8i1/hi8X26R1JFEEFP7gWc25wQOrr8sxYJeQpmU7KYQvqaggl+uwx4An25wSHTQPl10I8jB7PANWpO0PSTua0FExYWrQd0Isd5smofr2W7BVeHeYzuQK2ULf6Gy2k8qtDH3bVEo8uneRzBUxA+MeyLAiW2GENWIatZbReQOjsvcCAOVU0Fksud3UgN2htfmieZ9bHpTvoXzyETHOexqnggffKv/SWqOkFqoMS8xTCkqhdvdW0p3akiGw80EIUwPASfTYELNfz7w2iqfFxYGI15xhzq2r+mWWzd3fJkjNnpxyYP3JSIwEp0GBpHURshrfxom1ZUD3gvB9ch23 ********@dcim\n   homedir: /home/********\n   shell: /bin/bash\nssh_authorized_keys:\nssh_authorized_keys:\n - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC26IIM8i1/hi8X26R1JFEEFP7gWc25wQOrr8sxYJeQpmU7KYQvqaggl+uwx4An25wSHTQPl10I8jB7PANWpO0PSTua0FExYWrQd0Isd5smofr2W7BVeHeYzuQK2ULf6Gy2k8qtDH3bVEo8uneRzBUxA+MeyLAiW2GENWIatZbReQOjsvcCAOVU0Fksud3UgN2htfmieZ9bHpTvoXzyETHOexqnggffKv/SWqOkFqoMS8xTCkqhdvdW0p3akiGw80EIUwPASfTYELNfz7w2iqfFxYGI15xhzq2r+mWWzd3fJkjNnpxyYP3JSIwEp0GBpHURshrfxom1ZUD3gvB9ch23 ********@dcim\n - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCuGxL1N9ZRFxL0KUlrLw/JEyY0B4ufFldYRAQGMjR2+vzPsPKnRjVClyeVhGJBMkLapLQE3b2e1nfeI8M3A6Zw7oJ0AvLhbuRTrJEadpKryd13O/cWW6HnSXQm28ynLvM1Imkr5QY/ZKVMpPZvQhFaLscIcbU404quV7rp6oi9P5oVQHxX94BGtLuV8XG25PZb0x0W6toDke3HmRz9aF2D6PFvw/x0z+q9sUxapXdpmkTxSLEY/M7NtHiHpUXWLuLlsDfXrzSRUR/iMPCSupaiFmJdg6IGkg8NpaOZoAZYCtr8Uxv60ae0b1ReSQImuK3sF1mQgVELvHYGB6CmWiWx ubuntu@conrtoller2\nwrite_files:\n - content: this is a clou-init write file test...\n   owner: root:root\n   path: /home/cloudy/.bashrc\n   permissions: '0644'\nfinal_message: \"The system is finally up, after $UPTIME seconds\"\nbootcmd:\n - echo 127.0.0.1 $HOSTNAME > /home/cloudy/testfile", 
+            "userdata": "#cloud-config\nusers:\n - default\n - name: cloudy\n   sudo: ALL=(ALL) NOPASSWD:ALL\n   ssh-authorized-keys:\n    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC26IIM8i1/hi8X26R1JFEEFP7gWc25wQOrr8sxYJeQpmU7KYQvqaggl+uwx4An25wSHTQPl10I8jB7PANWpO0PSTua0FExYWrQd0Isd5smofr2W7BVeHeYzuQK2ULf6Gy2k8qtDH3bVEo8uneRzBUxA+MeyLAiW2GENWIatZbReQOjsvcCAOVU0Fksud3UgN2htfmieZ9bHpTvoXzyETHOexqnggffKv/SWqOkFqoMS8xTCkqhdvdW0p3akiGw80EIUwPASfTYELNfz7w2iqfFxYGI15xhzq2r+mWWzd3fJkjNnpxyYP3JSIwEp0GBpHURshrfxom1ZUD3gvB9ch23 ********@dcim\n   homedir: /home/cloudy\n   shell: /bin/bash\n - name: ********\n   sudo: ALL=(ALL) NOPASSWD:ALL\n   ssh-authorized-keys:\n    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC26IIM8i1/hi8X26R1JFEEFP7gWc25wQOrr8sxYJeQpmU7KYQvqaggl+uwx4An25wSHTQPl10I8jB7PANWpO0PSTua0FExYWrQd0Isd5smofr2W7BVeHeYzuQK2ULf6Gy2k8qtDH3bVEo8uneRzBUxA+MeyLAiW2GENWIatZbReQOjsvcCAOVU0Fksud3UgN2htfmieZ9bHpTvoXzyETHOexqnggffKv/SWqOkFqoMS8xTCkqhdvdW0p3akiGw80EIUwPASfTYELNfz7w2iqfFxYGI15xhzq2r+mWWzd3fJkjNnpxyYP3JSIwEp0GBpHURshrfxom1ZUD3gvB9ch23 ********@dcim\n   homedir: /home/********\n   shell: /bin/bash\nssh_authorized_keys:\nssh_authorized_keys:\n - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC26IIM8i1/hi8X26R1JFEEFP7gWc25wQOrr8sxYJeQpmU7KYQvqaggl+uwx4An25wSHTQPl10I8jB7PANWpO0PSTua0FExYWrQd0Isd5smofr2W7BVeHeYzuQK2ULf6Gy2k8qtDH3bVEo8uneRzBUxA+MeyLAiW2GENWIatZbReQOjsvcCAOVU0Fksud3UgN2htfmieZ9bHpTvoXzyETHOexqnggffKv/SWqOkFqoMS8xTCkqhdvdW0p3akiGw80EIUwPASfTYELNfz7w2iqfFxYGI15xhzq2r+mWWzd3fJkjNnpxyYP3JSIwEp0GBpHURshrfxom1ZUD3gvB9ch23 ********@dcim\n - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCuGxL1N9ZRFxL0KUlrLw/JEyY0B4ufFldYRAQGMjR2+vzPsPKnRjVClyeVhGJBMkLapLQE3b2e1nfeI8M3A6Zw7oJ0AvLhbuRTrJEadpKryd13O/cWW6HnSXQm28ynLvM1Imkr5QY/ZKVMpPZvQhFaLscIcbU404quV7rp6oi9P5oVQHxX94BGtLuV8XG25PZb0x0W6toDke3HmRz9aF2D6PFvw/x0z+q9sUxapXdpmkTxSLEY/M7NtHiHpUXWLuLlsDfXrzSRUR/iMPCSupaiFmJdg6IGkg8NpaOZoAZYCtr8Uxv60ae0b1ReSQImuK3sF1mQgVELvHYGB6CmWiWx ubuntu@conrtoller2\nwrite_files:\n - content: this is a clou-init write file test...\n   owner: root:root\n   path: /home/cloudy/.bashrc\n   permissions: '0644'\nfinal_message: \"The system is finally up, after $UPTIME seconds\"\nbootcmd:\n - echo 127.0.0.1 $HOSTNAME > /home/cloudy/testfile", 
+            "verify": true, 
+            "volume_size": false, 
+            "volumes": [], 
+            "wait": true
+        }, 
+        "module_name": "os_server"
+    }, 
+    "openstack": {
+        "OS-DCF:diskConfig": "MANUAL", 
+        "OS-EXT-AZ:availability_zone": "nova", 
+        "OS-EXT-SRV-ATTR:host": "compute1", 
+        "OS-EXT-SRV-ATTR:hypervisor_hostname": "compute1", 
+        "OS-EXT-SRV-ATTR:instance_name": "instance-0000008a", 
+        "OS-EXT-STS:power_state": 1, 
+        "OS-EXT-STS:task_state": null, 
+        "OS-EXT-STS:vm_state": "active", 
+        "OS-SRV-USG:launched_at": "2016-11-20T17:35:52.000000", 
+        "OS-SRV-USG:terminated_at": null, 
+        "accessIPv4": "10.1.0.25", 
+        "accessIPv6": "", 
+        "addresses": {
+            "demo-net": [
+                {
+                    "OS-EXT-IPS-MAC:mac_addr": "fa:16:3e:b5:0e:7a", 
+                    "OS-EXT-IPS:type": "fixed", 
+                    "addr": "192.168.1.74", 
+                    "version": 4
+                }, 
+                {
+                    "OS-EXT-IPS-MAC:mac_addr": "fa:16:3e:b5:0e:7a", 
+                    "OS-EXT-IPS:type": "floating", 
+                    "addr": "10.1.0.25", 
+                    "version": 4
+                }
+            ]
+        }, 
+        "adminPass": null, 
+        "az": "nova", 
+        "cloud": "defaults", 
+        "config_drive": "True", 
+        "created": "2016-11-20T17:35:34Z", 
+        "disk_config": "MANUAL", 
+        "flavor": {
+            "id": "7", 
+            "name": "m1.r1d2"
+        }, 
+        "has_config_drive": true, 
+        "hostId": "2f577837db747e00d78b02964f88b395bebf85926bfc67fed46bef90", 
+        "host_id": "2f577837db747e00d78b02964f88b395bebf85926bfc67fed46bef90", 
+        "id": "6bfb8774-b050-493b-897e-6c3a73af8dce", 
+        "image": {
+            "id": "f7641e91-384c-4306-aabe-099d88dfee67", 
+            "name": "Sandipan-Ubuntu16"
+        }, 
+        "interface_ip": "10.1.0.25", 
+        "key_name": "ubuntu-controller2-key", 
+        "launched_at": "2016-11-20T17:35:52.000000", 
+        "location": {
+            "cloud": "defaults", 
+            "project": {
+                "domain_id": null, 
+                "domain_name": null, 
+                "id": "d6f383ea237d4b589662857c106a932b", 
+                "name": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER"
+            }, 
+            "region_name": "", 
+            "zone": "nova"
+        }, 
+        "metadata": {}, 
+        "name": "vm8", 
+        "networks": {
+            "demo-net": [
+                "192.168.1.74", 
+                "10.1.0.25"
+            ]
+        }, 
+        "os-extended-volumes:volumes_attached": [], 
+        "power_state": 1, 
+        "private_v4": "192.168.1.74", 
+        "progress": 0, 
+        "project_id": "d6f383ea237d4b589662857c106a932b", 
+        "properties": {
+            "OS-DCF:diskConfig": "MANUAL", 
+            "OS-EXT-AZ:availability_zone": "nova", 
+            "OS-EXT-SRV-ATTR:host": "compute1", 
+            "OS-EXT-SRV-ATTR:hypervisor_hostname": "compute1", 
+            "OS-EXT-SRV-ATTR:instance_name": "instance-0000008a", 
+            "OS-EXT-STS:power_state": 1, 
+            "OS-EXT-STS:task_state": null, 
+            "OS-EXT-STS:vm_state": "active", 
+            "OS-SRV-USG:launched_at": "2016-11-20T17:35:52.000000", 
+            "OS-SRV-USG:terminated_at": null, 
+            "os-extended-volumes:volumes_attached": [], 
+            "request_ids": []
+        }, 
+        "public_v4": "10.1.0.25", 
+        "public_v6": "", 
+        "region": "", 
+        "request_ids": [], 
+        "security_groups": [
+            {
+                "HUMAN_ID": false, 
+                "NAME_ATTR": "name", 
+                "description": "default", 
+                "human_id": null, 
+                "id": "8804f40b-ce92-42c3-a2ad-200046e88243", 
+                "location": {
+                    "cloud": "defaults", 
+                    "project": {
+                        "domain_id": null, 
+                        "domain_name": null, 
+                        "id": "d6f383ea237d4b589662857c106a932b", 
+                        "name": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER"
+                    }, 
+                    "region_name": "", 
+                    "zone": null
+                }, 
+                "name": "default", 
+                "project_id": "d6f383ea237d4b589662857c106a932b", 
+                "properties": {
+                    "HUMAN_ID": false, 
+                    "NAME_ATTR": "name", 
+                    "human_id": null, 
+                    "request_ids": []
+                }, 
+                "request_ids": [], 
+                "security_group_rules": [
+                    {
+                        "direction": "ingress", 
+                        "ethertype": "IPv4", 
+                        "group": {}, 
+                        "id": "04a702cd-9598-458a-9cbc-7bf654e4c967", 
+                        "location": {
+                            "cloud": "defaults", 
+                            "project": {
+                                "domain_id": null, 
+                                "domain_name": null, 
+                                "id": "d6f383ea237d4b589662857c106a932b", 
+                                "name": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER"
+                            }, 
+                            "region_name": "", 
+                            "zone": null
+                        }, 
+                        "port_range_max": 22, 
+                        "port_range_min": 22, 
+                        "project_id": "", 
+                        "properties": {
+                            "group": {}
+                        }, 
+                        "protocol": "tcp", 
+                        "remote_group_id": null, 
+                        "remote_ip_prefix": "0.0.0.0/0", 
+                        "security_group_id": "8804f40b-ce92-42c3-a2ad-200046e88243", 
+                        "tenant_id": ""
+                    }, 
+                    {
+                        "direction": "ingress", 
+                        "ethertype": "IPv4", 
+                        "group": {}, 
+                        "id": "3855815f-8faa-4885-962c-e583572054fe", 
+                        "location": {
+                            "cloud": "defaults", 
+                            "project": {
+                                "domain_id": null, 
+                                "domain_name": null, 
+                                "id": "d6f383ea237d4b589662857c106a932b", 
+                                "name": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER"
+                            }, 
+                            "region_name": "", 
+                            "zone": null
+                        }, 
+                        "port_range_max": null, 
+                        "port_range_min": null, 
+                        "project_id": "", 
+                        "properties": {
+                            "group": {}
+                        }, 
+                        "protocol": "icmp", 
+                        "remote_group_id": null, 
+                        "remote_ip_prefix": "0.0.0.0/0", 
+                        "security_group_id": "8804f40b-ce92-42c3-a2ad-200046e88243", 
+                        "tenant_id": ""
+                    }, 
+                    {
+                        "direction": "ingress", 
+                        "ethertype": "IPv4", 
+                        "group": {
+                            "name": "default", 
+                            "tenant_id": "d6f383ea237d4b589662857c106a932b"
+                        }, 
+                        "id": "8cf0657d-52ba-4ee8-9ca8-5a82eb332514", 
+                        "location": {
+                            "cloud": "defaults", 
+                            "project": {
+                                "domain_id": null, 
+                                "domain_name": null, 
+                                "id": "d6f383ea237d4b589662857c106a932b", 
+                                "name": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER"
+                            }, 
+                            "region_name": "", 
+                            "zone": null
+                        }, 
+                        "port_range_max": null, 
+                        "port_range_min": null, 
+                        "project_id": "", 
+                        "properties": {
+                            "group": {
+                                "name": "default", 
+                                "tenant_id": "d6f383ea237d4b589662857c106a932b"
+                            }
+                        }, 
+                        "protocol": null, 
+                        "remote_group_id": null, 
+                        "remote_ip_prefix": null, 
+                        "security_group_id": "8804f40b-ce92-42c3-a2ad-200046e88243", 
+                        "tenant_id": ""
+                    }, 
+                    {
+                        "direction": "ingress", 
+                        "ethertype": "IPv4", 
+                        "group": {
+                            "name": "default", 
+                            "tenant_id": "d6f383ea237d4b589662857c106a932b"
+                        }, 
+                        "id": "d5adb41d-b33f-4dbd-b0b0-857b952d1da0", 
+                        "location": {
+                            "cloud": "defaults", 
+                            "project": {
+                                "domain_id": null, 
+                                "domain_name": null, 
+                                "id": "d6f383ea237d4b589662857c106a932b", 
+                                "name": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER"
+                            }, 
+                            "region_name": "", 
+                            "zone": null
+                        }, 
+                        "port_range_max": null, 
+                        "port_range_min": null, 
+                        "project_id": "", 
+                        "properties": {
+                            "group": {
+                                "name": "default", 
+                                "tenant_id": "d6f383ea237d4b589662857c106a932b"
+                            }
+                        }, 
+                        "protocol": null, 
+                        "remote_group_id": null, 
+                        "remote_ip_prefix": null, 
+                        "security_group_id": "8804f40b-ce92-42c3-a2ad-200046e88243", 
+                        "tenant_id": ""
+                    }
+                ], 
+                "tenant_id": "d6f383ea237d4b589662857c106a932b"
+            }
+        ], 
+        "status": "ACTIVE", 
+        "task_state": null, 
+        "tenant_id": "d6f383ea237d4b589662857c106a932b", 
+        "terminated_at": null, 
+        "updated": "2016-11-20T17:35:48Z", 
+        "user_id": "a9f490ed19b64711b2ba819baefbeaf3", 
+        "vm_state": "active", 
+        "volumes": []
+    }, 
+    "server": {
+        "OS-DCF:diskConfig": "MANUAL", 
+        "OS-EXT-AZ:availability_zone": "nova", 
+        "OS-EXT-SRV-ATTR:host": "compute1", 
+        "OS-EXT-SRV-ATTR:hypervisor_hostname": "compute1", 
+        "OS-EXT-SRV-ATTR:instance_name": "instance-0000008a", 
+        "OS-EXT-STS:power_state": 1, 
+        "OS-EXT-STS:task_state": null, 
+        "OS-EXT-STS:vm_state": "active", 
+        "OS-SRV-USG:launched_at": "2016-11-20T17:35:52.000000", 
+        "OS-SRV-USG:terminated_at": null, 
+        "accessIPv4": "10.1.0.25", 
+        "accessIPv6": "", 
+        "addresses": {
+            "demo-net": [
+                {
+                    "OS-EXT-IPS-MAC:mac_addr": "fa:16:3e:b5:0e:7a", 
+                    "OS-EXT-IPS:type": "fixed", 
+                    "addr": "192.168.1.74", 
+                    "version": 4
+                }, 
+                {
+                    "OS-EXT-IPS-MAC:mac_addr": "fa:16:3e:b5:0e:7a", 
+                    "OS-EXT-IPS:type": "floating", 
+                    "addr": "10.1.0.25", 
+                    "version": 4
+                }
+            ]
+        }, 
+        "adminPass": null, 
+        "az": "nova", 
+        "cloud": "defaults", 
+        "config_drive": "True", 
+        "created": "2016-11-20T17:35:34Z", 
+        "disk_config": "MANUAL", 
+        "flavor": {
+            "id": "7", 
+            "name": "m1.r1d2"
+        }, 
+        "has_config_drive": true, 
+        "hostId": "2f577837db747e00d78b02964f88b395bebf85926bfc67fed46bef90", 
+        "host_id": "2f577837db747e00d78b02964f88b395bebf85926bfc67fed46bef90", 
+        "id": "6bfb8774-b050-493b-897e-6c3a73af8dce", 
+        "image": {
+            "id": "f7641e91-384c-4306-aabe-099d88dfee67", 
+            "name": "Sandipan-Ubuntu16"
+        }, 
+        "interface_ip": "10.1.0.25", 
+        "key_name": "ubuntu-controller2-key", 
+        "launched_at": "2016-11-20T17:35:52.000000", 
+        "location": {
+            "cloud": "defaults", 
+            "project": {
+                "domain_id": null, 
+                "domain_name": null, 
+                "id": "d6f383ea237d4b589662857c106a932b", 
+                "name": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER"
+            }, 
+            "region_name": "", 
+            "zone": "nova"
+        }, 
+        "metadata": {}, 
+        "name": "vm8", 
+        "networks": {
+            "demo-net": [
+                "192.168.1.74", 
+                "10.1.0.25"
+            ]
+        }, 
+        "os-extended-volumes:volumes_attached": [], 
+        "power_state": 1, 
+        "private_v4": "192.168.1.74", 
+        "progress": 0, 
+        "project_id": "d6f383ea237d4b589662857c106a932b", 
+        "properties": {
+            "OS-DCF:diskConfig": "MANUAL", 
+            "OS-EXT-AZ:availability_zone": "nova", 
+            "OS-EXT-SRV-ATTR:host": "compute1", 
+            "OS-EXT-SRV-ATTR:hypervisor_hostname": "compute1", 
+            "OS-EXT-SRV-ATTR:instance_name": "instance-0000008a", 
+            "OS-EXT-STS:power_state": 1, 
+            "OS-EXT-STS:task_state": null, 
+            "OS-EXT-STS:vm_state": "active", 
+            "OS-SRV-USG:launched_at": "2016-11-20T17:35:52.000000", 
+            "OS-SRV-USG:terminated_at": null, 
+            "os-extended-volumes:volumes_attached": [], 
+            "request_ids": []
+        }, 
+        "public_v4": "10.1.0.25", 
+        "public_v6": "", 
+        "region": "", 
+        "request_ids": [], 
+        "security_groups": [
+            {
+                "HUMAN_ID": false, 
+                "NAME_ATTR": "name", 
+                "description": "default", 
+                "human_id": null, 
+                "id": "8804f40b-ce92-42c3-a2ad-200046e88243", 
+                "location": {
+                    "cloud": "defaults", 
+                    "project": {
+                        "domain_id": null, 
+                        "domain_name": null, 
+                        "id": "d6f383ea237d4b589662857c106a932b", 
+                        "name": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER"
+                    }, 
+                    "region_name": "", 
+                    "zone": null
+                }, 
+                "name": "default", 
+                "project_id": "d6f383ea237d4b589662857c106a932b", 
+                "properties": {
+                    "HUMAN_ID": false, 
+                    "NAME_ATTR": "name", 
+                    "human_id": null, 
+                    "request_ids": []
+                }, 
+                "request_ids": [], 
+                "security_group_rules": [
+                    {
+                        "direction": "ingress", 
+                        "ethertype": "IPv4", 
+                        "group": {}, 
+                        "id": "04a702cd-9598-458a-9cbc-7bf654e4c967", 
+                        "location": {
+                            "cloud": "defaults", 
+                            "project": {
+                                "domain_id": null, 
+                                "domain_name": null, 
+                                "id": "d6f383ea237d4b589662857c106a932b", 
+                                "name": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER"
+                            }, 
+                            "region_name": "", 
+                            "zone": null
+                        }, 
+                        "port_range_max": 22, 
+                        "port_range_min": 22, 
+                        "project_id": "", 
+                        "properties": {
+                            "group": {}
+                        }, 
+                        "protocol": "tcp", 
+                        "remote_group_id": null, 
+                        "remote_ip_prefix": "0.0.0.0/0", 
+                        "security_group_id": "8804f40b-ce92-42c3-a2ad-200046e88243", 
+                        "tenant_id": ""
+                    }, 
+                    {
+                        "direction": "ingress", 
+                        "ethertype": "IPv4", 
+                        "group": {}, 
+                        "id": "3855815f-8faa-4885-962c-e583572054fe", 
+                        "location": {
+                            "cloud": "defaults", 
+                            "project": {
+                                "domain_id": null, 
+                                "domain_name": null, 
+                                "id": "d6f383ea237d4b589662857c106a932b", 
+                                "name": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER"
+                            }, 
+                            "region_name": "", 
+                            "zone": null
+                        }, 
+                        "port_range_max": null, 
+                        "port_range_min": null, 
+                        "project_id": "", 
+                        "properties": {
+                            "group": {}
+                        }, 
+                        "protocol": "icmp", 
+                        "remote_group_id": null, 
+                        "remote_ip_prefix": "0.0.0.0/0", 
+                        "security_group_id": "8804f40b-ce92-42c3-a2ad-200046e88243", 
+                        "tenant_id": ""
+                    }, 
+                    {
+                        "direction": "ingress", 
+                        "ethertype": "IPv4", 
+                        "group": {
+                            "name": "default", 
+                            "tenant_id": "d6f383ea237d4b589662857c106a932b"
+                        }, 
+                        "id": "8cf0657d-52ba-4ee8-9ca8-5a82eb332514", 
+                        "location": {
+                            "cloud": "defaults", 
+                            "project": {
+                                "domain_id": null, 
+                                "domain_name": null, 
+                                "id": "d6f383ea237d4b589662857c106a932b", 
+                                "name": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER"
+                            }, 
+                            "region_name": "", 
+                            "zone": null
+                        }, 
+                        "port_range_max": null, 
+                        "port_range_min": null, 
+                        "project_id": "", 
+                        "properties": {
+                            "group": {
+                                "name": "default", 
+                                "tenant_id": "d6f383ea237d4b589662857c106a932b"
+                            }
+                        }, 
+                        "protocol": null, 
+                        "remote_group_id": null, 
+                        "remote_ip_prefix": null, 
+                        "security_group_id": "8804f40b-ce92-42c3-a2ad-200046e88243", 
+                        "tenant_id": ""
+                    }, 
+                    {
+                        "direction": "ingress", 
+                        "ethertype": "IPv4", 
+                        "group": {
+                            "name": "default", 
+                            "tenant_id": "d6f383ea237d4b589662857c106a932b"
+                        }, 
+                        "id": "d5adb41d-b33f-4dbd-b0b0-857b952d1da0", 
+                        "location": {
+                            "cloud": "defaults", 
+                            "project": {
+                                "domain_id": null, 
+                                "domain_name": null, 
+                                "id": "d6f383ea237d4b589662857c106a932b", 
+                                "name": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER"
+                            }, 
+                            "region_name": "", 
+                            "zone": null
+                        }, 
+                        "port_range_max": null, 
+                        "port_range_min": null, 
+                        "project_id": "", 
+                        "properties": {
+                            "group": {
+                                "name": "default", 
+                                "tenant_id": "d6f383ea237d4b589662857c106a932b"
+                            }
+                        }, 
+                        "protocol": null, 
+                        "remote_group_id": null, 
+                        "remote_ip_prefix": null, 
+                        "security_group_id": "8804f40b-ce92-42c3-a2ad-200046e88243", 
+                        "tenant_id": ""
+                    }
+                ], 
+                "tenant_id": "d6f383ea237d4b589662857c106a932b"
+            }
+        ], 
+        "status": "ACTIVE", 
+        "task_state": null, 
+        "tenant_id": "d6f383ea237d4b589662857c106a932b", 
+        "terminated_at": null, 
+        "updated": "2016-11-20T17:35:48Z", 
+        "user_id": "a9f490ed19b64711b2ba819baefbeaf3", 
+        "vm_state": "active", 
+        "volumes": []
+    }
+}
+
+TASK [Waiting OS boot and SSH readiness] ***************************************
+task path: /home/admin/ansible-projects/poc-openstack/anpb5.yml:57
+Using module file /usr/lib/python2.7/dist-packages/ansible/modules/core/utilities/logic/wait_for.py
+<localhost> ESTABLISH LOCAL CONNECTION FOR USER: admin
+<localhost> EXEC /bin/sh -c '( umask 77 && mkdir -p "` echo $HOME/.ansible/tmp/ansible-tmp-1479707944.41-162845894303248 `" && echo ansible-tmp-1479707944.41-162845894303248="` echo $HOME/.ansible/tmp/ansible-tmp-1479707944.41-162845894303248 `" ) && sleep 0'
+<localhost> PUT /tmp/tmpOJbXaZ TO /home/admin/.ansible/tmp/ansible-tmp-1479707944.41-162845894303248/wait_for.py
+<localhost> EXEC /bin/sh -c 'chmod u+x /home/admin/.ansible/tmp/ansible-tmp-1479707944.41-162845894303248/ /home/admin/.ansible/tmp/ansible-tmp-1479707944.41-162845894303248/wait_for.py && sleep 0'
+<localhost> EXEC /bin/sh -c 'sudo -H -S -n -u root /bin/sh -c '"'"'echo BECOME-SUCCESS-bxrncgffcrzmprsnlsdyfdakgbozohha; /usr/bin/python /home/admin/.ansible/tmp/ansible-tmp-1479707944.41-162845894303248/wait_for.py; rm -rf "/home/admin/.ansible/tmp/ansible-tmp-1479707944.41-162845894303248/" > /dev/null 2>&1'"'"' && sleep 0'
+ok: [localhost] => {
+    "changed": false, 
+    "elapsed": 10, 
+    "invocation": {
+        "module_args": {
+            "connect_timeout": 5, 
+            "delay": 10, 
+            "exclude_hosts": null, 
+            "host": "10.1.0.25", 
+            "path": null, 
+            "port": 22, 
+            "search_regex": null, 
+            "state": "started", 
+            "timeout": 1200
+        }, 
+        "module_name": "wait_for"
+    }, 
+    "path": null, 
+    "port": 22, 
+    "search_regex": null, 
+    "state": "started"
+}
+
+TASK [Add new  Instance  name to ansible  Inventory] ***************************
+task path: /home/admin/ansible-projects/poc-openstack/anpb5.yml:67
+fatal: [localhost]: FAILED! => {
+    "failed": true, 
+    "msg": "the field 'args' has an invalid value, which appears to include a variable that is undefined. The error was: 'dict object' has no attribute 'name'\n\nThe error appears to have been in '/home/admin/ansible-projects/poc-openstack/anpb5.yml': line 67, column 5, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n  - name: Add new  Instance  name to ansible  Inventory\n    ^ here\n"
+}
+
+NO MORE HOSTS LEFT *************************************************************
+	to retry, use: --limit @/home/admin/ansible-projects/poc-openstack/anpb5.retry
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=3    changed=0    unreachable=0    failed=1   
+
