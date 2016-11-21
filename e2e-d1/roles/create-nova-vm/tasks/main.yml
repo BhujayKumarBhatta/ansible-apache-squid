@@ -52,13 +52,13 @@
        #host: "{{ vnm }}"
        host: "{{newserver.server.public_v4}}"
        delay: 1
-       timeout: 1200
+       timeout: 3000
   delay: 60
   retries: 30
 
 - name: Add new  Instance  name to ansible  Inventory
   #add_host: name= {{newserver.server.name}} groups=webservers
-  add_host: name={{vnm}} groups=webservers
+  add_host: name={{vnm}} groups=new-openstack-servers
             ansible_ssh_host={{newserver.server.public_v4}}
 
   

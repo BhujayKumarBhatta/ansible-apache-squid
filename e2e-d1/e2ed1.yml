@@ -4,7 +4,7 @@
   become: true
   roles:
     - create-nova-vm
-- hosts: webservers
+- hosts: new-openstack-servers
   become: true
   tasks:
   - name: do something on the newly created VM
