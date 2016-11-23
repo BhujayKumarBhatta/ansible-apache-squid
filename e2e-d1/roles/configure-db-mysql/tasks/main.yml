@@ -1,0 +1,28 @@
+---
+- name: install mysql package
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+   - mysql-server
+   - mysql-common
+   - python-mysqldb
+#   - MySQLdb
+#   - mysql
+#   - mysqldump
+
+- name: Start mysql server
+  service: 
+    name: mysql
+    state: started
+
+- name: Create database
+  mysql_db:
+    name: searchlog
+    state: present
+
+
+- name: Create user and give permissions
+  mysql_user: name=bob password=12345 host=localhost priv=*.*:ALL,GRANT state=present
+
+  

@@ -1,14 +1,5 @@
 ---
 apt_packages:
- - python-dev
- - libffi-dev
- - libssl-dev
- - libxml2-dev
- - libxslt1-dev
- - libjpeg8-dev
- - zlib1g-dev
- - libevent-dev
- - libffi-dev
  - apache2
  - apache2-dev
  - libapache2-mod-wsgi
@@ -21,6 +12,19 @@ apt_packages:
  - python-virtualenv
  - curl    
  - rabbitmq-server  
+ - git
+ - python-pip
+ - libevent-dev
+ - python-dev
+ - libffi-dev
+ - libssl-dev
+ - libxml2-dev
+ - libxslt1-dev
+ - libjpeg8-dev
+ - zlib1g-dev
+ - libevent-dev
+ - libffi-dev
+
 
 apt_packages_1:
  - rabbitmq-server  
@@ -31,13 +35,12 @@ pip_packages:
  - paramiko
  - pyodbc 
  - django-pyodbc-azure
- - django=1.10.1
- - celery=3.2.13
+ - django==1.10.1
+ - celery==3.1.23
  - flower
  - django-celery
  - djangorestframework
  - django-filter
- - markdown
 
 
 code_repo: https://github.com/BhujayKumarBhatta/CloudSpacewithSearchLog-Python
@@ -47,14 +50,7 @@ djangrun_cmd: (exec python manage.py runserver 0.0.0.0:8000 &> /dev/null &)
 djangrun_cmd_1: python manage.py runserver 0.0.0.0:8000 & exit
 
 host_table_entry: |
-        192.168.52.1	acerpc
-        192.168.52.1	MSSQL
-        192.168.52.185	udesktop
-        192.168.52.182	server1
-        192.168.52.186	server2
         14.142.104.139	MSSQL1
-        14.142.104.138	dcim
-        14.142.104.142	dcim2
         10.0.0.45	swiftnode1
         10.0.0.46       swiftnode2
 apache_config_files:

@@ -1,18 +1,18 @@
 ---
-#- hosts: localhost
-#  connection: local  , don't use this it is casuing the second playbook run to fail during SSH connection
-#  become: true
-#  roles:
-#    - create-nova-vm
-#- hosts: new-openstack-servers
-#  become: true
-#  roles:
-#    - apply-common-config
-#- hosts: new-openstack-servers
-#  become: true
-#  roles:
+- hosts: localhost
+  connection: local  , don't use this it is casuing the second playbook run to fail during SSH connection
+  become: true
+  roles:
+    - create-nova-vm
+- hosts: new-openstack-servers
+  become: true
+  roles:
+    - apply-common-config
+- hosts: new-openstack-servers
+  become: true
+  roles:
 #    - configure-webserver-apache
-#- hosts: "{{ reverse-proxy-servername }}"
+    - configure-db-mysql
 - hosts: dcim
   vars_files: 
     - 'roles/configure-reverse-proxy/vars/main.yml'

@@ -2,13 +2,28 @@
 - name: Run the equivalent of "apt-get update" as a separate step
   apt:
     update_cache: yes
-- name: Install the software packages required for the application
+
+- name: apt Install the software packages required for the application
   apt:
     name: "{{item}}"
     state: present
   with_items: "{{apt_packages}}"
   ignore_errors: true
-- include: pbook-pkginstall-3.yml
+
+- name: apt Install the software packages required for the application
+  apt:
+    name: python-pip
+    state: latest
+  ignore_errors: true
+
+- name: pip  Install the software packages required for the application
+  pip:
+    name: "{{item}}"
+    state: present
+  with_items: "{{pip_packages}}"
+  ignore_errors: true
+#- include: pbook-pkginstall-3.yml
+
 # Include IP address and host names in the hosts file . This are taken from the varibale file var3.yml   
 - name: Add host addresses  to /etc/hosts
   blockinfile:
@@ -22,9 +37,9 @@
        src: "{{ item.src }}" 
        dest: "{{ item.dest }}"
   with_items:
-        - {src: "/home/ubuntu/ansible-dir/files/odbcinst.ini", dest: "/etc/odbcinst.ini" }
-        - {src: "/home/ubuntu/ansible-dir/files/odbc.ini",  dest: "/etc/odbc.ini" }
-        - {src: "/home/ubuntu/ansible-dir/files/freetds.conf",  dest: "/etc/freetds/freetds.conf" }
+        - {src: "odbcinst.ini", dest: "/etc/odbcinst.ini" }
+        - {src: "odbc.ini",  dest: "/etc/odbc.ini" }
+        - {src: "freetds.conf",  dest: "/etc/freetds/freetds.conf" }
 
 #Deploy your code from github. No changes should be made in the server locally . All code to be changed in the development system and uploaded to github . This playbook will  checkout the latest code from git hub and keep the  server code syncronized.  
   
