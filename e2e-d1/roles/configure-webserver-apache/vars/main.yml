@@ -3,19 +3,21 @@ apt_packages:
  - apache2
  - apache2-dev
  - libapache2-mod-wsgi
+ - python-setuptools
+ - build-essential
+ - python-dev
  - g++
- - unixodbc
- - unixodbc-dev  
- - freetds-dev
- - freetds-bin
- - tdsodbc   
+# - unixodbc
+# - unixodbc-dev  
+# - freetds-dev
+# - freetds-bin
+# - tdsodbc   
  - python-virtualenv
  - curl    
  - rabbitmq-server  
  - git
  - python-pip
  - libevent-dev
- - python-dev
  - libffi-dev
  - libssl-dev
  - libxml2-dev

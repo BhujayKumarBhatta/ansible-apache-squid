@@ -10,7 +10,7 @@
        name: "{{vnm}}"
        #image: ubuntu16-with-gfish
        #image: our-ubuntu16
-       image: ubuntu14-downloadedfrom-internet
+       image: Sandipan-Ubuntu16
        key_name: ubuntu-controller2-key
       # timeout: 2000
        flavor: m1.r1d2

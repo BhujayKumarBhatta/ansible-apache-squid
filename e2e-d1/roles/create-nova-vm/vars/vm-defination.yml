@@ -1,0 +1,3 @@
+apt_source_list_basedon_ostype:
+ - {vsrc: files/sources.list.xenial, vdest: /etc/apt/sources.list.testXenial, osdist: '"Ubuntu"', osdistmaj: '"16"', osdistrel: '"xenial"' }
+ - {vsrc: files/sources.list.trusty, vdest: /etc/apt/sources.list.testtrusty, osdist: '"Ubuntu"', osdistmaj: '"14"', osdistrel: '"trusty"'} 

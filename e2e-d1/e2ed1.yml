@@ -5,13 +5,15 @@
   roles:
     - create-nova-vm
 - hosts: new-openstack-servers
+  remote_user: cloudy
   become: true
   roles:
     - apply-common-config
 - hosts: new-openstack-servers
+  remote_user: cloudy
   become: true
   roles:
-#    - configure-webserver-apache
+    - configure-webserver-apache
     - configure-db-mysql
 - hosts: dcim
   vars_files: 

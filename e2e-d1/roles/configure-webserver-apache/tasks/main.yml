@@ -10,7 +10,7 @@
   with_items: "{{apt_packages}}"
   ignore_errors: true
 
-- name: apt Install the software packages required for the application
+- name: Install pip for installing python packages
   apt:
     name: python-pip
     state: latest
@@ -32,14 +32,14 @@
         
 # Configuration of unixodbc  for MSSQL database connection , testing from the server can be done using  isql -v MSSQL mssql mssql123 and \
 #tsql -S MSSQL -p 1433 -U mssql -P mssql123     
-- name: copy freetds.conf odbc.ini and odbcinst.ini  config file under /etc/ and etc/freetds/ directory\
-  copy : 
-       src: "{{ item.src }}" 
-       dest: "{{ item.dest }}"
-  with_items:
-        - {src: "odbcinst.ini", dest: "/etc/odbcinst.ini" }
-        - {src: "odbc.ini",  dest: "/etc/odbc.ini" }
-        - {src: "freetds.conf",  dest: "/etc/freetds/freetds.conf" }
+#- name: copy freetds.conf odbc.ini and odbcinst.ini  config file under /etc/ and etc/freetds/ directory\
+#  copy : 
+#       src: "{{ item.src }}" 
+#       dest: "{{ item.dest }}"
+#  with_items:
+#        - {src: "odbcinst.ini", dest: "/etc/odbcinst.ini" }
+#        - {src: "odbc.ini",  dest: "/etc/odbc.ini" }
+#        - {src: "freetds.conf",  dest: "/etc/freetds/freetds.conf" }
 
 #Deploy your code from github. No changes should be made in the server locally . All code to be changed in the development system and uploaded to github . This playbook will  checkout the latest code from git hub and keep the  server code syncronized.  
   

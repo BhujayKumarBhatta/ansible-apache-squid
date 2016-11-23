@@ -7,3 +7,7 @@ etc_environment_entry: |
 apt_proxy_entry: |
         Acquire::http { Proxy "http://dcim:3128";};
         Acquire::https { Proxy "http://dcim:3128";};
+pip_proxy_entry: |
+        [global]
+        proxy = dcim:3128
+       
