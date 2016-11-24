@@ -1,6 +1,5 @@
 ---
 - hosts: localhost
-  connection: local  , don't use this it is casuing the second playbook run to fail during SSH connection
   become: true
   roles:
     - create-nova-vm
@@ -15,6 +14,7 @@
   roles:
     - configure-webserver-apache
     - configure-db-mysql
+  environment: "{{ proxy_env }}"
 - hosts: dcim
   vars_files: 
     - 'roles/configure-reverse-proxy/vars/main.yml'

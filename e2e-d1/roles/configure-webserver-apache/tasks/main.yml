@@ -24,6 +24,12 @@
   ignore_errors: true
 #- include: pbook-pkginstall-3.yml
 
+#- name: pip install mitmproxy , django , paramiko using command module since pip module is not taking proxy settings for some reason 
+#  command: 'pip install --proxy=dcim:3128 {{ item }} '
+#  with_items: "{{ pip_packages }}"
+#  ignore_errors: true
+
+
 # Include IP address and host names in the hosts file . This are taken from the varibale file var3.yml   
 - name: Add host addresses  to /etc/hosts
   blockinfile:
@@ -48,10 +54,10 @@
  
 # Assumtion is a fresh searchlog database in mssql server  with no records in django_migration table  . There is no migration folder ro files  in our app1 directory . Hence we will do a fresh initial migration. 
 - name: django model file need to be activated by makemigrations
-  django_manage: command="makemigrations --noinput" app_path=/home/ubuntu/python-projects/djp1 settings=djp1.settings
+  django_manage: command="makemigrations --noinput" app_path={{app_dir}}/djp1 settings=djp1.settings
 
 - name: use migration command to actually create the database tables  
-  django_manage: command=migrate  app_path=/home/ubuntu/python-projects/djp1 settings=djp1.settings
+  django_manage: command=migrate  app_path={{app_dir}}/djp1 settings=djp1.settings
 
 - name: restart rabbitmq-server
   service: name=rabbitmq-server state=started enabled=yes
