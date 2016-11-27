@@ -12,8 +12,8 @@
   remote_user: cloudy
   become: true
   roles:
-    - configure-webserver-apache
     - configure-db-mysql
+    - configure-webserver-apache
   environment: "{{ proxy_env }}"
 - hosts: dcim
   vars_files: 

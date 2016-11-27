@@ -36,17 +36,6 @@
       dest: /etc/hosts
       block: "{{ host_table_entry }}"
         
-# Configuration of unixodbc  for MSSQL database connection , testing from the server can be done using  isql -v MSSQL mssql mssql123 and \
-#tsql -S MSSQL -p 1433 -U mssql -P mssql123     
-#- name: copy freetds.conf odbc.ini and odbcinst.ini  config file under /etc/ and etc/freetds/ directory\
-#  copy : 
-#       src: "{{ item.src }}" 
-#       dest: "{{ item.dest }}"
-#  with_items:
-#        - {src: "odbcinst.ini", dest: "/etc/odbcinst.ini" }
-#        - {src: "odbc.ini",  dest: "/etc/odbc.ini" }
-#        - {src: "freetds.conf",  dest: "/etc/freetds/freetds.conf" }
-
 #Deploy your code from github. No changes should be made in the server locally . All code to be changed in the development system and uploaded to github . This playbook will  checkout the latest code from git hub and keep the  server code syncronized.  
   
 - name: checkout latest  code from git hub - all the codes for my django and celery applications will be downloaded 
@@ -54,10 +43,13 @@
  
 # Assumtion is a fresh searchlog database in mssql server  with no records in django_migration table  . There is no migration folder ro files  in our app1 directory . Hence we will do a fresh initial migration. 
 - name: django model file need to be activated by makemigrations
-  django_manage: command="makemigrations --noinput" app_path={{app_dir}}/djp1 settings=djp1.settings
+  django_manage: command="makemigrations app1 -noinput" app_path={{app_dir}}/djp1 settings=djp1.settings
 
-- name: use migration command to actually create the database tables  
+- name: use migration command to actually create the database tables
   django_manage: command=migrate  app_path={{app_dir}}/djp1 settings=djp1.settings
+
+#- django_manage: command="createsuperuser --noinput --username=admin  --email=admin@example.com" app_path={{app_dir}}/djp1
+
 
 - name: restart rabbitmq-server
   service: name=rabbitmq-server state=started enabled=yes
@@ -86,12 +78,13 @@
 - name: Stop celery background tasks worker pool w1
   command: celery multi stop w1 -A djp1 -l info
   args: 
-      chdir: /home/ubuntu/python-projects/djp1/
+      chdir:{{app_dir}}/djp1
 
 - name: start celery in background mode - worker pool w1
   command: celery multi start w1 -A djp1 -l info
   args: 
-      chdir: /home/ubuntu/python-projects/djp1/
+      chdir:{{app_dir}}/djp1
+  ignore_errors: true
 
 #####################Apache Configuration and starting the service , this overwirites any existing configuration ans is suitable for  a dedicated apache for our app ##############################################
 

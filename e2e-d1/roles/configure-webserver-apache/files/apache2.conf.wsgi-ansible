@@ -221,10 +221,10 @@ includeOptional sites-enabled/*.conf
 # vim: syntax=apache ts=4 sw=4 sts=4 sr noet
 # BEGIN ANSIBLE MANAGED BLOCK
 
-WSGIDaemonProcess example.com python-path=/home/ubuntu/python-projects/djp1 processes=2 threads=15 display-name=%{GROUP}
+WSGIDaemonProcess example.com python-path=/apt/djangoproject/djp1 processes=2 threads=15 display-name=%{GROUP}
 WSGIProcessGroup example.com
-WSGIScriptAlias / /home/ubuntu/python-projects/djp1/djp1/wsgi.py
-<Directory /home/ubuntu/python-projects/djp1/djp1>
+WSGIScriptAlias / /apt/djangoproject/djp1/djp1/wsgi.py
+<Directory /apt/djangoproject/djp1/djp1>
 <Files wsgi.py>
 Options Indexes FollowSymLinks
 AllowOverride  all

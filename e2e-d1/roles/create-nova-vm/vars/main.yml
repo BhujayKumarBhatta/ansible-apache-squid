@@ -5,6 +5,6 @@ etc_environment_entry: |
         export https_proxy="http://dcim:3128"
         export http_proxy="http://dcim:3128"
         no_proxy=localhost,127.0.0.1,10.*.*.*,*.poc,dcim,gitlab
-vnm: vm10
+vnm: vm11
 
         
