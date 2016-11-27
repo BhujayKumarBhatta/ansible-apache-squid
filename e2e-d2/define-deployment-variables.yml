@@ -1,0 +1,159 @@
+#Openstack VM Details
+#give a vm name in the following format 
+#vnm: vm11
+
+# OS images  name that are avilable in open stack  .The image options are 
+#		vimage: our-ubuntu16   , this image was created by installing iso on a kvm and conerting it as openstack image manually. 
+#		vimage: ubuntu14-downloadedfrom-internet , this image was downloaded from ubuntu site . This is ready made openstack image. 
+#vimage: ubuntu14-downloadedfrom-internet
+#vkeynm: ubuntu-controller2-key
+
+#vfalvor is vm size availbale options are 
+# 		m1.r1d2  ,  1 cpu , 1 gb RAM and 20 gb disk 
+#vflavor: m1.r1d2
+
+# There are preexisting networks  with id as below . Check from horizon which network is required 
+#		305c14fa-5c44-4cc6-969d-259333562249
+#		a2310efa-6b42-41ce-b409-f7f522949de7 
+#vnetid: 305c14fa-5c44-4cc6-969d-259333562249 
+
+#Security groups are   
+#vsecurity_group: default
+
+#Once the vm is launched , store its openstack values such as floating ip etc. in a temporary varibale
+#register-OpenStack-VM: newserver
+
+############################################################################################
+app-servers:
+ - {vnm: django-appserver1, vimage: ubuntu14-downloadedfrom-internet,vkeynm: ubuntu-controller2-key, vflavor: m1.r1d2,vnetid: 305c14fa-5c44-4cc6-969d-259333562249 , vsecurity_group: default, register-OpenStack-VM: newappserver} 
+#for multiple app server repeat this entry here with different name e.g. 
+#- {vnm: appserver2, vimage: ubuntu14-downloadedfrom-internet,vkeynm: ubuntu-controller2-key, vflavor: m1.r1d2,vnetid: 305c14fa-5c44-4cc6-969d-259333562249 , vsecurity_group: default, register-OpenStack-VM: newserver}
+
+db-servers:
+ - {vnm: mysql-dbserver1, vimage: ubuntu14-downloadedfrom-internet,vkeynm: ubuntu-controller2-key, vflavor: m1.r1d2,vnetid: 305c14fa-5c44-4cc6-969d-259333562249 , vsecurity_group: default, register-OpenStack-VM: newdbserver} 
+#for multiple db server repeat this entry here with different name e.g. 
+#- {vnm: dbserver2, vimage: ubuntu14-downloadedfrom-internet,vkeynm: ubuntu-controller2-key, vflavor: m1.r1d2,vnetid: 305c14fa-5c44-4cc6-969d-259333562249 , vsecurity_group: default, register-OpenStack-VM: newdbserver}
+
+#All the VM will have the following configurations 
+host_table_entry: |
+        10.0.0.100       dcim
+etc_environment_entry: |
+        export https_proxy="http://dcim:3128"
+        export http_proxy="http://dcim:3128"
+        no_proxy=localhost,127.0.0.1,10.*.*.*,*.poc,dcim,gitlab
+apt_proxy_entry: |
+        Acquire::http { Proxy "http://dcim:3128";};
+        Acquire::https { Proxy "http://dcim:3128";};
+pip_proxy_entry: |
+        [global]
+        proxy = dcim:3128
+     
+
+############################################################## 
+
+#db server configuration 
+
+#########################################################################
+
+db_server_apt_packages:
+ - mysql-server
+ - mysql-common
+ - python-mysqldb
+#   - MySQLdb
+#   - mysql
+#   - mysqldump
+
+db_server_pip_packages:
+
+
+db_names: searchlog
+
+database_user_name: mysql
+database_user_password: mysql123
+database_host: localhost 
+database_priv: *.*:ALL,GRANT
+
+################################################################################
+#app server configuration
+###################################################################################
+
+proxy_env:
+    http_proxy: http://dcim:3128
+    https_proxy: http://dcim:3128
+    no_proxy: localhost,127.0.0.1,10.*.*.*,*.poc,dcim,gitlaboxy.example.com:8080
+
+app_server_apt_packages:
+ - apache2
+ - apache2-dev
+ - libapache2-mod-wsgi
+ - python-setuptools
+ - build-essential
+ - python-dev
+ - g++
+# - unixodbc
+# - unixodbc-dev  
+# - freetds-dev
+# - freetds-bin
+# - tdsodbc   
+ - python-virtualenv
+ - curl    
+ - rabbitmq-server  
+ - git
+ - python-pip
+ - libevent-dev
+ - libffi-dev
+ - libssl-dev
+ - libxml2-dev
+ - libxslt1-dev
+ - libjpeg8-dev
+ - zlib1g-dev
+ - libevent-dev
+ - libffi-dev
+ - python-mysqldb
+
+
+app_server_pip_packages:
+ - mitmproxy
+ - paramiko
+# - pyodbc 
+# - django-pyodbc-azure
+ - django==1.10.1
+ - celery==3.1.23
+# - flower
+ - django-celery
+ - djangorestframework
+ - django-filter
+# - ipcalc
+
+#git hub repository name and web address from where the application code will be synchorinized whenever the playbbok is run
+code_repo: https://github.com/BhujayKumarBhatta/CloudSpacewithSearchLog-Python
+
+#the application will be installed in this directory
+app_dir: /apt/djangoproject
+
+#these ip need to be derived from host or from the playbook 
+app_server_host_table_entry: |
+        14.142.104.139	MSSQL1
+        10.0.0.45	swiftnode1
+        10.0.0.46       swiftnode2
+
+# in the app server the http service will be served by apache. apache  uses wsgi for serving django python codes. Configuration files are as follows
+app_server_apache_config_files:
+ - {name: apache2.conf, rnm: /etc/apache2/apache2.conf-ansible,fpath: /etc/apache2/apache2.conf, idn: A,x: 0, fsrc: files/apache2.conf.wsgi-ansible, fdest: /etc/apache2/apache2.conf}
+ - {name: ports.conf, rnm: /etc/apache2/ports.conf-ansible,fpath: /etc/apache2/ports.conf, idn: B , x: 1,fsrc: files/ports.conf.ansible-file, fdest: /etc/apache2/ports.conf}
+
+#######################################################################################################
+#reverse proxy or the fron end web servers configuration 
+#########################################################################################################
+#considering there is a pre eisting reverse proxy server 
+reverseproxy-server-name: "dcim"
+
+#these ip need to be derived from host or from the playbook 
+rp_host_table_entry: |
+        10.1.0.28       e2ed1-djangovm
+        14.142.104.138	e2ed1-django
+
+
+
+
+        

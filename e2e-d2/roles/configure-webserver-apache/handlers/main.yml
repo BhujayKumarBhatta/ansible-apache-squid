@@ -1,0 +1,7 @@
+- name: restart rabbitmq
+  service: name=rabbitmq-server state=restarted
+- name: stop apache
+  service: name=apache2 state=stopped
+- name: start apace
+  service: name=apache2 state=started
+
