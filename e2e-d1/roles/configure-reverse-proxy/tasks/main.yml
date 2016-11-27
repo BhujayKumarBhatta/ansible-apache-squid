@@ -34,7 +34,10 @@
 - name: Add host addresses  to /etc/hosts
   blockinfile:
    dest: /etc/hosts
-   block: "{{ host_table_entry }}"
+#   block: "{{ host_table_entry }}"
+   block: |
+       {{newserver.server.public_v4}}	e2ed1-djangovm		#openstack vm which will host django
+       {{ ansible_default_ipv4.address }}	e2ed1-django 	#virtual site name pointing to self       
 - name: start apache2 httpd  service
   service:
    name: apache2

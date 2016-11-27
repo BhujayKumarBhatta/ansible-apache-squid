@@ -8,17 +8,22 @@
 #    - configure-db-mysql
 
   tasks:
+   - name: Add host addresses  to /etc/hosts
+     blockinfile:
+      dest: /etc/hosts
+      block: |
+          {{ ansible_default_ipv4.address }} 	abcd
 ####################Celery task starting , with every change in code under @app.task ( in our case AnalyzeServer) celery restart is required   
-   - name: Stop celery background tasks worker pool w1
-     command: celery multi stop w1 -A djp1 -l info
-     args:
-      chdir:{{app_dir}}/djp1
+#   - name: Stop celery background tasks worker pool w1
+#     command: celery multi stop w1 -A djp1 -l info
+#     args:
+#      chdir:{{app_dir}}/djp1
 
-   - name: start celery in background mode - worker pool w1
-     command: celery multi start w1 -A djp1 -l info
-     args:
-      chdir:{{app_dir}}/djp1
-     ignore_errors: true
+#   - name: start celery in background mode - worker pool w1
+#     command: celery multi start w1 -A djp1 -l info
+#     args:
+#      chdir:{{app_dir}}/djp1
+#     ignore_errors: true
 
 #   - service:
 #      name: celery
