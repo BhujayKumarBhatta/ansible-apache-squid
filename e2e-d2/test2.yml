@@ -1,0 +1,55 @@
+---
+- hosts: vm10
+  vars_files: 
+    - roles/configure-webserver-apache/vars/main.yml
+  remote_user: cloudy
+  become: true
+#  roles:
+#    - configure-db-mysql
+
+  tasks:
+   - name: Add host addresses  to /etc/hosts
+     blockinfile:
+      dest: /etc/hosts
+      block: |
+          {{ ansible_default_ipv4.address }} 	abcd
+####################Celery task starting , with every change in code under @app.task ( in our case AnalyzeServer) celery restart is required   
+#   - name: Stop celery background tasks worker pool w1
+#     command: celery multi stop w1 -A djp1 -l info
+#     args:
+#      chdir:{{app_dir}}/djp1
+
+#   - name: start celery in background mode - worker pool w1
+#     command: celery multi start w1 -A djp1 -l info
+#     args:
+#      chdir:{{app_dir}}/djp1
+#     ignore_errors: true
+
+#   - service:
+#      name: celery
+#      state: started
+#   - apt:
+#      name: python-mysqldb
+#      state: present
+#   - pip:
+#       name: "{{item}}"
+#       state: present
+#       extra_args: '--proxy=dcim:3128'
+#    - command: 'pip install --proxy=dcim:3128 {{ item }} ' 
+#     with_items: "{{ pip_packages }}"
+#   - shell: curl -v https://github.com/BhujayKumarBhatta/CloudSpacewithSearchLog-Python/
+#   - name: checkout latest  code from git hub - all the codes for my django and celery applications will be downloaded
+#     git: repo={{code_repo}}  dest={{app_dir}} accept_hostkey=True force=no
+#   - name: django model file need to be activated by makemigrations
+#     django_manage: command="makemigrations app1 -noinput" app_path={{app_dir}}/djp1 settings=djp1.settings
+#
+#   - name: use migration command to actually create the database tables
+#     django_manage: command=migrate  app_path={{app_dir}}/djp1 settings=djp1.settings
+#
+#   - django_manage: command="createsuperuser --noinput --username=admin  --email=admin@example.com" app_path={{app_dir}}/djp1
+#
+#
+#  environment:
+#    http_proxy: http://dcim:3128
+#    https_proxy: http://dcim:3128
+#    no_proxy: localhost,127.0.0.1,10.*.*.*,*.poc,dcim,gitlaboxy.example.com:8080

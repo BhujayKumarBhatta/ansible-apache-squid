@@ -1,0 +1,25 @@
+- name: upgrade pip to latest version otherwise susequent pip installation fails even when state=present or state=latest
+  pip: name=pip state=latest 
+- name: install pyodbc driver to connect MSSQL database  
+  pip: name=pyodbc state=present 
+- name: install django azure odbc driver to connect MSSQL database
+  pip: name=django-pyodbc-azure state=present 
+
+- name: install python packges - mitmproxy , without this paramiko installation fails 
+# pip: name=mitmproxy state=present  ;with ubuntu 16 it was
+  pip: name=mitmproxy state=present 
+        
+     
+- name: install paramiko
+  pip: name=paramiko state=present
+- name: install django 1.10.2  
+  pip: name=django state=present
+- name: install celery==3.1.23
+  pip: name=celery version=3.1.23
+- name: install celery monitoring tool flower , its not so imp task and hence playbook will continue even if this\install fails . Watch the ignore_errors parameter
+  pip: name=flower  state=present 
+  ignore_errors: True  
+- name: install djangorestframework
+  pip: name=djangorestframework state=present
+- name: install django-celery
+  pip: name=django-celery  state=present 
