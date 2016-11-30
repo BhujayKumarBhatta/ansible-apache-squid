@@ -17,7 +17,8 @@
   environment: "{{ proxy_env }}"
 - hosts: dcim
   vars_files: 
-    - 'roles/configure-reverse-proxy/vars/main.yml'
+#    - 'roles/configure-reverse-proxy/vars/main.yml'
+    - 'roles/create-nova-vm/vars/main.yml'
   become: true
   roles:
     - configure-reverse-proxy

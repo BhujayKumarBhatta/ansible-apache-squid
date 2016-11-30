@@ -37,16 +37,16 @@ apt_packages_1:
 
   
 pip_packages:
-# - mitmproxy
-# - paramiko
+ - mitmproxy
+ - paramiko
 # - pyodbc 
 # - django-pyodbc-azure
-# - django==1.10.1
-# - celery==3.1.23
+ - django==1.10.1
+ - celery==3.1.23
 # - flower
-# - django-celery
-# - djangorestframework
-# - django-filter
+ - django-celery
+ - djangorestframework
+ - django-filter
  - ipcalc
 
 code_repo: https://github.com/BhujayKumarBhatta/CloudSpacewithSearchLog-Python

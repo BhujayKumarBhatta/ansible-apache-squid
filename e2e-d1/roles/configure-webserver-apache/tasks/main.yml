@@ -31,10 +31,10 @@
 
 
 # Include IP address and host names in the hosts file . This are taken from the varibale file var3.yml   
-- name: Add host addresses  to /etc/hosts
-  blockinfile:
-      dest: /etc/hosts
-      block: "{{ host_table_entry }}"
+#- name: Add host addresses  to /etc/hosts
+#  blockinfile:
+#      dest: /etc/hosts
+#      block: "{{ host_table_entry }}"
         
 #Deploy your code from github. No changes should be made in the server locally . All code to be changed in the development system and uploaded to github . This playbook will  checkout the latest code from git hub and keep the  server code syncronized.  
   

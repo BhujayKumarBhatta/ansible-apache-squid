@@ -7,6 +7,7 @@
      - apache2
      - build-essential
 #     - lib-apache2-mod-proxy-html
+
 - name: enable proxy modules in apache
   command: "{{item}}"
   with_items:
@@ -19,6 +20,7 @@
    path: /etc/apache2/ssl
    state: directory 
    mode: 0755
+
 - name: Configure reverse proxy directives by copying the preconfigured files in /etc/apache2/ports.conf and /etc/apache2/sites-enabled/000-default.conf
   copy:
    backup: yes
@@ -31,17 +33,28 @@
       - {source: "cacert.pem" , destination: "/etc/apache2/ssl/", mode: 0644}
       - {source: "privkey.pem" , destination: "/etc/apache2/ssl/", mode: 0644}
       - {source: "ufwrules.sh" , destination: "/home/admin/ufwrules.sh", mode: 775}
-- name: Add host addresses  to /etc/hosts
-  blockinfile:
-   dest: /etc/hosts
+
+#- name: Add host addresses  to /etc/hosts
+#  blockinfile:
+#   dest: /etc/hosts
 #   block: "{{ host_table_entry }}"
-   block: |
-       {{newserver.server.public_v4}}	e2ed1-djangovm		#openstack vm which will host django
-       {{ ansible_default_ipv4.address }}	e2ed1-django 	#virtual site name pointing to self       
+#   block: |
+#       {{ hostvars[vnm]['ansible_ssh_host'] }}       {{ hostvars[vnm]['ansible_hostname'] }}
+
+- name: Add host addresses  to /etc/hosts
+  lineinfile:
+   dest: /etc/hosts
+   line: "{{item}}"
+  with_items:
+       - "{{ hostvars[vnm]['ansible_ssh_host'] }}       {{ hostvars[vnm]['ansible_hostname'] }}    {{rp_pointer_name_to_vm}}"
+       #- "{{hostvars[inventory_hostname].ansible_default_ipv4.address}}  {{rp_virtual_hostname_website}}"
+       - "{{hostvars[inventory_hostname].ansible_all_ipv4_addresses.0}}  {{rp_virtual_hostname_website}}"
+
 - name: start apache2 httpd  service
   service:
    name: apache2
    state: restarted
+
 - name: open firewall ports  - considering the same server is using a ufw host based firewall
   command: "{{item}}"
   args:
