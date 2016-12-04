@@ -71,7 +71,7 @@ db_names: searchlog
 database_user_name: mysql
 database_user_password: mysql123
 database_host: localhost 
-database_priv: *.*:ALL,GRANT
+database_priv: "*.*:ALL,GRANT"
 
 ################################################################################
 #app server configuration
