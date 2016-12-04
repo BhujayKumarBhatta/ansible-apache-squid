@@ -6,9 +6,9 @@
   become: true
   roles:
     - { role: create-nova-vm, vnm: "{{ item.name }}", vimage: "{{ item.image }}", vkeyname: "{{ item.keyname }}", vflavor: "{{ item.flavor }}", vnetid: "{{ item.netid }}", vsecurity_group: "{{ item.security_group }}", vregister-OpenStack-VM: "{{ item.register-OpenStack-VM }}", vinmemory_inventory_group: "{{ item.inmemory_inventory_group }}" }
-  with_items:
-    - "{{ app-servers }}"
-    - "{{ db-servers }}"
+  #with_items:
+   # - "{{ app-servers }}"
+    #- "{{ db-servers }}"
  
 
 #- hosts: "{{ inmemory_inventory_group }}"
