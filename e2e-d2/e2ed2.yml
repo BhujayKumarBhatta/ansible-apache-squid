@@ -6,9 +6,10 @@
   become: true
   roles:
     - { role: create-nova-vm, vnm: "{{ app_servers.name }}", vimage: "{{ app_servers.image }}", vkeyname: "{{ app_servers.keyname }}", vflavor: "{{ app_servers.flavor }}", vnetid: "{{ app_servers.netid }}", vsecurity_group: "{{ app_servers.security_group }}", vregister-OpenStack-VM: "{{ app_servers.register-OpenStack-VM }}", vinmemory_inventory_group: "{{ app_servers.inmemory_inventory_group }}" }
-  register: just_created_vm
+  
  
   tasks:   
+  - register: just_created_vm
   - name: Add new  Instance  name to ansible  Inventory  
     add_host: name= "{{ app_servers.name }}" groups= "{{ app_servers.inmemory_inventory_group }}"
               ansible_ssh_host= "{{ just_created_vm.server.public_v4 }}"
