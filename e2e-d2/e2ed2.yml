@@ -5,7 +5,7 @@
     - opnstack_authfile.yml
   become: true
   roles:
-    - { role: create-nova-vm, vnm: "{{ app-servers.name }}", vimage: "{{ app-servers.image }}", vkeyname: "{{ app-servers.keyname }}", vflavor: "{{ app-servers.flavor }}", vnetid: "{{ app-servers.netid }}", vsecurity_group: "{{ app-servers.security_group }}", vregister-OpenStack-VM: "{{ app-servers.register-OpenStack-VM }}", vinmemory_inventory_group: "{{ app-servers.inmemory_inventory_group }}" }
+    - { role: create-nova-vm, vnm: "{{ app_servers.name }}", vimage: "{{ app_servers.image }}", vkeyname: "{{ app_servers.keyname }}", vflavor: "{{ app_servers.flavor }}", vnetid: "{{ app_servers.netid }}", vsecurity_group: "{{ app_servers.security_group }}", vregister-OpenStack-VM: "{{ app_servers.register-OpenStack-VM }}", vinmemory_inventory_group: "{{ app_servers.inmemory_inventory_group }}" }
   #with_items:
    # - "{{ app-servers }}"
     #- "{{ db-servers }}"
