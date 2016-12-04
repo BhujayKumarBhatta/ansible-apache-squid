@@ -7,24 +7,24 @@
   roles:
     - create-nova-vm
 
-- hosts: new-openstack-servers
-  vars_files: define-deployment-variables.yml
-  remote_user: cloudy
-  become: true
-  roles:
-    - apply-common-config
-
-- hosts: new-openstack-servers
-  vars_files: define-deployment-variables.yml
-  remote_user: cloudy
-  become: true
-  roles:
-    - configure-db-mysql
-    - configure-webserver-apache
-  environment: "{{ proxy_env }}"
-
-- hosts: dcim
-  vars_files: vars_files: define-deployment-variables.yml    
-  become: true
-  roles:
-    - configure-reverse-proxy
+#- hosts: new-openstack-servers
+#  vars_files: define-deployment-variables.yml
+#  remote_user: cloudy
+#  become: true
+#  roles:
+#    - apply-common-config
+#
+#- hosts: new-openstack-servers
+#  vars_files: define-deployment-variables.yml
+#  remote_user: cloudy
+#  become: true
+#  roles:
+#    - configure-db-mysql
+#    - configure-webserver-apache
+#  environment: "{{ proxy_env }}"
+#
+#- hosts: dcim
+#  vars_files: define-deployment-variables.yml    
+#  become: true
+#  roles:
+#    - configure-reverse-proxy
