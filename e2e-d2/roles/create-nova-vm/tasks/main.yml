@@ -30,8 +30,8 @@
   delay: 60
   retries: 30
 
-- name: Add new  Instance  name to ansible  Inventory  
-  add_host: name={{ vnm }} groups= "{{ vinmemory_inventory_group }}"
-            ansible_ssh_host= "{{ new-OpenStack-VM.server.public_v4 }}"
+#- name: Add new  Instance  name to ansible  Inventory  
+#  add_host: name={{ vnm }} groups= "{{ vinmemory_inventory_group }}"
+#            ansible_ssh_host= "{{ new-OpenStack-VM.server.public_v4 }}"
 
   

@@ -6,17 +6,20 @@
   become: true
   roles:
     - { role: create-nova-vm, vnm: "{{ app_servers.name }}", vimage: "{{ app_servers.image }}", vkeyname: "{{ app_servers.keyname }}", vflavor: "{{ app_servers.flavor }}", vnetid: "{{ app_servers.netid }}", vsecurity_group: "{{ app_servers.security_group }}", vregister-OpenStack-VM: "{{ app_servers.register-OpenStack-VM }}", vinmemory_inventory_group: "{{ app_servers.inmemory_inventory_group }}" }
-  #with_items:
-   # - "{{ app-servers }}"
-    #- "{{ db-servers }}"
+  register: just_created_vm
+ 
+  tasks:   
+  - name: Add new  Instance  name to ansible  Inventory  
+    add_host: name= "{{ app_servers.name }}" groups= "{{ app_servers.inmemory_inventory_group }}"
+              ansible_ssh_host= "{{ just_created_vm.server.public_v4 }}"
  
 
-#- hosts: "{{ inmemory_inventory_group }}"
-#  vars_files: define-deployment-variables.yml
-#  remote_user: cloudy
-#  become: true
-#  roles:
-#    - apply-common-config
+- hosts: "{{ app_servers.inmemory_inventory_group }}"
+  vars_files: define-deployment-variables.yml
+  remote_user: cloudy
+  become: true
+  roles:
+    - apply-common-config
 #
 #- hosts: new-openstack-servers
 #  vars_files: define-deployment-variables.yml
