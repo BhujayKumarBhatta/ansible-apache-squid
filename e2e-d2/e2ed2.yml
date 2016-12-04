@@ -15,7 +15,8 @@
  
 
 - hosts: "{{ app_servers.inmemory_inventory_group }}"
-  vars_files: define-deployment-variables.yml
+  vars_files: 
+    - define-deployment-variables.yml
   remote_user: cloudy
   become: true
   roles:
