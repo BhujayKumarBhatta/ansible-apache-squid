@@ -47,15 +47,15 @@ host_table_entry: |
         10.0.0.100       dcim
         10.0.0.50        dcim2
 etc_environment_entry: |
-        export https_proxy="http://dcim2:3128"
-        export http_proxy="http://dcim2:3128"
-        no_proxy=localhost,127.0.0.1,10.*.*.*,*.poc,dcim2,gitlab
+        export https_proxy="http://dcim:3128"
+        export http_proxy="http://dcim:3128"
+        no_proxy=localhost,127.0.0.1,10.*.*.*,*.poc,dcim,dcim2,gitlab
 apt_proxy_entry: |
-        Acquire::http { Proxy "http://dcim2:3128";};
-        Acquire::https { Proxy "http://dcim2:3128";};        
+        Acquire::http { Proxy "http://dcim:3128";};
+        Acquire::https { Proxy "http://dcim:3128";};        
 pip_proxy_entry: |
         [global]
-        proxy = dcim2:3128
+        proxy = dcim:3128
      
 
 ############################################################## 
@@ -90,9 +90,9 @@ database_priv: "*.*:ALL,GRANT"
 ###################################################################################
 
 proxy_env:
-    http_proxy: http://dcim2:3128
-    https_proxy: http://dcim2:3128
-    no_proxy: localhost,127.0.0.1,10.*.*.*,*.poc,dcim,gitlaboxy.example.com:8080
+    http_proxy: http://dcim:3128
+    https_proxy: http://dcim:3128
+    no_proxy: localhost,127.0.0.1,10.*.*.*,*.poc,dcim,dcim2,gitlaboxy.example.com:8080
 
 app_server_apt_packages:
  - apache2
