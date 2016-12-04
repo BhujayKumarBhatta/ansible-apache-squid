@@ -19,7 +19,7 @@
        config_drive: yes
        user_data: "{{ lookup('file', 'our-user-data-v3.txt') }}"
        timeout: 1500
-  register: just_created_vm
+  register: justcreatedvm
 
 - name: 'Waiting OS boot and SSH readiness'
   wait_for: 
@@ -34,6 +34,6 @@
 #  add_host: name={{ vnm }} groups= "{{ vinmemory_inventory_group }}"
 #            ansible_ssh_host= "{{ new-OpenStack-VM.server.public_v4 }}"
 - name: Add new  Instance  name to ansible  Inventory  
-  add_host: name= "{{ app_servers.name }}" groups= groupofjustcreatedvm
-            ansible_ssh_host= "{{ just_created_vm.server.public_v4 }}"
+  add_host: name= "{{app_servers.name}}" groups= groupofjustcreatedvm
+            ansible_ssh_host={{justcreatedvm.server.public_v4}}
   
