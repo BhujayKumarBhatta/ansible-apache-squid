@@ -25,7 +25,7 @@
     - { role: configure-db-mysql, when: "server_role == 'dbserver'" }
   tasks:
     - name: show the servers role 
-      debug: msg={{hostvars[inventory_hostname].server_role}}   
+      debug: msg={{hostvars[inventory_hostname].server_role}}    
 #
 #- hosts: new-openstack-servers
 #  vars_files: define-deployment-variables.yml
