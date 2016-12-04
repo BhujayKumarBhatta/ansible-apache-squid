@@ -34,6 +34,6 @@
 #  add_host: name={{ vnm }} groups= "{{ vinmemory_inventory_group }}"
 #            ansible_ssh_host= "{{ new-OpenStack-VM.server.public_v4 }}"
 - name: Add new  Instance  name to ansible  Inventory  
-  add_host: name= "{{ app_servers.name }}" groups= group_of_just_created_vm
+  add_host: name= "{{ app_servers.name }}" groups= groupofjustcreatedvm
             ansible_ssh_host= "{{ just_created_vm.server.public_v4 }}"
   

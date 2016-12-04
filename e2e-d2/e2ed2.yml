@@ -11,7 +11,7 @@
 #         vregister-OpenStack-VM: "{{ app_servers.register-OpenStack-VM }}", 
 #         vinmemory_inventory_group: "{{ app_servers.inmemory_inventory_group }}" }
 #   # - apply-common-config
-- hosts: dcim
+- hosts: groupofjustcreatedvm
   vars_files: 
     - define-deployment-variables.yml
   remote_user: cloudy
