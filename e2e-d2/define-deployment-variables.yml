@@ -23,9 +23,14 @@
 #Once the vm is launched , store its openstack values such as floating ip etc. in a temporary varibale
 #register-OpenStack-VM: newserver
 
+
+###################################################################################
+
+#create openstacck VM 
+
 ############################################################################################
 app-servers:
- - {vnm: django-appserver1, vimage: ubuntu14-downloadedfrom-internet,vkeyname: ubuntu-controller2-key, vflavor: m1.r1d2,vnetid: 305c14fa-5c44-4cc6-969d-259333562249 , vsecurity_group: default, register-OpenStack-VM: newappserver, inmemory_inventory_group: django-app1-servers} 
+ - {name: django-appserver1, image: ubuntu14-downloadedfrom-internet, keyname: ubuntu-controller2-key, flavor: m1.r1d2, vnetid: 305c14fa-5c44-4cc6-969d-259333562249 , vsecurity_group: default, register-OpenStack-VM: newappserver, inmemory_inventory_group: django-app1-servers} 
 #for multiple app server repeat this entry here with different name e.g. 
 #- {vnm: django-appserver1, vimage: ubuntu14-downloadedfrom-internet,vkeynm: ubuntu-controller2-key, vflavor: m1.r1d2,vnetid: 305c14fa-5c44-4cc6-969d-259333562249 , vsecurity_group: default, register-OpenStack-VM: newappserver, inmemory_inventory_group: django-app1-servers}
 
@@ -34,7 +39,12 @@ db-servers:
 #for multiple db server repeat this entry here with different name e.g. 
 #- {vnm: dbserver2, vimage: ubuntu14-downloadedfrom-internet,vkeynm: ubuntu-controller2-key, vflavor: m1.r1d2,vnetid: 305c14fa-5c44-4cc6-969d-259333562249 , vsecurity_group: default, register-OpenStack-VM: newdbserver}
 
+
+############################################################################################
+
 #All the VM will have the following configurations 
+
+####################################################################################################
 host_table_entry: |
         10.0.0.100       dcim
 etc_environment_entry: |
@@ -73,8 +83,11 @@ database_user_password: mysql123
 database_host: localhost 
 database_priv: "*.*:ALL,GRANT"
 
+
 ################################################################################
+
 #app server configuration
+
 ###################################################################################
 
 proxy_env:
@@ -142,8 +155,11 @@ app_server_apache_config_files:
  - {name: apache2.conf, rnm: /etc/apache2/apache2.conf-ansible,fpath: /etc/apache2/apache2.conf, idn: A,x: 0, fsrc: files/apache2.conf.wsgi-ansible, fdest: /etc/apache2/apache2.conf}
  - {name: ports.conf, rnm: /etc/apache2/ports.conf-ansible,fpath: /etc/apache2/ports.conf, idn: B , x: 1,fsrc: files/ports.conf.ansible-file, fdest: /etc/apache2/ports.conf}
 
+
 #######################################################################################################
+
 #reverse proxy or the fron end web servers configuration 
+
 #########################################################################################################
 #considering there is a pre eisting reverse proxy server 
 reverseproxy-server-name: "dcim"

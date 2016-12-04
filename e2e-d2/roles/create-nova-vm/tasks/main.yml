@@ -19,12 +19,12 @@
        config_drive: yes
        user_data: "{{ lookup('file', 'our-user-data-v3.txt') }}"
        timeout: 1500
-  register: "{{ register-OpenStack-VM }}"
+  register: "{{ vregister-OpenStack-VM }}"
 
 - name: 'Waiting OS boot and SSH readiness'
   wait_for: 
        port: 22        
-       host: "{{ register-OpenStack-VM.server.public_v4 }}"
+       host: "{{ vregister-OpenStack-VM.server.public_v4 }}"
        delay: 1
        timeout: 3000
   delay: 60
