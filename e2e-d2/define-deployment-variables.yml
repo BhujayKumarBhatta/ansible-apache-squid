@@ -29,14 +29,13 @@
 #create openstacck VM 
 
 ############################################################################################
-app_servers: {name: django-appserver1, image: ubuntu14-downloadedfrom-internet, keyname: ubuntu-controller2-key, flavor: m1.r1d2, netid: 305c14fa-5c44-4cc6-969d-259333562249 , security_group: default, register-OpenStack-VM: newappserver, inmemory_inventory_group: django-app1-servers, server_role: appserver} 
-#for multiple app server repeat this entry here with different name e.g. 
-#- {vnm: django-appserver1, vimage: ubuntu14-downloadedfrom-internet,vkeynm: ubuntu-controller2-key, vflavor: m1.r1d2,vnetid: 305c14fa-5c44-4cc6-969d-259333562249 , vsecurity_group: default, register-OpenStack-VM: newappserver, inmemory_inventory_group: django-app1-servers}
+app_servers: {name: django-appserver1, image: ubuntu14-downloadedfrom-internet, keyname: ubuntu-controller2-key,
+              flavor: m1.r1d2, netid: 305c14fa-5c44-4cc6-969d-259333562249 , security_group: default,
+              register-OpenStack-VM: newappserver, inmemory_inventory_group: django-app1-servers, server_role: appserver} 
 
-db-servers:
- - {vnm: mysql-dbserver1, vimage: ubuntu14-downloadedfrom-internet,vkeyname: ubuntu-controller2-key, vflavor: m1.r1d2,vnetid: 305c14fa-5c44-4cc6-969d-259333562249 , vsecurity_group: default, register-OpenStack-VM: newdbserver, inmemory_inventory_group: mysql-db1-servers, server_role: appserver} 
-#for multiple db server repeat this entry here with different name e.g. 
-#- {vnm: dbserver2, vimage: ubuntu14-downloadedfrom-internet,vkeynm: ubuntu-controller2-key, vflavor: m1.r1d2,vnetid: 305c14fa-5c44-4cc6-969d-259333562249 , vsecurity_group: default, register-OpenStack-VM: newdbserver}
+db-servers: {name: mysql-dbserver1, image: ubuntu14-downloadedfrom-internet, keyname: ubuntu-controller2-key,
+             flavor: m1.r1d2, netid: 305c14fa-5c44-4cc6-969d-259333562249 , security_group: default,
+             register-OpenStack-VM: newdbserver, inmemory_inventory_group: mysql-db1-servers, server_role: dbserver} 
 
 
 ############################################################################################
