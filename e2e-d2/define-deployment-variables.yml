@@ -30,7 +30,7 @@ app-servers:
 #- {vnm: django-appserver1, vimage: ubuntu14-downloadedfrom-internet,vkeynm: ubuntu-controller2-key, vflavor: m1.r1d2,vnetid: 305c14fa-5c44-4cc6-969d-259333562249 , vsecurity_group: default, register-OpenStack-VM: newappserver, inmemory_inventory_group: django-app1-servers}
 
 db-servers:
- - {vnm: mysql-dbserver1, vimage: ubuntu14-downloadedfrom-internet,vkeynm: ubuntu-controller2-key, vflavor: m1.r1d2,vnetid: 305c14fa-5c44-4cc6-969d-259333562249 , vsecurity_group: default, register-OpenStack-VM: newdbserver, inmemory_inventory_group: mysql-db1-servers} 
+ - {vnm: mysql-dbserver1, vimage: ubuntu14-downloadedfrom-internet,vkeyname: ubuntu-controller2-key, vflavor: m1.r1d2,vnetid: 305c14fa-5c44-4cc6-969d-259333562249 , vsecurity_group: default, register-OpenStack-VM: newdbserver, inmemory_inventory_group: mysql-db1-servers} 
 #for multiple db server repeat this entry here with different name e.g. 
 #- {vnm: dbserver2, vimage: ubuntu14-downloadedfrom-internet,vkeynm: ubuntu-controller2-key, vflavor: m1.r1d2,vnetid: 305c14fa-5c44-4cc6-969d-259333562249 , vsecurity_group: default, register-OpenStack-VM: newdbserver}
 
