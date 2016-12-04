@@ -49,10 +49,14 @@ host_table_entry: |
 etc_environment_entry: |
         export https_proxy="http://dcim2:3128"
         export http_proxy="http://dcim2:3128"
-        no_proxy=localhost,127.0.0.1,10.*.*.*,*.poc,dcim,gitlab
+        export https_proxy="http://dcim:3128"
+        export http_proxy="http://dcim:3128"
+        no_proxy=localhost,127.0.0.1,10.*.*.*,*.poc,dcim2,gitlab
 apt_proxy_entry: |
         Acquire::http { Proxy "http://dcim2:3128";};
         Acquire::https { Proxy "http://dcim2:3128";};
+        Acquire::http { Proxy "http://dcim:3128";};
+        Acquire::https { Proxy "http://dcim:3128";};
 pip_proxy_entry: |
         [global]
         proxy = dcim2:3128
