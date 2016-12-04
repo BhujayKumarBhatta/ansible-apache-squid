@@ -10,7 +10,7 @@
          vnetid: "{{ app_servers.netid }}", vsecurity_group: "{{ app_servers.security_group }}", 
          vregister-OpenStack-VM: "{{ app_servers.register-OpenStack-VM }}", 
          vinmemory_inventory_group: "{{ app_servers.inmemory_inventory_group }}" }
-    - apply-common-config
+   # - apply-common-config
 - hosts: group_of_just_created_vm
   vars_files: 
     - define-deployment-variables.yml
