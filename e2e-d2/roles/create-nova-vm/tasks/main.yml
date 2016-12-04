@@ -31,7 +31,7 @@
   retries: 30
 
 - name: Add new  Instance  name to ansible  Inventory  
-  add_host: name={{ vnm }} groups= "{{ inmemory_inventory_group }}"
-            ansible_ssh_host= "{{ register-OpenStack-VM.server.public_v4 }}"
+  add_host: name={{ vnm }} groups= "{{ vinmemory_inventory_group }}"
+            ansible_ssh_host= "{{ vregister-OpenStack-VM.server.public_v4 }}"
 
   

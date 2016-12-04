@@ -13,7 +13,7 @@
     - "{{ db-servers }}"
  
 
-#- hosts: new-openstack-servers
+#- hosts: "{{ inmemory_inventory_group }}"
 #  vars_files: define-deployment-variables.yml
 #  remote_user: cloudy
 #  become: true
