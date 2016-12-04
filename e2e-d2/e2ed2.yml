@@ -1,16 +1,16 @@
 ---
-#- hosts: localhost
-#  vars_files: 
-#    - define-deployment-variables.yml
-#    - opnstack_authfile.yml
-#  become: true
-#  roles:
-#    - { role: create-nova-vm, vnm: "{{ app_servers.name }}", vimage: "{{ app_servers.image }}", 
-#        vkeyname: "{{ app_servers.keyname }}", vflavor: "{{ app_servers.flavor }}",
-#         vnetid: "{{ app_servers.netid }}", vsecurity_group: "{{ app_servers.security_group }}", 
-#         vregister-OpenStack-VM: "{{ app_servers.register-OpenStack-VM }}", 
-#         vinmemory_inventory_group: "{{ app_servers.inmemory_inventory_group }}" }
-#   # - apply-common-config
+- hosts: localhost
+  vars_files: 
+    - define-deployment-variables.yml
+    - opnstack_authfile.yml
+  become: true
+  roles:
+    - { role: create-nova-vm, vnm: "{{ app_servers.name }}", vimage: "{{ app_servers.image }}", 
+        vkeyname: "{{ app_servers.keyname }}", vflavor: "{{ app_servers.flavor }}",
+         vnetid: "{{ app_servers.netid }}", vsecurity_group: "{{ app_servers.security_group }}", 
+         vregister-OpenStack-VM: "{{ app_servers.register-OpenStack-VM }}", 
+         vinmemory_inventory_group: "{{ app_servers.inmemory_inventory_group }}" }
+   # - apply-common-config
 - hosts: groupofjustcreatedvm
   vars_files: 
     - define-deployment-variables.yml
