@@ -7,10 +7,9 @@
   roles: 
     - { role: create-nova-vm, vnm: "{{ app_servers.name }}", vimage: "{{ app_servers.image }}", 
         vkeyname: "{{ app_servers.keyname }}", vflavor: "{{ app_servers.flavor }}",
-         vnetid: "{{ app_servers.netid }}", vsecurity_group: "{{ app_servers.security_group }}", 
-         vregister-OpenStack-VM: "{{ app_servers.register-OpenStack-VM }}", 
-         vinmemory_inventory_group: "{{ app_servers.inmemory_inventory_group }}" }
-      
+         vnetid: "{{ app_servers.netid }}", vsecurity_group: "{{ app_servers.security_group }}",
+         vservers_role: "{{ appr_servers.server_role}}" }
+              
 
 - hosts: groupofjustcreatedvm
   vars_files: 
@@ -19,6 +18,9 @@
   become: true
   roles:
     - apply-common-config
+  tasks:
+    - name: show the servers role 
+      debug: msg={{hostvars[inventory_hostname].server_role}}   
 #
 #- hosts: new-openstack-servers
 #  vars_files: define-deployment-variables.yml

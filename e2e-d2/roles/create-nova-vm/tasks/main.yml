@@ -33,7 +33,7 @@
 #in add host module dont quote  the variables , dont give space after equal to sign and no space before or after the 
 #variable name inside curly braces  
 - name: Add new  Instance  name to ansible  Inventory  
-  add_host: name={{app_servers.name}} groups=groupofjustcreatedvm
+  add_host: name={{vnm}} groups=groupofjustcreatedvm
             ansible_ssh_host={{justcreatedvm.server.public_v4}}
-            
+            server_role={{vservers_role}}
   
