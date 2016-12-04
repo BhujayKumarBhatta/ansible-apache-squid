@@ -24,7 +24,7 @@
 - name: 'Waiting OS boot and SSH readiness'
   wait_for: 
        port: 22        
-       host: "{{ just_created_vm.server.public_v4 }}"
+       host: "{{ justcreatedvm.server.public_v4 }}"
        delay: 1
        timeout: 3000
   delay: 60
@@ -34,6 +34,6 @@
 #  add_host: name={{ vnm }} groups= "{{ vinmemory_inventory_group }}"
 #            ansible_ssh_host= "{{ new-OpenStack-VM.server.public_v4 }}"
 - name: Add new  Instance  name to ansible  Inventory  
-  add_host: name= "{{app_servers.name}}" groups= groupofjustcreatedvm
+  add_host: name={{app_servers.name}} groups= groupofjustcreatedvm
             ansible_ssh_host={{justcreatedvm.server.public_v4}}
   
