@@ -4,7 +4,7 @@
     - define-deployment-variables.yml
     - opnstack_authfile.yml
   become: true
-  roles: "{{item}}"
+  roles: {{item}}
 #    - { role: create-nova-vm, vnm: "{{ app_servers.name }}", vimage: "{{ app_servers.image }}", 
 #        vkeyname: "{{ app_servers.keyname }}", vflavor: "{{ app_servers.flavor }}",
 #         vnetid: "{{ app_servers.netid }}", vsecurity_group: "{{ app_servers.security_group }}", 
