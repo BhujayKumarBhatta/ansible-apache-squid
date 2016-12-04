@@ -1,6 +1,8 @@
 ---
 - hosts: localhost
-  vars_files: define-deployment-variables.yml
+  vars_files: 
+    - define-deployment-variables.yml
+    - opnstack_authfile.yml
   become: true
   roles:
     - create-nova-vm

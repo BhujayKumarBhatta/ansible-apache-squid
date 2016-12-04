@@ -3,62 +3,35 @@
   os_server: 
        state: present
        auth:
-          auth_url: http://controller:35357/v2.0
-          username: admin
-          password: admin123
-          project_name: admin
-       name: "{{vnm}}"
-       #image: ubuntu16-with-gfish
-       #image: our-ubuntu16
-       image: ubuntu14-downloadedfrom-internet
-       key_name: ubuntu-controller2-key
-      # timeout: 2000
-       flavor: m1.r1d2
+          auth_url: "{{ auth_url_var }}"
+          username: "{{ username_var }}"
+          password: "{{ password_var }}"
+          project_name: "{{ project_name_var }}"
+       name: "{{ vnm }}"
+       image: "{{ vimage }}"
+       key_name: "{{ vkeyname }}"
+       flavor: "{{ vflavor }}"
        nics:
-          - net-id: 305c14fa-5c44-4cc6-969d-259333562249
-          #- net-id: a2310efa-6b42-41ce-b409-f7f522949de7 
-#          - net-id: 1de40943-4af7-41d0-9d7a-b0ee790469e9 
+          - net-id: "{{ vnetid }}"         
 #       auto_ip: yes
 #       floating_ip_pools: ext-net
-       security_groups: default
+       security_groups: "{{ vsecurity_group }}"
        config_drive: yes
-
-#       meta:
-#          hostname: vm4-auto-ubuntu
-#          group: uge_master
        user_data: "{{ lookup('file', 'our-user-data-v3.txt') }}"
        timeout: 1500
-#       wait: yes
-  register: newserver
-#    async: 1200
-#    poll: 0
-#    register: vmboot_sleeper
-#  - name: 'Waiting till the VM creation  is done from the image'
-#    async_status: jid={{ vmboot_sleeper.ansible_job_id }}
-#    register: job_result
-#    until: job_result.finished
-#    retries: 30
+  register: "{{ register-OpenStack-VM }}"
 
-#  - name: Wait for ping readiness on the Instance
-#    command: >
-#       ping {{newserver.server.public_v4}}
-#    register: result
-#    until: result|success
-#    delay: 150
-#    retries: 100
 - name: 'Waiting OS boot and SSH readiness'
   wait_for: 
-       port: 22 
-       #host: "{{ vnm }}"
-       host: "{{newserver.server.public_v4}}"
+       port: 22        
+       host: "{{ register-OpenStack-VM.server.public_v4 }}"
        delay: 1
        timeout: 3000
   delay: 60
   retries: 30
 
-- name: Add new  Instance  name to ansible  Inventory
-  #add_host: name= {{newserver.server.name}} groups=webservers
-  add_host: name={{vnm}} groups=new-openstack-servers
-            ansible_ssh_host={{newserver.server.public_v4}}
+- name: Add new  Instance  name to ansible  Inventory  
+  add_host: name={{ vnm }} groups= "{{ inmemory_inventory_group }}"
+            ansible_ssh_host= "{{ register-OpenStack-VM.server.public_v4 }}"
 
   
