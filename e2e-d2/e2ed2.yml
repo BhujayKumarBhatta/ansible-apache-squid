@@ -23,6 +23,8 @@
   roles:
     - apply-common-config
     - { role: configure-db-mysql, when: "server_role == 'dbserver'" }
+    - { role: configure-db-mysql, when: "{{hostvars[inventory_hostname].server_role}} == 'dbserver'" }
+  environment: "{{ proxy_env }}"
   tasks:
     - name: show the servers role 
       debug: msg={{hostvars[inventory_hostname].server_role}}    
