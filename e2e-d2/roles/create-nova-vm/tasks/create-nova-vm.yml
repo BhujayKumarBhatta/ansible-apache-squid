@@ -1,0 +1,39 @@
+---
+- name: launch an nova instance 
+  os_server: 
+       state: present
+       auth:
+          auth_url: "{{ auth_url_var }}"
+          username: "{{ username_var }}"
+          password: "{{ password_var }}"
+          project_name: "{{ project_name_var }}"
+       name: "{{ vnm }}"
+       image: "{{ vimage }}"
+       key_name: "{{ vkeyname }}"
+       flavor: "{{ vflavor }}"
+       nics:
+          - net-id: "{{ vnetid }}"         
+#       auto_ip: yes
+#       floating_ip_pools: ext-net
+       security_groups: "{{ vsecurity_group }}"
+       config_drive: yes
+       user_data: "{{ lookup('file', 'our-user-data-v3.txt') }}"
+       timeout: 1500
+  register: justcreatedvm
+
+- name: 'Waiting OS boot and SSH readiness'
+  wait_for: 
+       port: 22        
+       host: "{{ justcreatedvm.server.public_v4 }}"
+       delay: 1
+       timeout: 3000
+  delay: 60
+  retries: 30
+
+#in add host module dont quote  the variables , dont give space after equal to sign and no space before or after the 
+#variable name inside curly braces  
+- name: Add new  Instance  name to ansible  Inventory  
+  add_host: name={{vnm}} groups=groupofjustcreatedvm
+            ansible_ssh_host={{justcreatedvm.server.public_v4}}
+            server_role={{vservers_role}}
+  
