@@ -44,7 +44,7 @@ db_servers: {name: mysql-dbserver1, image: ubuntu14-downloadedfrom-internet, key
 
 ####################################################################################################
 host_table_entry: |
-        10.0.0.100       dcim
+        10.0.0.52       dcim
         10.0.0.50        dcim2
 etc_environment_entry: |
         export https_proxy="http://dcim:3128"
