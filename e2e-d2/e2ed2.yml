@@ -21,8 +21,8 @@
   remote_user: cloudy
   become: true
   roles:
-#    - apply-common-config
-#    - { role: configure-db-mysql, when: "server_role == 'dbserver'" }
+    - apply-common-config
+    - { role: configure-db-mysql, when: "server_role == 'dbserver'" }
     - { role: configure-webserver-apache, when: "server_role == 'appserver'" }
   environment: "{{ proxy_env }}"
   
