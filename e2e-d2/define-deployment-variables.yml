@@ -74,7 +74,7 @@ db_server_apt_packages:
 
 db_server_pip_packages:
 
-
+db_hostname: mysqldb-server1
 db_names: searchlog
 
 database_user_name: mysql

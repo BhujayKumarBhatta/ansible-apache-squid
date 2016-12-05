@@ -1,111 +1,105 @@
 ---
-- name: Run the equivalent of "apt-get update" as a separate step
-  apt:
-    update_cache: yes
-
-- name: apt Install the software packages required for the application
-  apt:
-    name: "{{item}}"
-    state: present
-  with_items: "{{apt_packages}}"
-  ignore_errors: true
-
-- name: Install pip for installing python packages
-  apt:
-    name: python-pip
-    state: latest
-  ignore_errors: true
-
-- name: pip  Install the software packages required for the application
-  pip:
-    name: "{{item}}"
-    state: present
-  with_items: "{{pip_packages}}"
-  ignore_errors: true
-#- include: pbook-pkginstall-3.yml
-
-#- name: pip install mitmproxy , django , paramiko using command module since pip module is not taking proxy settings for some reason 
-#  command: 'pip install --proxy=dcim:3128 {{ item }} '
-#  with_items: "{{ pip_packages }}"
-#  ignore_errors: true
-
-
-# Include IP address and host names in the hosts file . This are taken from the varibale file var3.yml   
-- name: Add host addresses  to /etc/hosts
-  blockinfile:
-      dest: /etc/hosts
-      block: "{{ host_table_entry }}"
-        
-#Deploy your code from github. No changes should be made in the server locally . All code to be changed in the development system and uploaded to github . This playbook will  checkout the latest code from git hub and keep the  server code syncronized.  
-  
-- name: checkout latest  code from git hub - all the codes for my django and celery applications will be downloaded 
-  git: repo={{code_repo}}  dest={{app_dir}} accept_hostkey=True force=no
- 
-# Assumtion is a fresh searchlog database in mssql server  with no records in django_migration table  . There is no migration folder ro files  in our app1 directory . Hence we will do a fresh initial migration. 
-- name: django model file need to be activated by makemigrations
-  django_manage: command="makemigrations app1 -noinput" app_path={{app_dir}}/djp1 settings=djp1.settings
-
-- name: use migration command to actually create the database tables
-  django_manage: command=migrate  app_path={{app_dir}}/djp1 settings=djp1.settings
-
-#- django_manage: command="createsuperuser --noinput --username=admin  --email=admin@example.com" app_path={{app_dir}}/djp1
-
-
-- name: restart rabbitmq-server
-  service: name=rabbitmq-server state=started enabled=yes
-
-- name: enable rabbitmq plugins
-  rabbitmq_plugin: names=rabbitmq_management,rabbitmq_tracing,rabbitmq_federation state=enabled
-  notify:
-    - restart rabbitmq
-
-- name: add users
-  rabbitmq_user: user={{item}} password=changeme tags=administrator,{{item}} vhost=/ configure_priv=.* write_priv=.* read_priv=.* state=present
+# Include IP address and host names of the DB server 
+- name: Add IP address and host names of the DB server  to /etc/hosts
+  lineinfile:
+   dest: /etc/hosts
+   line: "{{item}}"
   with_items:
-    - onepk
-    - ubuntu
+       - "{{hostvars[db_servers.name].ansible_all_ipv4_addresses.0}}       {{db_hostname}}"
+#        - "{{ hostvars[vnm]['ansible_ssh_host'] }}       {{ hostvars[vnm]['ansible_hostname'] }}    {{rp_pointer_name_to_vm}}"
+#        - "{{hostvars[inventory_hostname].ansible_default_ipv4.address}}  {{rp_virtual_hostname_website}}    {{db_hostname}}"
+#        - "{{hostvars[inventory_hostname].ansible_all_ipv4_addresses.0}}  {{rp_virtual_hostname_website}}"  
 
-#  - name: remove default guest user
-#    rabbitmq_user: user=guest state=absent
-
-- name: ensure vhost /test is present
-  rabbitmq_vhost: name=/myvhost state=present
-
-#  - name: set federation local-username
-#    rabbitmq_parameter: component=federation name=local-username value='"user1"' state=present
-
-####################Celery task starting , with every change in code under @app.task ( in our case AnalyzeServer) celery restart is required   
-- name: Stop celery background tasks worker pool w1
-  command: celery multi stop w1 -A djp1 -l info
-  args: 
-      chdir:{{app_dir}}/djp1
-
-- name: start celery in background mode - worker pool w1
-  command: celery multi start w1 -A djp1 -l info
-  args: 
-      chdir:{{app_dir}}/djp1
-  ignore_errors: true
-
-#####################Apache Configuration and starting the service , this overwirites any existing configuration ans is suitable for  a dedicated apache for our app ##############################################
-
-#never give a space after  the equal to sign. For example path=<filename> is ok however  path= <filename> wont work.
-- name: Check Apache2.conf file exists
-  stat: path="{{item.fpath}}"    
-  register: result
-  with_items: "{{ apache_config_files }}"
-
-- name: keep a backup of the existing apache2.conf file
-  copy:
-      src: "{{ item.fpath }}"
-      dest: "{{ item.rnm }}"
-  when: "result.results[{{item.x}}].stat.exists"  
-  with_items: "{{ apache_config_files }}"
-
-- name: copy apache2.conf for Apache2 wsgi configuration and ports.conf for port 80
-  copy : 
-       src: "{{ item.fsrc }}"
-       dest: "{{ item.fdest }}"
-  with_items: "{{ apache_config_files }}"
-  notify:
-      - stop apache 
-      - start apace
+#- name: apt Install the software packages required for the application
+#  apt:
+#    name: "{{item}}"
+#    state: present
+#  with_items: "{{apt_packages}}"
+#  ignore_errors: true
+#
+#- name: Install pip for installing python packages
+#  apt:
+#    name: python-pip
+#    state: latest
+#  ignore_errors: true
+#
+#- name: pip  Install the software packages required for the application
+#  pip:
+#    name: "{{item}}"
+#    state: present
+#  with_items: "{{pip_packages}}"
+#  ignore_errors: true
+#
+#       
+##Deploy your code from github. No changes should be made in the server locally . All code to be changed in the development system and uploaded to github . This playbook will  checkout the latest code from git hub and keep the  server code syncronized.  
+#  
+#- name: checkout latest  code from git hub - all the codes for my django and celery applications will be downloaded 
+#  git: repo={{code_repo}}  dest={{app_dir}} accept_hostkey=True force=no
+# 
+## Assumtion is a fresh searchlog database in mssql server  with no records in django_migration table  . There is no migration folder ro files  in our app1 directory . Hence we will do a fresh initial migration. 
+#- name: django model file need to be activated by makemigrations
+#  django_manage: command="makemigrations app1 -noinput" app_path={{app_dir}}/djp1 settings=djp1.settings
+#
+#- name: use migration command to actually create the database tables
+#  django_manage: command=migrate  app_path={{app_dir}}/djp1 settings=djp1.settings
+#
+##- django_manage: command="createsuperuser --noinput --username=admin  --email=admin@example.com" app_path={{app_dir}}/djp1
+#
+#- name: restart rabbitmq-server
+#  service: name=rabbitmq-server state=started enabled=yes
+#
+#- name: enable rabbitmq plugins
+#  rabbitmq_plugin: names=rabbitmq_management,rabbitmq_tracing,rabbitmq_federation state=enabled
+#  notify:
+#    - restart rabbitmq
+#
+#- name: add users
+#  rabbitmq_user: user={{item}} password=changeme tags=administrator,{{item}} vhost=/ configure_priv=.* write_priv=.* read_priv=.* state=present
+#  with_items:
+#    - onepk
+#    - ubuntu
+#
+##  - name: remove default guest user
+##    rabbitmq_user: user=guest state=absent
+#
+#- name: ensure vhost /test is present
+#  rabbitmq_vhost: name=/myvhost state=present
+#
+##  - name: set federation local-username
+##    rabbitmq_parameter: component=federation name=local-username value='"user1"' state=present
+#
+#####################Celery task starting , with every change in code under @app.task ( in our case AnalyzeServer) celery restart is required   
+#- name: Stop celery background tasks worker pool w1
+#  command: celery multi stop w1 -A djp1 -l info
+#  args: 
+#      chdir:{{app_dir}}/djp1
+#
+#- name: start celery in background mode - worker pool w1
+#  command: celery multi start w1 -A djp1 -l info
+#  args: 
+#      chdir:{{app_dir}}/djp1
+#  ignore_errors: true
+#
+######################Apache Configuration and starting the service , this overwirites any existing configuration ans is suitable for  a dedicated apache for our app ##############################################
+#
+##never give a space after  the equal to sign. For example path=<filename> is ok however  path= <filename> wont work.
+#- name: Check Apache2.conf file exists
+#  stat: path="{{item.fpath}}"    
+#  register: result
+#  with_items: "{{ apache_config_files }}"
+#
+#- name: keep a backup of the existing apache2.conf file
+#  copy:
+#      src: "{{ item.fpath }}"
+#      dest: "{{ item.rnm }}"
+#  when: "result.results[{{item.x}}].stat.exists"  
+#  with_items: "{{ apache_config_files }}"
+#
+#- name: copy apache2.conf for Apache2 wsgi configuration and ports.conf for port 80
+#  copy : 
+#       src: "{{ item.fsrc }}"
+#       dest: "{{ item.fdest }}"
+#  with_items: "{{ apache_config_files }}"
+#  notify:
+#      - stop apache 
+#      - start apace
