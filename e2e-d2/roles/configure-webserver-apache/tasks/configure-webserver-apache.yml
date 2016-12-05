@@ -14,7 +14,7 @@
   apt:
     name: "{{item}}"
     state: present
-  with_items: "{{apt_packages}}"
+  with_items: "{{app_server_apt_packages}}"
   ignore_errors: true
 
 - name: Install pip for installing python packages
@@ -27,7 +27,7 @@
   pip:
     name: "{{item}}"
     state: present
-  with_items: "{{pip_packages}}"
+  with_items: "{{app_server_pip_packages}}"
   ignore_errors: true
 
        
@@ -93,13 +93,13 @@
       src: "{{ item.fpath }}"
       dest: "{{ item.rnm }}"
   when: "result.results[{{item.x}}].stat.exists"  
-  with_items: "{{ apache_config_files }}"
+  with_items: "{{ app_server_apache_config_files }}"
 
 - name: copy apache2.conf for Apache2 wsgi configuration and ports.conf for port 80
   copy : 
        src: "{{ item.fsrc }}"
        dest: "{{ item.fdest }}"
-  with_items: "{{ apache_config_files }}"
+  with_items: "{{ app_server_apache_config_files }}"
   notify:
       - stop apache 
       - start apace
