@@ -28,3 +28,7 @@
   blockinfile:
       dest: .pip/pip.conf
       block: "{{ pip_proxy_entry }}"
+      
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
