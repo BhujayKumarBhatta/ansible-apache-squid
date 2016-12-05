@@ -15,7 +15,9 @@
           - net-id: "{{ vnetid }}"         
 #       auto_ip: yes
 #       floating_ip_pools: ext-net
-       security_groups: "{{ vsecurity_group }}"
+       security_groups:
+         - default
+         - "{{ vsecurity_group }}"
        config_drive: yes
        user_data: "{{ lookup('file', 'our-user-data-v3.txt') }}"
        timeout: 1500
