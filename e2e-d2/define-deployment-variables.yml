@@ -30,11 +30,11 @@
 
 ############################################################################################
 app_servers: {name: django-appserver1, image: ubuntu14-downloadedfrom-internet, keyname: ubuntu-controller2-key,
-              flavor: m1.r1d2, netid: 305c14fa-5c44-4cc6-969d-259333562249 , security_group: default,
+              flavor: m1.r1d2, netid: 305c14fa-5c44-4cc6-969d-259333562249 , security_group: webservers,
               register-OpenStack-VM: newappserver, inmemory_inventory_group: django-app1-servers, server_role: appserver} 
 
 db_servers: {name: mysql-dbserver1, image: ubuntu14-downloadedfrom-internet, keyname: ubuntu-controller2-key,
-             flavor: m1.r1d2, netid: 305c14fa-5c44-4cc6-969d-259333562249 , security_group: default,
+             flavor: m1.r1d2, netid: 305c14fa-5c44-4cc6-969d-259333562249 , security_group: mysqldb-security-group,
              register-OpenStack-VM: newdbserver, inmemory_inventory_group: mysql-db1-servers, server_role: dbserver} 
 
  
