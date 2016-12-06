@@ -30,7 +30,7 @@
 #  environment: "{{ proxy_env }}"
    
   tasks:
-     - debug: msg=rpserver
+     - debug: msg= "{{rpserver}}"
 
 - hosts: rpserver
   vars_files: 
