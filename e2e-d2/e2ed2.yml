@@ -4,9 +4,7 @@
     - define-deployment-variables.yml
     - opnstack_authfile.yml
   become: true
-  vars:
-    rpserver: "{{ reverseproxyservername }}"
-  
+   
 #  roles: 
 #    - { role: create-nova-vm, vnm: "{{ db_servers.name }}", vimage: "{{ db_servers.image }}", 
 #        vkeyname: "{{ db_servers.keyname }}", vflavor: "{{ db_servers.flavor }}",
@@ -30,7 +28,11 @@
 #  environment: "{{ proxy_env }}"
    
   tasks:
-     - debug: msg= "{{rpserver}}"
+     - name: add the reverse proxy server name to inmemroy inventroy
+       add_host: name=rpserver groups=groupofrpserver
+            ansible_ssh_host={{reverseproxyserverip}}
+            
+         
 
 - hosts: rpserver
   vars_files: 
