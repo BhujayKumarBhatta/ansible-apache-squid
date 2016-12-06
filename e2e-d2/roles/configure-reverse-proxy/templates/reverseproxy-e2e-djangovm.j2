@@ -3,21 +3,21 @@
 #LoadModule proxy_connect_module modules/mod_proxy_connect.so
 Listen 80
 Listen 443
-<VirtualHost {{ rp_virtual_hostname_website }}:80>
+<VirtualHost {{ rpvirtualhostnamewebsite }}:80>
 
-        ServerName {{ rp_virtual_hostname_website }}
+        ServerName {{ rpvirtualhostnamewebsite }}
         ServerAdmin webmaster@localhost
         DocumentRoot /var/www/html
         ErrorLog ${APACHE_LOG_DIR}/error.log
         CustomLog ${APACHE_LOG_DIR}/access.log combined
     ProxyRequests Off
-        ProxyPass /       http://{{ rp_pointer_name_to_vm }}/  connectiontimeout=5 timeout=300
-        ProxyPassReverse /  http://{{ rp_pointer_name_to_vm }}/
+        ProxyPass /       http://{{ rppointernametovm }}/  connectiontimeout=5 timeout=300
+        ProxyPassReverse /  http://{{ rppointernametovm }}/
 </VirtualHost>
 
-<VirtualHost {{ rp_virtual_hostname_website }}:443>
+<VirtualHost {{ rpvirtualhostnamewebsite }}:443>
 
-        ServerName {{ rp_virtual_hostname_website }}
+        ServerName {{ rpvirtualhostnamewebsite }}
         ServerAdmin webmaster@localhost
         DocumentRoot /var/www/html
         ErrorLog ${APACHE_LOG_DIR}/error.log
@@ -26,7 +26,7 @@ SSLEngine On
   SSLCertificateFile /etc/apache2/ssl/cacert.pem
   SSLCertificateKeyFile /etc/apache2/ssl/privkey.pem
     ProxyRequests Off
-        ProxyPass /       http://{{ rp_pointer_name_to_vm }}/  connectiontimeout=5 timeout=300
-        ProxyPassReverse /  http://{{ rp_pointer_name_to_vm }}/
+        ProxyPass /       http://{{ rppointernametovm }}/  connectiontimeout=5 timeout=300
+        ProxyPassReverse /  http://{{ rppointernametovm }}/
 </VirtualHost>
 
