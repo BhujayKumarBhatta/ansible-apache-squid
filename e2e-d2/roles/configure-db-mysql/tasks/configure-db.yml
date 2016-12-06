@@ -25,5 +25,8 @@
 
 - name: Create user and give permissions
   mysql_user: name=mysql password=mysql123 host=localhost priv=*.*:ALL,GRANT state=present
+  
+- name: give permission to all hosts
+  mysql_user: name=mysql  host_all=yes 
 
   

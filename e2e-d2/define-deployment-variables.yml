@@ -122,6 +122,7 @@ app_server_apt_packages:
  - libevent-dev
  - libffi-dev
  - python-mysqldb
+ - mysql-client-core-5.6
 
 
 app_server_pip_packages:

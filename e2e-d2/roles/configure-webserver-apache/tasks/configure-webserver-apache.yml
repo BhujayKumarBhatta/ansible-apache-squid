@@ -103,3 +103,5 @@
   notify:
       - stop apache 
       - start apace
+
+ #mysql -h HOST -u USERNAME -pPASSWORD 
