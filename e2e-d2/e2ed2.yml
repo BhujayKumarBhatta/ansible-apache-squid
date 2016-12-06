@@ -1,7 +1,4 @@
 ---
-- include: define-deployment-variables.yml
-- include: opnstack_authfile.yml
-
 - hosts: localhost
   vars_files: 
     - define-deployment-variables.yml
