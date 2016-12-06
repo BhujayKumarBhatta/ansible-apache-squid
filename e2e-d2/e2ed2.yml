@@ -6,7 +6,7 @@
   become: true
   vars:
     rpserver: "{{ reverseproxy-server-name }}"
-  debug: msg=rpserver
+  
 #  roles: 
 #    - { role: create-nova-vm, vnm: "{{ db_servers.name }}", vimage: "{{ db_servers.image }}", 
 #        vkeyname: "{{ db_servers.keyname }}", vflavor: "{{ db_servers.flavor }}",
@@ -28,7 +28,9 @@
 #    - { role: configure-db-mysql, when: "server_role == 'dbserver'" }
 ##    - { role: configure-webserver-apache, when: "server_role == 'appserver'" }
 #  environment: "{{ proxy_env }}"
-
+   
+  tasks:
+     - debug: msg=rpserver
 
 - hosts: rpserver
   vars_files: 
