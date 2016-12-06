@@ -43,8 +43,8 @@
    dest: /etc/hosts
    line: "{{item}}"
   with_items:
-       - "{{ hostvars[app_servers.name]['ansible_ssh_host'] }}       {{ hostvars[app_servers.name]['ansible_hostname'] }}    {{rp_pointer_name_to_vm}}"
-       - "{{hostvars[inventory_hostname].ansible_all_ipv4_addresses.0}}  {{rp_virtual_hostname_website}}"
+       - "{{ hostvars[app_servers.name]['ansible_ssh_host'] }}       {{ hostvars[app_servers.name]['ansible_hostname'] }}    {{rppointernametovm}}"
+       - "{{hostvars[inventory_hostname].ansible_all_ipv4_addresses.0}}  {{rpvirtualhostnamewebsite}}"
           
 - name: start apache2 httpd  service
   service:

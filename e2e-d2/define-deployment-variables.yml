@@ -157,9 +157,9 @@ app_server_apache_config_files:
 
 #########################################################################################################
 #considering there is a pre eisting reverse proxy server 
-reverseproxy-server-name: dcim
-rp_pointer_name_to_vm: e2ed1-djangovm
-rp_virtual_hostname_website: e2ed1-django
+reverseproxyservername: dcim
+rppointernametovm: e2ed1-djangovm
+rpvirtualhostnamewebsite: e2ed1-django
 
 
 

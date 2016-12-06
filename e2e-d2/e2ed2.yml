@@ -5,7 +5,7 @@
     - opnstack_authfile.yml
   become: true
   vars:
-    rpserver: "{{ reverseproxy-server-name }}"
+    rpserver: "{{ reverseproxyservername }}"
   
 #  roles: 
 #    - { role: create-nova-vm, vnm: "{{ db_servers.name }}", vimage: "{{ db_servers.image }}", 
