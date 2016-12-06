@@ -18,7 +18,10 @@
 #vnetid: 305c14fa-5c44-4cc6-969d-259333562249 
 
 #Security groups are   
-#vsecurity_group: default
+#vsecurity_group: 
+#default: open ssh port , icmp 
+#webserver: open http and httts
+#mysql-db1-servers: open mysql 3306
 
 #Once the vm is launched , store its openstack values such as floating ip etc. in a temporary varibale
 #register-OpenStack-VM: newserver
