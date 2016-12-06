@@ -35,7 +35,7 @@
 - name: copy the virtuall host template with reverse proxy configuration
   template:
    src: reverseproxy-e2e-djangovm.j2
-   dest: /etc/apache2/sites-enabled/reverseproxy-e2ed1-djangovm.conf
+   dest: /etc/apache2/sites-enabled/reverseproxy-e2e-djangovm.conf
    mode: 0744
    
 - name: Add host addresses  to /etc/hosts
