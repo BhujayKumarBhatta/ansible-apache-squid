@@ -1,4 +1,4 @@
----
+--
 - hosts: localhost
   vars_files: 
     - define-deployment-variables.yml
