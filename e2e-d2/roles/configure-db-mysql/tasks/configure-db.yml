@@ -12,6 +12,12 @@
 #   - mysql
 #   - mysqldump
 
+- name: Configure my sql to listen and bind on all IP address 
+  lineinfile:
+   dest: /etc/mysql/my.cnf
+   line: "bind-address    = 0.0.0.0"
+   
+   
 - name: Start mysql server
   service: 
     name: mysql
