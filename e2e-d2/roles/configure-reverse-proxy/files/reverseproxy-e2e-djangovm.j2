@@ -3,21 +3,21 @@
 #LoadModule proxy_connect_module modules/mod_proxy_connect.so
 Listen 80
 Listen 443
-<VirtualHost e2ed1-django:80>
+<VirtualHost {{ rp_virtual_hostname_website }}:80>
 
-        ServerName e2ed1-django
+        ServerName {{ rp_virtual_hostname_website }}
         ServerAdmin webmaster@localhost
         DocumentRoot /var/www/html
         ErrorLog ${APACHE_LOG_DIR}/error.log
         CustomLog ${APACHE_LOG_DIR}/access.log combined
     ProxyRequests Off
-        ProxyPass /       http://e2ed1-djangovm/  connectiontimeout=5 timeout=300
-        ProxyPassReverse /  http://e2ed1-djangovm/
+        ProxyPass /       http://{{ rp_pointer_name_to_vm }}/  connectiontimeout=5 timeout=300
+        ProxyPassReverse /  http://{{ rp_pointer_name_to_vm }}/
 </VirtualHost>
 
-<VirtualHost e2ed1-django:443>
+<VirtualHost {{ rp_virtual_hostname_website }}:443>
 
-        ServerName e2ed1-django
+        ServerName {{ rp_virtual_hostname_website }}
         ServerAdmin webmaster@localhost
         DocumentRoot /var/www/html
         ErrorLog ${APACHE_LOG_DIR}/error.log
@@ -26,7 +26,7 @@ SSLEngine On
   SSLCertificateFile /etc/apache2/ssl/cacert.pem
   SSLCertificateKeyFile /etc/apache2/ssl/privkey.pem
     ProxyRequests Off
-        ProxyPass /       http://e2ed1-djangovm/  connectiontimeout=5 timeout=300
-        ProxyPassReverse /  http://e2ed1-djangovm/
+        ProxyPass /       http://{{ rp_pointer_name_to_vm }}/  connectiontimeout=5 timeout=300
+        ProxyPassReverse /  http://{{ rp_pointer_name_to_vm }}/
 </VirtualHost>
 

@@ -158,11 +158,10 @@ app_server_apache_config_files:
 #########################################################################################################
 #considering there is a pre eisting reverse proxy server 
 reverseproxy-server-name: "dcim"
+rp_pointer_name_to_vm: e2ed1-djangovm
+rp_virtual_hostname_website: e2ed1-django
 
-#these ip need to be derived from host or from the playbook 
-rp_host_table_entry: |
-        10.1.0.28       e2ed1-djangovm
-        14.142.104.138	e2ed1-django
+
 
 
 

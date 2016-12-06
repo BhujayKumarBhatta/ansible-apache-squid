@@ -21,27 +21,22 @@
   remote_user: cloudy
   become: true
   roles:
-    - apply-common-config
+#    - apply-common-config
     - { role: configure-db-mysql, when: "server_role == 'dbserver'" }
-    - { role: configure-webserver-apache, when: "server_role == 'appserver'" }
+#    - { role: configure-webserver-apache, when: "server_role == 'appserver'" }
   environment: "{{ proxy_env }}"
+
+
+- hosts: "{{ reverseproxy-server-name }}"
+  vars_files: define-deployment-variables.yml    
+  become: true
+  roles:
+    - configure-reverse-proxy
+
+    
+ ###########################################################  
   
+#  tasks:
+#    - name: show the servers role 
+#      debug: msg={{hostvars[inventory_hostname].server_role}}    
   
-  tasks:
-    - name: show the servers role 
-      debug: msg={{hostvars[inventory_hostname].server_role}}    
-#
-#- hosts: new-openstack-servers
-#  vars_files: define-deployment-variables.yml
-#  remote_user: cloudy
-#  become: true
-#  roles:
-#    - configure-db-mysql
-#    - configure-webserver-apache
-#  environment: "{{ proxy_env }}"
-#
-#- hosts: dcim
-#  vars_files: define-deployment-variables.yml    
-#  become: true
-#  roles:
-#    - configure-reverse-proxy
