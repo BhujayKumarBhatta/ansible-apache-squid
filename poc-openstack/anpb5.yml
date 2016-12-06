@@ -22,7 +22,7 @@
        key_name: ubuntu-controller2-key
       # timeout: 2000
        flavor: m1.r1d2
-       network: net1
+       network: net2
        #nics:
         #  - net-name: net1
           #- net-id: 305c14fa-5c44-4cc6-969d-259333562249
