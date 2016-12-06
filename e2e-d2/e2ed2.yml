@@ -31,7 +31,8 @@
      - name: add the reverse proxy server name to inmemroy inventroy
        add_host: name=rpserver groups=groupofrpserver
             ansible_ssh_host={{reverseproxyserverip}}
-            
+            ansible_ssh_port={{reverseproxyserversshport}}
+            hostname={{reverseproxyservername}}
          
 
 - hosts: rpserver

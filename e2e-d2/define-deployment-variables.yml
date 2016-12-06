@@ -159,6 +159,7 @@ app_server_apache_config_files:
 #considering there is a pre eisting reverse proxy server 
 reverseproxyservername: dcim
 reverseproxyserverip: 10.0.0.52
+reverseproxyserversshport: 2223
 rppointernametovm: e2ed1-djangovm
 rpvirtualhostnamewebsite: e2ed1-django
 
