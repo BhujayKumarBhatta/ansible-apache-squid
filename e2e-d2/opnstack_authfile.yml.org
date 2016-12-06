@@ -1,0 +1,5 @@
+---
+auth_url_var: http://controller:35357/v2.0
+username_var: admin
+password_var: admin123
+project_name_var: admin

@@ -80,8 +80,8 @@ db_server_pip_packages:
 db_hostname: mysqldb-server1
 db_names: searchlog
 
-database_user_name: mysql
-database_user_password: mysql123
+database_user_name: "{{ mysql_db_user }}"
+database_user_password: "{{ mysql_db_user_password }}"
 database_host: localhost 
 database_priv: "*.*:ALL,GRANT"
 
