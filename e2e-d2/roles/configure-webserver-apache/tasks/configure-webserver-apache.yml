@@ -86,7 +86,7 @@
 - name: Check Apache2.conf file exists
   stat: path="{{item.fpath}}"    
   register: result
-  with_items: "{{ apache_config_files }}"
+  with_items: "{{ app_server_apache_config_files }}"
 
 - name: keep a backup of the existing apache2.conf file
   copy:
