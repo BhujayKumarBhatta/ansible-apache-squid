@@ -5,30 +5,30 @@
     - opnstack_authfile.yml
   become: true
    
-#  roles: 
-#    - { role: create-nova-vm, vnm: "{{ db_servers.name }}", vimage: "{{ db_servers.image }}", 
-#        vkeyname: "{{ db_servers.keyname }}", vflavor: "{{ db_servers.flavor }}",
-#         vnetid: "{{ db_servers.netid }}", vsecurity_group: "{{ db_servers.security_group }}",
-#         vservers_role: "{{ db_servers.server_role}}" }
-#    - { role: create-nova-vm, vnm: "{{ app_servers.name }}", vimage: "{{ app_servers.image }}", 
-#        vkeyname: "{{ app_servers.keyname }}", vflavor: "{{ app_servers.flavor }}",
-#         vnetid: "{{ app_servers.netid }}", vsecurity_group: "{{ app_servers.security_group }}",
-#         vservers_role: "{{ app_servers.server_role}}" }
-#              
-#
-#- hosts: groupofjustcreatedvm
-#  vars_files: 
-#    - define-deployment-variables.yml
-#  remote_user: cloudy
-#  become: true
-#  roles:
-##    - apply-common-config
-#    - { role: configure-db-mysql, when: "server_role == 'dbserver'" }
-##    - { role: configure-webserver-apache, when: "server_role == 'appserver'" }
-#  environment: "{{ proxy_env }}"
+  roles: 
+    - { role: create-nova-vm, vnm: "{{ db_servers.name }}", vimage: "{{ db_servers.image }}", 
+        vkeyname: "{{ db_servers.keyname }}", vflavor: "{{ db_servers.flavor }}",
+         vnetid: "{{ db_servers.netid }}", vsecurity_group: "{{ db_servers.security_group }}",
+         vservers_role: "{{ db_servers.server_role}}" }
+    - { role: create-nova-vm, vnm: "{{ app_servers.name }}", vimage: "{{ app_servers.image }}", 
+        vkeyname: "{{ app_servers.keyname }}", vflavor: "{{ app_servers.flavor }}",
+         vnetid: "{{ app_servers.netid }}", vsecurity_group: "{{ app_servers.security_group }}",
+         vservers_role: "{{ app_servers.server_role}}" }
+              
+
+- hosts: groupofjustcreatedvm
+  vars_files: 
+    - define-deployment-variables.yml
+  remote_user: cloudy
+  become: true
+  roles:
+    - apply-common-config
+    - { role: configure-db-mysql, when: "server_role == 'dbserver'" }
+    - { role: configure-webserver-apache, when: "server_role == 'appserver'" }
+  environment: "{{ proxy_env }}"
    
   tasks:
-     - name: add the reverse proxy server name to inmemroy inventroy
+     - name: add the pre existing reverse proxy server name to inmemroy inventroy
        add_host: name=rpserver groups=groupofrpserver
             ansible_ssh_host={{reverseproxyserverip}}
             ansible_ssh_port={{reverseproxyserversshport}}
