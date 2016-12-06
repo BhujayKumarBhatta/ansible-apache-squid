@@ -28,7 +28,8 @@
 
 
 - hosts: "{{ reverseproxy-server-name }}"
-  vars_files: define-deployment-variables.yml    
+  vars_files: 
+    - define-deployment-variables.yml    
   become: true
   roles:
     - configure-reverse-proxy
