@@ -1,9 +1,11 @@
 ---
-#- hosts: localhost
-#  vars_files: 
-#    - define-deployment-variables.yml
-#    - opnstack_authfile.yml
-#  become: true
+- hosts: localhost
+  vars_files: 
+    - define-deployment-variables.yml
+    - opnstack_authfile.yml
+  become: true
+  vars:
+    rpserver: "{{ reverseproxy-server-name }}"
 #  roles: 
 #    - { role: create-nova-vm, vnm: "{{ db_servers.name }}", vimage: "{{ db_servers.image }}", 
 #        vkeyname: "{{ db_servers.keyname }}", vflavor: "{{ db_servers.flavor }}",
@@ -27,7 +29,7 @@
 #  environment: "{{ proxy_env }}"
 
 
-- hosts: "{{ reverseproxy-server-name }}"
+- hosts: rpserver
   vars_files: 
     - define-deployment-variables.yml    
   become: true
