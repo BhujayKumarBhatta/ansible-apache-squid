@@ -14,7 +14,7 @@
        network: "{{ vnetid }}"
 #       nics:
 #          - net-id: "{{ vnetid }}"         
-       auto_ip: yes
+#       auto_ip: yes
        floating_ip_pools: ext-net
        security_groups:
          - default
