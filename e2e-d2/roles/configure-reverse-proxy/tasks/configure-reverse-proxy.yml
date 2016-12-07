@@ -56,6 +56,15 @@
    chdir: /home/admin 
   with_items:
      - /home/admin/ufwrules.sh
- ######################################################
- #sudo ip route add 10.1.0.0/24 via 10.0.0.53
+######################################################
+#After restart the br config maight have been lost  so did it agin
+#==================================================
+#service start libvirtd
+#ifconfig enp9s0 0     ( delete the existing ip if any on the actuall interface)
+#virsh  net-start default
+#brctl addif virbr0  enp9s0   
+#brctl show
+#bridge name bridge id   STP enabled interfaces
+#virbr0    8000.00188b4344a4 yes   enp9s0 
+#sudo ip route add 10.1.0.0/24 via 10.0.0.53
  
