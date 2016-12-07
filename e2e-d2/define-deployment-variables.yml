@@ -11,19 +11,19 @@ net2_is_the_network_shared_between_customers: false
 net2_accessable_outside_openstack_virtual_network: false  
 
 #subnet on the specified network
-subnet_name: 
-subnet_address_in_cidr: 
-dns_server_for_subnet:
+1_subnet_name: subnet3
+1_subnet_address_in_cidr: 175.1.0 
+1_dns_server_for_subnet:
  - 1.1.1.1
  - 1.1.1.2    
-additional_routing_for_subnet: 
+1_additional_routing_for_subnet: 
  - destination: 192.168.0.0/24
    nexthop: 192.168.0.1
  - destination: 192.168.0.0/24
    nexthop: 192.168.0.1
-dhcp_to_be_enabled: True
-dhcp_ip_allocation_pool_start: 
-dhcp_ip_allocation_pool_end: 
+1_dhcp_to_be_enabled: True
+1_dhcp_ip_allocation_pool_start: 
+1_dhcp_ip_allocation_pool_end: 
 
 #router 
 router_name: 
