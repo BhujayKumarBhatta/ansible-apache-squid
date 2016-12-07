@@ -1,3 +1,36 @@
+#network defination
+network_name: 
+is_the_network_shared_between_customers:    
+accessable_outside_openstack_virtual_network:   
+
+#subnet on the specified network
+subnet_name: 
+subnet_address_in_cidr: 
+dns_server_for_subnet:
+ - 1.1.1.1
+ - 1.1.1.2    
+additional_routing_for_subnet: 
+ - destination: 192.168.0.0/24
+   nexthop: 192.168.0.1
+ - destination: 192.168.0.0/24
+   nexthop: 192.168.0.1
+dhcp_to_be_enabled: True
+dhcp_ip_allocation_pool_start: 
+dhcp_ip_allocation_pool_end: 
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
 #Openstack VM Details
 #give a vm name in the following format 
 #vnm: vm11

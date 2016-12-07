@@ -18,7 +18,7 @@
        name: "{{vnm}}"
        #image: ubuntu16-with-gfish
        #image: our-ubuntu16
-       image: ubuntu14-itc-djnngo
+       image: ubuntu14-itc-djnngo-v2
        key_name: ubuntu-controller2-key
       # timeout: 2000
        flavor: m1.r1d2
@@ -28,7 +28,7 @@
           #- net-id: 305c14fa-5c44-4cc6-969d-259333562249
           #- net-id: a2310efa-6b42-41ce-b409-f7f522949de7 
 #          - net-id: 1de40943-4af7-41d0-9d7a-b0ee790469e9 
-#       auto_ip: yes
+       auto_ip: yes
 #       floating_ip_pools: ext-net
        security_groups: default
        config_drive: yes
