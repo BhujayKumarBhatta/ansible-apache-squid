@@ -6,10 +6,13 @@
   become: true
    
   roles:
-#    - { role: create-network, network_name: "{{  }}"  , is_the_network_shared_between_customers: "{{  }}" , 
-#        accessable_outside_openstack_virtual_network: "{{  }}" }    
+#    - { role: create-network, network_name: "{{net1_network_name}}", 
+#         is_the_network_shared_between_customers: "{{net1_is_the_network_shared_between_customers}}" , 
+#        accessable_outside_openstack_virtual_network: "{{net1_accessable_outside_openstack_virtual_network}}" }    
 #    - { role: create-subnet, subnet_name: "{{  }}"  , subnet_address_in_cidr: "{{  }}" , 
-#        dns_server_for_subnet: "{{  }}" }         
+#        dns_server_for_subnet: "{{  }}" }
+#    - { role: create-router, router_name: "{{  }}" ,  external_network_attched_with_router: "{{  }}" ,
+#         external_subnet_n_gatewayIP: "{{  }}" }   
     - { role: create-nova-vm, vnm: "{{ db_servers.name }}", vimage: "{{ db_servers.image }}", 
         vkeyname: "{{ db_servers.keyname }}", vflavor: "{{ db_servers.flavor }}",
          vnetid: "{{ db_servers.netid }}", vsecurity_group: "{{ db_servers.security_group }}",

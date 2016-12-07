@@ -8,13 +8,13 @@
           username: "{{ username_var }}"
           password: "{{ password_var }}"
           project_name: "{{ project_name_var }}"
-    network_name: "{{ network_name }}"
-    name: "{{ subnet_name }}"
-    cidr: "{{ subnet_address_in_cidr }}"   
-    dns_nameservers: "{{dns_server_for_subnet}}"       
-    host_routes: "{{additional_routing_for_subnet}}"
-    enable_dhcp: "{{dhcp_to_be_enabled}}"
-    allocation_pool_start: "{{dhcp_ip_allocation_pool_start}}"
-    allocation_pool_end: "{{dhcp_ip_allocation_pool_end}}"
-  register: justcreatedsubnetwork
+    state: present
+    name: "{{router_name}}"
+    network: "{{external_network_attched_with_router}}"
+    external_fixed_ips: "{{external_subnet_n_gatewayIP}}"
+      - subnet: public-subnet
+        ip: 172.24.4.2
+    interfaces: "{{subnet_names_tobeconnected}}"
+      - private-subnet
+  register: justcreatedrouter
   

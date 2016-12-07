@@ -1,7 +1,14 @@
-#network defination
-network_name: 
-is_the_network_shared_between_customers:    
-accessable_outside_openstack_virtual_network:   
+#network defination 
+
+#for network 1
+net1_network_name: net3
+net1_is_the_network_shared_between_customers: false
+net1_accessable_outside_openstack_virtual_network: false
+
+#for network 2
+net2_network_name: net4
+net2_is_the_network_shared_between_customers: false  
+net2_accessable_outside_openstack_virtual_network: false  
 
 #subnet on the specified network
 subnet_name: 
@@ -19,8 +26,14 @@ dhcp_ip_allocation_pool_start:
 dhcp_ip_allocation_pool_end: 
 
 #router 
-  
-
+router_name: 
+external_network_attched_with_router: 
+external_subnet_n_gatewayIP: 
+ - subnet: public-subnet
+   ip: 172.24.4.2
+subnet_names_tobeconnected: 
+ - subnet1
+ - subnet2
 
 
 
