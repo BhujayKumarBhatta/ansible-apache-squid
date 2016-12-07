@@ -6,11 +6,11 @@ net1_is_the_network_shared_between_customers: false
 net1_accessable_outside_openstack_virtual_network: false
 
 #subnet on the first   network
-1_subnet_name: subnet1-net3
-1_subnet_address_in_cidr: 175.1.1.0/24 
+1_subnet_name: subnet1net3
+1_subnet_address_in_cidr: "175.1.1.0/24" 
 1_dns_server_for_subnet: 
- - 175.1.1.10
- - 175.1.1.11    
+ - "175.1.1.10"
+ - "175.1.1.11"    
 1_additional_routing_for_subnet: 
  - destination: 176.1.1.0/24
    nexthop: 175.1.1.2
@@ -26,7 +26,7 @@ net2_is_the_network_shared_between_customers: false
 net2_accessable_outside_openstack_virtual_network: false  
 
 #subnet on the net4  network
-2_subnet_name: subnet1-net4
+2_subnet_name: subnet1net4
 2_subnet_address_in_cidr: 176.1.1.0/24 
 2_dns_server_for_subnet:
  - 176.1.1.10
@@ -46,8 +46,8 @@ net2_accessable_outside_openstack_virtual_network: false
  - subnet: public-subnet
    ip: 172.24.4.2
 1_subnet_names_tobeconnected: 
- - subnet1-net3
- - subnet1-net4
+ - subnet1net3
+ - subnet1net4
  
 #2nd  router to connect net 3 and net4  to external net
 2_router_name: net3-net4-extnet
