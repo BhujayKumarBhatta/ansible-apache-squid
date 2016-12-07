@@ -50,12 +50,12 @@ net2_accessable_outside_openstack_virtual_network: false
  - subnet1-net4
  
 #2nd  router to connect net 3 and net4  to external net
-1_router_name: net3-net4-extnet
-1_external_network_attched_with_router: ext-net
-1_external_subnet_n_gatewayIP: 
+2_router_name: net3-net4-extnet
+2_external_network_attched_with_router: ext-net
+2_external_subnet_n_gatewayIP: 
  - subnet: user-lan-subnet
    ip: 10.1.0.1
-1_subnet_names_tobeconnected: 
+2_subnet_names_tobeconnected: 
  - subnet1-net3
  - subnet1-net4
 
