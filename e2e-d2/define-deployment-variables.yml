@@ -1,39 +1,71 @@
 #network defination 
 
-#for network 1
+#for first network 
 net1_network_name: net3
 net1_is_the_network_shared_between_customers: false
 net1_accessable_outside_openstack_virtual_network: false
 
-#for network 2
+#subnet on the first   network
+1_subnet_name: subnet1-net3
+1_subnet_address_in_cidr: 175.1.1.0/24 
+1_dns_server_for_subnet: 
+ - 175.1.1.10
+ - 175.1.1.11    
+1_additional_routing_for_subnet: 
+ - destination: 176.1.1.0/24
+   nexthop: 175.1.1.2
+ - destination: 177.1.1.0/24
+   nexthop: 175.1.1.3
+1_dhcp_to_be_enabled: True
+1_dhcp_ip_allocation_pool_start: 175.1.1.20 
+1_dhcp_ip_allocation_pool_end: 175.1.1.240
+
+#for second  network 
 net2_network_name: net4
 net2_is_the_network_shared_between_customers: false  
 net2_accessable_outside_openstack_virtual_network: false  
 
-#subnet on the specified network
-1_subnet_name: subnet3
-1_subnet_address_in_cidr: 175.1.0 
-1_dns_server_for_subnet:
- - 1.1.1.1
- - 1.1.1.2    
-1_additional_routing_for_subnet: 
- - destination: 192.168.0.0/24
-   nexthop: 192.168.0.1
- - destination: 192.168.0.0/24
-   nexthop: 192.168.0.1
-1_dhcp_to_be_enabled: True
-1_dhcp_ip_allocation_pool_start: 
-1_dhcp_ip_allocation_pool_end: 
+#subnet on the net4  network
+2_subnet_name: subnet1-net4
+2_subnet_address_in_cidr: 176.1.1.0/24 
+2_dns_server_for_subnet:
+ - 176.1.1.10
+ - 176.1.1.11 
+2_additional_routing_for_subnet: 
+ - destination: 175.1.1.0/24
+   nexthop: 176.1.1.2
+ 
+2_dhcp_to_be_enabled: True
+2_dhcp_ip_allocation_pool_start: 176.1.1.20
+2_dhcp_ip_allocation_pool_end: 176.1.1.240
 
-#router 
-router_name: 
-external_network_attched_with_router: 
-external_subnet_n_gatewayIP: 
+#First router to connect net3 to net4  
+1_router_name: net3-net4 
+1_external_network_attched_with_router: 
+1_external_subnet_n_gatewayIP: 
  - subnet: public-subnet
    ip: 172.24.4.2
-subnet_names_tobeconnected: 
- - subnet1
- - subnet2
+1_subnet_names_tobeconnected: 
+ - subnet1-net3
+ - subnet1-net4
+ 
+#2nd  router to connect net 3 and net4  to external net
+1_router_name: net3-net4-extnet
+1_external_network_attched_with_router: ext-net
+1_external_subnet_n_gatewayIP: 
+ - subnet: user-lan-subnet
+   ip: 10.1.0.1
+1_subnet_names_tobeconnected: 
+ - subnet1-net3
+ - subnet1-net4
+
+#######################################################################
+# avilable subnet in  external network    
+# user-lan-subnet 10.1.0.0/24 
+# Internet-1 14.142.104.136/29 
+# ext-subnet 203.0.113.0/24 
+#
+########################################################################################
 
 
 
@@ -44,8 +76,7 @@ subnet_names_tobeconnected:
 
 
 
-
-
+#####################################################################################################################3
 #Openstack VM Details
 #give a vm name in the following format 
 #vnm: vm11
@@ -116,9 +147,9 @@ pip_proxy_entry: |
 #########################################################################
 
 db_server_apt_packages:
- - mysql-server
- - mysql-common
- - python-mysqldb
+# - mysql-server
+# - mysql-common
+# - python-mysqldb
 #   - MySQLdb
 #   - mysql
 #   - mysqldump
@@ -146,48 +177,48 @@ proxy_env:
     no_proxy: localhost,127.0.0.1,10.*.*.*,*.poc,dcim,dcim2,gitlaboxy.example.com:8080
 
 app_server_apt_packages:
- - apache2
- - apache2-dev
- - libapache2-mod-wsgi
- - python-setuptools
- - build-essential
- - python-dev
- - g++
-# - unixodbc
-# - unixodbc-dev  
-# - freetds-dev
-# - freetds-bin
-# - tdsodbc   
- - python-virtualenv
- - curl    
- - rabbitmq-server  
- - git
- - python-pip
- - libevent-dev
- - libffi-dev
- - libssl-dev
- - libxml2-dev
- - libxslt1-dev
- - libjpeg8-dev
- - zlib1g-dev
- - libevent-dev
- - libffi-dev
- - python-mysqldb
- - mysql-client-core-5.6
+# - apache2
+# - apache2-dev
+# - libapache2-mod-wsgi
+# - python-setuptools
+# - build-essential
+# - python-dev
+# - g++
+## - unixodbc
+## - unixodbc-dev  
+## - freetds-dev
+## - freetds-bin
+## - tdsodbc   
+# - python-virtualenv
+# - curl    
+# - rabbitmq-server  
+# - git
+# - python-pip
+# - libevent-dev
+# - libffi-dev
+# - libssl-dev
+# - libxml2-dev
+# - libxslt1-dev
+# - libjpeg8-dev
+# - zlib1g-dev
+# - libevent-dev
+# - libffi-dev
+# - python-mysqldb
+# - mysql-client-core-5.6
 
 
 app_server_pip_packages:
- - mitmproxy
- - paramiko
-# - pyodbc 
-# - django-pyodbc-azure
- - django==1.10.1
- - celery==3.1.23
-# - flower
- - django-celery
- - djangorestframework
- - django-filter
-# - ipcalc
+# - mitmproxy
+# - paramiko
+## - pyodbc 
+## - django-pyodbc-azure
+# - django==1.10.1
+# - celery==3.1.23
+## - flower
+# - django-celery
+# - djangorestframework
+# - django-filter
+## - ipcalc
 
 #git hub repository name and web address from where the application code will be synchorinized whenever the playbbok is run
 code_repo: https://github.com/BhujayKumarBhatta/CloudSpacewithSearchLog-Python
@@ -211,8 +242,8 @@ app_server_apache_config_files:
 reverseproxyservername: dcim
 reverseproxyserverip: 10.0.0.52
 reverseproxyserversshport: 2223
-rppointernametovm: e2ed1-djangovm
-rpvirtualhostnamewebsite: e2ed1-django
+rppointernametovm: e2e-djangovm
+rpvirtualhostnamewebsite: e2e-django
 
 
 
