@@ -9,6 +9,7 @@
           project_name: "{{ project_name_var }}"
        name: "{{ network_name }}"
        shared: "{{ is_the_network_shared_between_customers }}"       
-       external: "{{ accessable_outside_openstack_virtual_network }}"       
+       external: "{{ accessable_outside_openstack_virtual_network }}"
+       admin_state_up: True       
   register: justcreatednetwork
 

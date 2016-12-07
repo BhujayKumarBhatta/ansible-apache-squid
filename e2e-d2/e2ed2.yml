@@ -1,11 +1,15 @@
---
+---
 - hosts: localhost
   vars_files: 
     - define-deployment-variables.yml
     - opnstack_authfile.yml
   become: true
    
-  roles: 
+  roles:
+#    - { role: create-network, network_name: "{{  }}"  , is_the_network_shared_between_customers: "{{  }}" , 
+#        accessable_outside_openstack_virtual_network: "{{  }}" }    
+#    - { role: create-subnet, subnet_name: "{{  }}"  , subnet_address_in_cidr: "{{  }}" , 
+#        dns_server_for_subnet: "{{  }}" }         
     - { role: create-nova-vm, vnm: "{{ db_servers.name }}", vimage: "{{ db_servers.image }}", 
         vkeyname: "{{ db_servers.keyname }}", vflavor: "{{ db_servers.flavor }}",
          vnetid: "{{ db_servers.netid }}", vsecurity_group: "{{ db_servers.security_group }}",

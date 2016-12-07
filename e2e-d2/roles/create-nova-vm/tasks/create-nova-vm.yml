@@ -11,8 +11,9 @@
        image: "{{ vimage }}"
        key_name: "{{ vkeyname }}"
        flavor: "{{ vflavor }}"
-       nics:
-          - net-id: "{{ vnetid }}"         
+       network: "{{ vnetid }}"
+#       nics:
+#          - net-id: "{{ vnetid }}"         
 #       auto_ip: yes
 #       floating_ip_pools: ext-net
        security_groups:
