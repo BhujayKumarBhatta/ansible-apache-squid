@@ -24,7 +24,7 @@
         dhcp_to_be_enabled: "{{dhcpToBeEnabledB}}",
         dhcp_ip_allocation_pool_start: "{{dhcpIpAllocationPoolStartB}}", 
         dhcp_ip_allocation_pool_end: "{{dhcpIpAllocationPoolEndB}}", }
-    - { role: create-internal-router, router_name: "{{routerNameA}}", subnet_names_tobeconnected: "{{subnetNamesTobeconnectedA}}" } 
+#    - { role: create-internal-router, router_name: "{{routerNameA}}", subnet_names_tobeconnected: "{{subnetNamesTobeconnectedA}}" } 
     - { role: create-external-router, router_name: "{{routerNameB}}" ,
         external_network_attched_with_router: "{{externalNetworkAttchedWithRouterB}}" ,
          external_subnet_n_gatewayIP: "{{externalSubnetNgatewayIPB}}", 
