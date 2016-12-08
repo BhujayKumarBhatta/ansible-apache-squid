@@ -24,10 +24,10 @@
         dhcp_to_be_enabled: "{{dhcpToBeEnabledB}}",
         dhcp_ip_allocation_pool_start: "{{dhcpIpAllocationPoolStartB}}", 
         dhcp_ip_allocation_pool_end: "{{dhcpIpAllocationPoolEndB}}", }
-#    - { role: create-router, router_name: "{{routerNameA}}" ,
-#        external_network_attched_with_router: "{{externalNetworkAttchedWithRouterA}}" ,
-#         external_subnet_n_gatewayIP: "{{externalSubnetNgatewayIPA}}", 
-#         subnet_names_tobeconnected: "{{subnetNamesTobeconnectedA}}" } 
+    - { role: create-router, router_name: "{{routerNameA}}" ,
+        external_network_attched_with_router: "{{externalNetworkAttchedWithRouterA}}" ,
+         external_subnet_n_gatewayIP: "{{externalSubnetNgatewayIPA}}", 
+         subnet_names_tobeconnected: "{{subnetNamesTobeconnectedA}}" } 
     - { role: create-router, router_name: "{{routerNameB}}" ,
         external_network_attched_with_router: "{{externalNetworkAttchedWithRouterB}}" ,
          external_subnet_n_gatewayIP: "{{externalSubnetNgatewayIPB}}", 
