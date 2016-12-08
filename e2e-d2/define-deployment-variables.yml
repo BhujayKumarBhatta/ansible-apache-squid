@@ -6,19 +6,19 @@ net1_is_the_network_shared_between_customers: false
 net1_accessable_outside_openstack_virtual_network: false
 
 #subnet on the first   network
-1_subnet_name: subnet1net3
-1_subnet_address_in_cidr: "175.1.1.0/24" 
-1_dns_server_for_subnet: 
+subNetNameA: subnet1net3
+subnetAddressInCidrA: "175.1.1.0/24" 
+dnsserverForSubnetA: 
  - "175.1.1.10"
  - "175.1.1.11"    
-1_additional_routing_for_subnet: 
+additionalRoutingForSubnetA: 
  - destination: 176.1.1.0/24
    nexthop: 175.1.1.2
  - destination: 177.1.1.0/24
    nexthop: 175.1.1.3
-1_dhcp_to_be_enabled: True
-1_dhcp_ip_allocation_pool_start: 175.1.1.20 
-1_dhcp_ip_allocation_pool_end: 175.1.1.240
+dhcpToBeEnabledA: True
+dhcpIpAllocationPoolStartA: 175.1.1.20 
+dhcpIpAllocationPoolEndA: 175.1.1.240
 
 #for second  network 
 net2_network_name: net4
@@ -26,36 +26,36 @@ net2_is_the_network_shared_between_customers: false
 net2_accessable_outside_openstack_virtual_network: false  
 
 #subnet on the net4  network
-2_subnet_name: subnet1net4
-2_subnet_address_in_cidr: 176.1.1.0/24 
-2_dns_server_for_subnet:
+subNetNameB: subnet1net4
+ubnetAddressInCidrB: 176.1.1.0/24 
+dnsserverForSubnetB: 
  - 176.1.1.10
  - 176.1.1.11 
-2_additional_routing_for_subnet: 
+additionalRoutingForSubnetB: 
  - destination: 175.1.1.0/24
    nexthop: 176.1.1.2
  
-2_dhcp_to_be_enabled: True
-2_dhcp_ip_allocation_pool_start: 176.1.1.20
-2_dhcp_ip_allocation_pool_end: 176.1.1.240
+dhcpToBeEnabledB: True
+dhcpIpAllocationPoolStartB: 176.1.1.20
+dhcpIpAllocationPoolEndB: 176.1.1.240
 
 #First router to connect net3 to net4  
-1_router_name: net3-net4 
-1_external_network_attched_with_router: 
-1_external_subnet_n_gatewayIP: 
+routerNameA: net3-net4 
+externalNetworkAttchedWithRouterA: 
+externalSubnetNgatewayIPA: 
  - subnet: public-subnet
    ip: 172.24.4.2
-1_subnet_names_tobeconnected: 
+subnetNamesTobeconnectedA: 
  - subnet1net3
  - subnet1net4
  
 #2nd  router to connect net 3 and net4  to external net
-2_router_name: net3-net4-extnet
-2_external_network_attched_with_router: ext-net
-2_external_subnet_n_gatewayIP: 
+routerNameB: net3-net4-extnet
+externalNetworkAttchedWithRouterB: ext-net
+externalSubnetNgatewayIPB: 
  - subnet: user-lan-subnet
    ip: 10.1.0.1
-2_subnet_names_tobeconnected: 
+subnetNamesTobeconnectedB: 
  - subnet1-net3
  - subnet1-net4
 

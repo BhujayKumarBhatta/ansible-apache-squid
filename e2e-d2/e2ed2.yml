@@ -12,26 +12,26 @@
     - { role: create-network, network_name: "{{net2_network_name}}", 
          is_the_network_shared_between_customers: "{{net2_is_the_network_shared_between_customers}}" , 
         accessable_outside_openstack_virtual_network: "{{net2_accessable_outside_openstack_virtual_network}}" }     
-    - { role: create-subnetwork, subnet_name: "{{1_subnet_name}}", subnet_address_in_cidr: "{{1_subnet_address_in_cidr}}" , 
-        dns_server_for_subnet: "{{1_dns_server_for_subnet}}", 
-        additional_routing_for_subnet: "{{1_additional_routing_for_subnet}}",
-        dhcp_to_be_enabled: "{{1_dhcp_to_be_enabled}}",
-        dhcp_ip_allocation_pool_start: "{{1_dhcp_ip_allocation_pool_start}}", 
-        dhcp_ip_allocation_pool_end: "{{1_dhcp_ip_allocation_pool_end}}", }
-    - { role: create-subnetwork, subnet_name: "{{2_subnet_name}}", subnet_address_in_cidr: "{{2_subnet_address_in_cidr}}" , 
-        dns_server_for_subnet: "{{2_dns_server_for_subnet}}", 
-        additional_routing_for_subnet: "{{2_additional_routing_for_subnet}}",
-        dhcp_to_be_enabled: "{{2_dhcp_to_be_enabled}}",
-        dhcp_ip_allocation_pool_start: "{{2_dhcp_ip_allocation_pool_start}}", 
-        dhcp_ip_allocation_pool_end: "{{2_dhcp_ip_allocation_pool_end}}", }
-    - { role: create-router, router_name: "{{1_router_name}}" ,
-        external_network_attched_with_router: "{{1_external_network_attched_with_router}}" ,
-         external_subnet_n_gatewayIP: "{{1_external_subnet_n_gatewayIP}}", 
-         subnet_names_tobeconnected: "{{1_subnet_names_tobeconnected}}" } 
-    - { role: create-router, router_name: "{{2_router_name}}" ,
-        external_network_attched_with_router: "{{2_external_network_attched_with_router}}" ,
-         external_subnet_n_gatewayIP: "{{2_external_subnet_n_gatewayIP}}", 
-         subnet_names_tobeconnected: "{{2_subnet_names_tobeconnected}}" }   
+    - { role: create-subnetwork, subnet_name: "{{subNetNameA}}", subnet_address_in_cidr: "{{subnetAddressInCidrA}}" , 
+        dns_server_for_subnet: "{{dnsserverForSubnetA}}", 
+        additional_routing_for_subnet: "{{additionalRoutingForSubnetA}}",
+        dhcp_to_be_enabled: "{{dhcpToBeEnabledA}}",
+        dhcp_ip_allocation_pool_start: "{{dhcpIpAllocationPoolStartA}}", 
+        dhcp_ip_allocation_pool_end: "{{dhcpIpAllocationPoolEndA}}", }
+    - { role: create-subnetwork, subnet_name: "{{subNetNameB}}", subnet_address_in_cidr: "{{subnetAddressInCidrB}}" , 
+        dns_server_for_subnet: "{{dnsserverForSubnetB}}", 
+        additional_routing_for_subnet: "{{additionalRoutingForSubnetB}}",
+        dhcp_to_be_enabled: "{{dhcpToBeEnabledB}}",
+        dhcp_ip_allocation_pool_start: "{{dhcpIpAllocationPoolStartB}}", 
+        dhcp_ip_allocation_pool_end: "{{dhcpIpAllocationPoolEndB}}", }
+    - { role: create-router, router_name: "{{routerNameA}}" ,
+        external_network_attched_with_router: "{{externalNetworkAttchedWithRouterA}}" ,
+         external_subnet_n_gatewayIP: "{{externalSubnetNgatewayIPA}}", 
+         subnet_names_tobeconnected: "{{subnetNamesTobeconnectedA}}" } 
+    - { role: create-router, router_name: "{{routerNameB}}" ,
+        external_network_attched_with_router: "{{externalNetworkAttchedWithRouterB}}" ,
+         external_subnet_n_gatewayIP: "{{externalSubnetNgatewayIPB}}", 
+         subnet_names_tobeconnected: "{{subnetNamesTobeconnectedB}}" }   
     - { role: create-nova-vm, vnm: "{{ db_servers.name }}", vimage: "{{ db_servers.image }}", 
         vkeyname: "{{ db_servers.keyname }}", vflavor: "{{ db_servers.flavor }}",
          vnetid: "{{ db_servers.netid }}", vsecurity_group: "{{ db_servers.security_group }}",
