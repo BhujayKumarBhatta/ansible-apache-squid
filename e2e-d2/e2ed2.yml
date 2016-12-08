@@ -1,7 +1,7 @@
 ---
 - hosts: localhost
   vars_files: 
-    - define-deployment-variables.yml
+    - define-deployment-variables_wp.yml
     - opnstack_authfile.yml
   become: true
    
@@ -41,7 +41,7 @@
 
 - hosts: groupofjustcreatedvm
   vars_files: 
-    - define-deployment-variables.yml
+    - define-deployment-variables_wp.yml
   remote_user: cloudy
   become: true
   roles:
@@ -60,7 +60,7 @@
 
 - hosts: rpserver
   vars_files: 
-    - define-deployment-variables.yml    
+    - define-deployment-variables_wp.yml    
   become: true
   roles:
     - configure-reverse-proxy

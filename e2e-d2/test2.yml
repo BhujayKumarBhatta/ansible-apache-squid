@@ -2,7 +2,7 @@
 - hosts: localhost
   vars_files: 
     - define-deployment-variables.yml
-    - opnstack_authfile.yml
+    - opnstack_authfile_wp.yml
   become: true
   
   tasks:
@@ -15,10 +15,10 @@
           password: "{{ password_var }}"
           project_name: "{{ project_name_var }}"    
        name: ext-router
-#       network: ext-net
-#       external_fixed_ips:  
-#         - subnet: internet1
-#           ip: 10.1.0.1    
+       network: ext-net
+       external_fixed_ips:  
+         - subnet: user-lan-subnet
+#           ip: 10.1.0.20    
        interfaces:
 #         - user-lan-subnet
          - subnet1net3
