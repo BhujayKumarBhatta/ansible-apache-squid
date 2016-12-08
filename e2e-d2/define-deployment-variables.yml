@@ -43,8 +43,8 @@ dhcpIpAllocationPoolEndB: 176.1.1.240
 routerNameA: net3-net4 
 externalNetworkAttchedWithRouterA: 
 externalSubnetNgatewayIPA: 
- - subnet: public-subnet
-   ip: 172.24.4.2
+ - subnet: 
+   ip: 
 subnetNamesTobeconnectedA: 
  - subnet1net3
  - subnet1net4
@@ -56,8 +56,8 @@ externalSubnetNgatewayIPB:
  - subnet: user-lan-subnet
    ip: 10.1.0.1
 subnetNamesTobeconnectedB: 
- - subnet1-net3
- - subnet1-net4
+ - subnet1net3
+ - subnet1net4
 
 #######################################################################
 # avilable subnet in  external network    
