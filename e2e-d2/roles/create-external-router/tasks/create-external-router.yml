@@ -13,7 +13,7 @@
 #    external_fixed_ips: "{{external_subnet_n_gatewayIP}}" 
     external_fixed_ips:  
      - subnet: user-lan-subnet
-       ip: 10.1.0.1    
+#       ip: 10.1.0.1    
     interfaces: "{{subnet_names_tobeconnected}}"      
   
   
