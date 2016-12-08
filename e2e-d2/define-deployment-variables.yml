@@ -39,17 +39,14 @@ dhcpToBeEnabledB: True
 dhcpIpAllocationPoolStartB: 176.1.1.20
 dhcpIpAllocationPoolEndB: 176.1.1.240
 
-#First router to connect net3 to net4  
+#First internal router to connect net3 to net4  
 routerNameA: net3-net4 
 externalNetworkAttchedWithRouterA: 
-externalSubnetNgatewayIPA: 
- - subnet: 
-   ip: 
 subnetNamesTobeconnectedA: 
  - subnet1net3
  - subnet1net4
  
-#2nd  router to connect net 3 and net4  to external net
+#2nd  router is external  to connect net 3 and net4  to external net
 routerNameB: net3-net4-extnet
 externalNetworkAttchedWithRouterB: ext-net
 externalSubnetNgatewayIPB: 
