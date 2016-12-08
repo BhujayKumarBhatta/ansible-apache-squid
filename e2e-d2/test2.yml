@@ -14,7 +14,7 @@
           username: "{{ username_var }}"
           password: "{{ password_var }}"
           project_name: "{{ project_name_var }}"    
-#       name: ext-router
+       name: ext-router
 #       network: ext-net
 #       external_fixed_ips:  
 #         - subnet: user-lan-subnet
