@@ -27,7 +27,7 @@ net2_accessable_outside_openstack_virtual_network: false
 
 #subnet on the net4  network
 subNetNameB: subnet1net4
-ubnetAddressInCidrB: 176.1.1.0/24 
+subnetAddressInCidrB: 176.1.1.0/24 
 dnsserverForSubnetB: 
  - 176.1.1.10
  - 176.1.1.11 
