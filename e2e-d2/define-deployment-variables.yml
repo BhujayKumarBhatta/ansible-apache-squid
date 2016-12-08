@@ -55,6 +55,7 @@ externalSubnetNgatewayIPB:
 subnetNamesTobeconnectedB: 
  - subnet1net3
  - subnet1net4
+ - ext-subnet
 
 #######################################################################
 # avilable subnet in  external network    
