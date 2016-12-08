@@ -1,50 +1,53 @@
 ---
-- hosts: localhost
+- hosts: django-appserver2
   vars_files: 
     - define-deployment-variables.yml
     - opnstack_authfile_wp.yml
   become: true
+  -debg: 
+     msg: "System {{ inventory_hostname }} has gateway {{ ansible_default_ipv4.gateway }}"
   
-  tasks:
-   
-   
-   - name: Create a router for tenant admin
-     quantum_router:
-       state: present
-       auth_url: "{{ auth_url_var }}"
-       login_username: "{{ username_var }}"
-       login_password: "{{ password_var }}"
-       login_tenant_name: "{{ project_name_var }}"
-       name: router1
-   - name: Link External Network
-     quantum_router_gateway:
-       state: present
-       auth_url: "{{ auth_url_var }}"
-       login_username: "{{ username_var }}"
-       login_password: "{{ password_var }}"
-       login_tenant_name: "{{ project_name_var }}"
-       router_name: "{{router_name}}"
-       network_name: "{{external_network_attched_with_router}}"
-       
-   - name: attach private subnets
-     quantum_router_interface:
-       state: present
-       auth_url: "{{ auth_url_var }}"
-       login_username: "{{ username_var }}"
-       login_password: "{{ password_var }}"
-       login_tenant_name: "{{ project_name_var }}"
-       router_name: "{{router_name}}"
-       subnet_name: "{{subNetNameA}}"
-       
-   - name: attach private subnets
-     quantum_router_interface:
-       state: present
-       auth_url: "{{ auth_url_var }}"
-       login_username: "{{ username_var }}"
-       login_password: "{{ password_var }}"
-       login_tenant_name: "{{ project_name_var }}"
-       router_name: "{{router_name}}"
-       subnet_name: "{{subNetNameB}}"
+  
+#  tasks:
+#   
+#   
+#   - name: Create a router for tenant admin
+#     quantum_router:
+#       state: present
+#       auth_url: "{{ auth_url_var }}"
+#       login_username: "{{ username_var }}"
+#       login_password: "{{ password_var }}"
+#       login_tenant_name: "{{ project_name_var }}"
+#       name: router1
+#   - name: Link External Network
+#     quantum_router_gateway:
+#       state: present
+#       auth_url: "{{ auth_url_var }}"
+#       login_username: "{{ username_var }}"
+#       login_password: "{{ password_var }}"
+#       login_tenant_name: "{{ project_name_var }}"
+#       router_name: "{{router_name}}"
+#       network_name: "{{external_network_attched_with_router}}"
+#       
+#   - name: attach private subnets
+#     quantum_router_interface:
+#       state: present
+#       auth_url: "{{ auth_url_var }}"
+#       login_username: "{{ username_var }}"
+#       login_password: "{{ password_var }}"
+#       login_tenant_name: "{{ project_name_var }}"
+#       router_name: "{{router_name}}"
+#       subnet_name: "{{subNetNameA}}"
+#       
+#   - name: attach private subnets
+#     quantum_router_interface:
+#       state: present
+#       auth_url: "{{ auth_url_var }}"
+#       login_username: "{{ username_var }}"
+#       login_password: "{{ password_var }}"
+#       login_tenant_name: "{{ project_name_var }}"
+#       router_name: "{{router_name}}"
+#       subnet_name: "{{subNetNameB}}"
          
    
    
