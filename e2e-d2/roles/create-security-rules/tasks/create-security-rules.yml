@@ -2,10 +2,11 @@
 - name: Create security group
   os_security_group_rule: 
        state: present
-       auth_url: "{{ auth_url_var }}"
-       login_username: "{{ username_var }}"
-       login_password: "{{ password_var }}"
-       login_tenant_name: "{{ project_name_var }}"
+       auth:
+          auth_url: "{{ auth_url_var }}"
+          username: "{{ username_var }}"
+          password: "{{ password_var }}"
+          project_name: "{{ project_name_var }}"
        security_group: "{{secgroupName}}"
        protocol: "{{ruleprotocol}}"
        port_range_min: "{{startport}}"

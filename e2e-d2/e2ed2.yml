@@ -2,7 +2,7 @@
 - hosts: localhost
   vars_files: 
     - define-deployment-variables.yml
-    - opnstack_authfile_wp.yml
+    - opnstack_authfile.yml
   become: true
    
   roles:
