@@ -1,0 +1,12 @@
+---
+- name: Create security group
+  os_security_group:
+       state: present
+       auth_url: "{{ auth_url_var }}"
+       login_username: "{{ username_var }}"
+       login_password: "{{ password_var }}"
+       login_tenant_name: "{{ project_name_var }}"
+       name: "{{secgroupName}}"
+        
+
+  

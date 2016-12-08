@@ -55,13 +55,18 @@ externalSubnetNgatewayIPB:
 subnetNamesTobeconnectedB: 
  - subnet1net3
  - subnet1net4
-#######################################################################
-# avilable subnet in  external network    
-# user-lan-subnet 10.1.0.0/24 
-# Internet-1 14.142.104.136/29 
-# ext-subnet 203.0.113.0/24 
-#
-########################################################################################
+ 
+##########################################
+#Define security group ( firewall)
+secgroupdb: dbsecgroup 
+secgroupapp: appsecgroup
+
+#define rules for security group
+ruleprot: tcp
+mysqlport: 3306
+dbSourceIP: 0.0.0.0/0
+appSourceIP: 0.0.0.0/0
+appPort: 80
 
 
 ###################################################################################
@@ -70,11 +75,11 @@ subnetNamesTobeconnectedB:
 
 ############################################################################################
 app_servers: {name: django-appserver2, image: ubuntu14-downloadedfrom-internet, keyname: ubuntu-controller2-key,
-              flavor: m1.r1d2, netid: "{{net1_network_name}}" , security_group: webservers,
+              flavor: m1.r1d2, netid: "{{net1_network_name}}" , security_group: appsecgroup,
               register-OpenStack-VM: newappserver, inmemory_inventory_group: django-app1-servers, server_role: appserver} 
 
 db_servers: {name: mysql-dbserver2, image: ubuntu14-downloadedfrom-internet, keyname: ubuntu-controller2-key,
-             flavor: m1.r1d2, netid: "{{net2_network_name}}" , security_group: mysqldb-security-group,
+             flavor: m1.r1d2, netid: "{{net2_network_name}}" , security_group: dbsecgroup,
              register-OpenStack-VM: newdbserver, inmemory_inventory_group: mysql-db1-servers, server_role: dbserver} 
 
  
@@ -237,3 +242,10 @@ rpvirtualhostnamewebsite: e2e-django
 
 
         
+#######################################################################
+# avilable subnet in  external network    
+# user-lan-subnet 10.1.0.0/24 
+# Internet-1 14.142.104.136/29 
+# ext-subnet 203.0.113.0/24 
+#
+########################################################################################

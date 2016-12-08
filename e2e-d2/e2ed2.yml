@@ -25,6 +25,12 @@
 #        dhcp_ip_allocation_pool_start: "{{dhcpIpAllocationPoolStartB}}", 
 #        dhcp_ip_allocation_pool_end: "{{dhcpIpAllocationPoolEndB}}", }
 #    - { role: create-internal-router, router_name: "{{routerNameA}}", subnet_names_tobeconnected: "{{subnetNamesTobeconnectedA}}" } 
+    - { role: create-security-group, secgroupName: "{{secgroupdb}}" }
+    - { role: create-security-group, secgroupName: "{{secgroupapp}}" }
+    - { role: create-security-rules, secgroupName: "{{secgroupdb}}",ruleprotocol: "{{ruleprot}}",
+       startport: "{{mysqlport}}", endport: "{{mysqlport}}", ruleSourceIP: "{{dbSourceIP}}" }
+    - { role: create-security-rules, secgroupName: "{{secgroupapp}}",ruleprotocol: "{{ruleprot}}",
+       startport: "{{appPort}}", endport: "{{appPort}}", ruleSourceIP: "{{appSourceIP}}" }      
     - { role: create-external-router, router_name: "{{routerNameB}}" ,
         external_network_attched_with_router: "{{externalNetworkAttchedWithRouterB}}" ,
          external_subnet_n_gatewayIP: "{{externalSubnetNgatewayIPB}}", 
