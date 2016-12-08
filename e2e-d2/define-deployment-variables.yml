@@ -47,7 +47,7 @@ subnetNamesTobeconnectedA:
  - subnet1net4
  
 #2nd  router is external  to connect net 3 and net4  to external net
-routerNameB: sz2-router
+routerNameB: ext-router
 externalNetworkAttchedWithRouterB: ext-net
 externalSubnetNgatewayIPB: 
  - subnet: user-lan-subnet
