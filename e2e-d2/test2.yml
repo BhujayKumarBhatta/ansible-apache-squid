@@ -23,7 +23,7 @@
 #         - user-lan-subnet
          - subnet1net3
          - subnet1net4
-         - net2   
+         - subnet1-net2   
 
 #- hosts: vm10
 #  vars_files: 
