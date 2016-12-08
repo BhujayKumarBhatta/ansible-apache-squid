@@ -70,11 +70,11 @@ subnetNamesTobeconnectedB:
 
 ############################################################################################
 app_servers: {name: django-appserver2, image: ubuntu14-downloadedfrom-internet, keyname: ubuntu-controller2-key,
-              flavor: m1.r1d2, netid: {{net1_network_name}} , security_group: webservers,
+              flavor: m1.r1d2, netid: "{{net1_network_name}}" , security_group: webservers,
               register-OpenStack-VM: newappserver, inmemory_inventory_group: django-app1-servers, server_role: appserver} 
 
 db_servers: {name: mysql-dbserver2, image: ubuntu14-downloadedfrom-internet, keyname: ubuntu-controller2-key,
-             flavor: m1.r1d2, netid: {{net2_network_name}} , security_group: mysqldb-security-group,
+             flavor: m1.r1d2, netid: "{{net2_network_name}}" , security_group: mysqldb-security-group,
              register-OpenStack-VM: newdbserver, inmemory_inventory_group: mysql-db1-servers, server_role: dbserver} 
 
  
