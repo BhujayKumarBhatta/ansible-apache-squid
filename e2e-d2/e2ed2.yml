@@ -12,13 +12,13 @@
     - { role: create-network, network_name: "{{net2_network_name}}", 
          is_the_network_shared_between_customers: "{{net2_is_the_network_shared_between_customers}}" , 
         accessable_outside_openstack_virtual_network: "{{net2_accessable_outside_openstack_virtual_network}}" }     
-    - { role: create-subnetwork, subnet_name: "{{subNetNameA}}", subnet_address_in_cidr: "{{subnetAddressInCidrA}}" , 
+    - { role: create-subnetwork, subnet_name: "{{subNetNameA}}", network_name: "{{net1_network_name}}", subnet_address_in_cidr: "{{subnetAddressInCidrA}}" , 
         dns_server_for_subnet: "{{dnsserverForSubnetA}}", 
         additional_routing_for_subnet: "{{additionalRoutingForSubnetA}}",
         dhcp_to_be_enabled: "{{dhcpToBeEnabledA}}",
         dhcp_ip_allocation_pool_start: "{{dhcpIpAllocationPoolStartA}}", 
         dhcp_ip_allocation_pool_end: "{{dhcpIpAllocationPoolEndA}}", }
-    - { role: create-subnetwork, subnet_name: "{{subNetNameB}}", subnet_address_in_cidr: "{{subnetAddressInCidrB}}" , 
+    - { role: create-subnetwork, subnet_name: "{{subNetNameB}}", network_name: "{{net2_network_name}}", subnet_address_in_cidr: "{{subnetAddressInCidrB}}" , 
         dns_server_for_subnet: "{{dnsserverForSubnetB}}", 
         additional_routing_for_subnet: "{{additionalRoutingForSubnetB}}",
         dhcp_to_be_enabled: "{{dhcpToBeEnabledB}}",
