@@ -3,6 +3,7 @@
   vars_files: 
     - define-deployment-variables.yml
     - opnstack_authfile_wp.yml
+  remote_user: cloudy
   become: true
   
   tasks:
