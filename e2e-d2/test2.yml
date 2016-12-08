@@ -6,24 +6,56 @@
   become: true
   
   tasks:
-   - name: Create a new (or update an existing) router to connect two subnets 
-     os_router:
+   
+   
+   - name: Create a router for tenant admin
+     quantum_router:
        state: present
-       auth:
-          auth_url: "{{ auth_url_var }}"
-          username: "{{ username_var }}"
-          password: "{{ password_var }}"
-          project_name: "{{ project_name_var }}"    
-       name: ext-router
+       auth_url: "{{ auth_url_var }}"
+       login_username: "{{ username_var }}"
+       login_password: "{{ password_var }}"
+       login_tenant_name: "{{ project_name_var }}"
+       name: router1
+   - name: Link External Network
+     quantum_router_gateway:
+       state: present
+       auth_url: "{{ auth_url_var }}"
+       login_username: "{{ username_var }}"
+       login_password: "{{ password_var }}"
+       login_tenant_name: "{{ project_name_var }}"
+       name: router1
+       network_name: ext-net
+       
+   - name: attach private subnets
+     quantum_router_interface:
+       state: present
+       auth_url: "{{ auth_url_var }}"
+       login_username: "{{ username_var }}"
+       login_password: "{{ password_var }}"
+       login_tenant_name: "{{ project_name_var }}"
+       name: router1
+       subnet_name: ext-net
+   
+   
+   
+#   - name: Create a new (or update an existing) router to connect two subnets 
+#     os_router:
+#       state: present
+#       auth:
+#          auth_url: "{{ auth_url_var }}"
+#          username: "{{ username_var }}"
+#          password: "{{ password_var }}"
+#          project_name: "{{ project_name_var }}"    
+#       name: ext-router
 #       network: ext-net
 #       external_fixed_ips:  
 #         - subnet: user-lan-subnet
 #           ip: 10.1.0.20    
-       interfaces:
-#         - user-lan-subnet
-         - subnet1net3
-         - subnet1net4
-         - subnet1-net2   
+#       interfaces:
+##         - user-lan-subnet
+#         - subnet1net3
+#         - subnet1net4
+#         - subnet1-net2   
 
 #- hosts: vm10
 #  vars_files: 
