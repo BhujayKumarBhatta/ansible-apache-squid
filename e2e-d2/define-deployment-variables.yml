@@ -55,8 +55,6 @@ externalSubnetNgatewayIPB:
 subnetNamesTobeconnectedB: 
  - subnet1net3
  - subnet1net4
- 
-
 #######################################################################
 # avilable subnet in  external network    
 # user-lan-subnet 10.1.0.0/24 
@@ -66,55 +64,17 @@ subnetNamesTobeconnectedB:
 ########################################################################################
 
 
-
-
-
-
-
-
-
-
-#####################################################################################################################3
-#Openstack VM Details
-#give a vm name in the following format 
-#vnm: vm11
-
-# OS images  name that are avilable in open stack  .The image options are 
-#		vimage: our-ubuntu16   , this image was created by installing iso on a kvm and conerting it as openstack image manually. 
-#		vimage: ubuntu14-downloadedfrom-internet , this image was downloaded from ubuntu site . This is ready made openstack image. 
-#vimage: ubuntu14-downloadedfrom-internet
-#vkeynm: ubuntu-controller2-key
-
-#vfalvor is vm size availbale options are 
-# 		m1.r1d2  ,  1 cpu , 1 gb RAM and 20 gb disk 
-#vflavor: m1.r1d2
-
-# There are preexisting networks  with id as below . Check from horizon which network is required 
-#		305c14fa-5c44-4cc6-969d-259333562249
-#		a2310efa-6b42-41ce-b409-f7f522949de7 
-#vnetid: 305c14fa-5c44-4cc6-969d-259333562249 
-
-#Security groups are   
-#vsecurity_group: 
-#default: open ssh port , icmp 
-#webserver: open http and httts
-#mysql-db1-servers: open mysql 3306
-
-#Once the vm is launched , store its openstack values such as floating ip etc. in a temporary varibale
-#register-OpenStack-VM: newserver
-
-
 ###################################################################################
 
 #create openstacck VM 
 
 ############################################################################################
 app_servers: {name: django-appserver2, image: ubuntu14-downloadedfrom-internet, keyname: ubuntu-controller2-key,
-              flavor: m1.r1d2, netid: net1 , security_group: webservers,
+              flavor: m1.r1d2, netid: {{net1_network_name}} , security_group: webservers,
               register-OpenStack-VM: newappserver, inmemory_inventory_group: django-app1-servers, server_role: appserver} 
 
 db_servers: {name: mysql-dbserver2, image: ubuntu14-downloadedfrom-internet, keyname: ubuntu-controller2-key,
-             flavor: m1.r1d2, netid: net1 , security_group: mysqldb-security-group,
+             flavor: m1.r1d2, netid: {{net2_network_name}} , security_group: mysqldb-security-group,
              register-OpenStack-VM: newdbserver, inmemory_inventory_group: mysql-db1-servers, server_role: dbserver} 
 
  
@@ -245,6 +205,34 @@ rpvirtualhostnamewebsite: e2e-django
 
 
 
+#####################################################################################################################3
+#Openstack VM Details
+#give a vm name in the following format 
+#vnm: vm11
+
+# OS images  name that are avilable in open stack  .The image options are 
+#   vimage: our-ubuntu16   , this image was created by installing iso on a kvm and conerting it as openstack image manually. 
+#   vimage: ubuntu14-downloadedfrom-internet , this image was downloaded from ubuntu site . This is ready made openstack image. 
+#vimage: ubuntu14-downloadedfrom-internet
+#vkeynm: ubuntu-controller2-key
+
+#vfalvor is vm size availbale options are 
+#     m1.r1d2  ,  1 cpu , 1 gb RAM and 20 gb disk 
+#vflavor: m1.r1d2
+
+# There are preexisting networks  with id as below . Check from horizon which network is required 
+#   305c14fa-5c44-4cc6-969d-259333562249
+#   a2310efa-6b42-41ce-b409-f7f522949de7 
+#vnetid: 305c14fa-5c44-4cc6-969d-259333562249 
+
+#Security groups are   
+#vsecurity_group: 
+#default: open ssh port , icmp 
+#webserver: open http and httts
+#mysql-db1-servers: open mysql 3306
+
+#Once the vm is launched , store its openstack values such as floating ip etc. in a temporary varibale
+#register-OpenStack-VM: newserver
 
 
 
