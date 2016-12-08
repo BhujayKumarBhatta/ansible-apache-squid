@@ -4,9 +4,12 @@
     - define-deployment-variables.yml
     - opnstack_authfile_wp.yml
   become: true
+  
   tasks:
-  -debug: 
-     msg: "System {{ inventory_hostname }} has gateway {{ ansible_default_ipv4.gateway }}"
+   - name: Display all variables/facts known for a host
+     #debug: var=hostvars[inventory_hostname] verbosity=4
+     debug: msg={{hostvars[inventory_hostname].ansible_default_ipv4}} 
+     debug: msg={{hostvars[inventory_hostname].ansible_eth0.ipv4.address}} 
   
   
 #  tasks:
