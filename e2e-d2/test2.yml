@@ -23,7 +23,7 @@
        login_username: "{{ username_var }}"
        login_password: "{{ password_var }}"
        login_tenant_name: "{{ project_name_var }}"
-       name: router1
+       router_name: router1
        network_name: ext-net
        
    - name: attach private subnets
@@ -33,7 +33,7 @@
        login_username: "{{ username_var }}"
        login_password: "{{ password_var }}"
        login_tenant_name: "{{ project_name_var }}"
-       name: router1
+       router_name: router1
        subnet_name: ext-net
    
    
