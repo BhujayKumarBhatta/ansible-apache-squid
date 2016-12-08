@@ -9,8 +9,8 @@
           password: "{{ password_var }}"
           project_name: "{{ project_name_var }}"    
     name: "{{router_name}}"
-    network: "{{external_network_attched_with_router}}"
-    external_fixed_ips: "{{external_subnet_n_gatewayIP}}"      
-    interfaces: "{{subnet_names_tobeconnected}}"      
+#    network: "{{external_network_attched_with_router}}"
+#    external_fixed_ips: "{{external_subnet_n_gatewayIP}}"      
+#    interfaces: "{{subnet_names_tobeconnected}}"      
   
   
