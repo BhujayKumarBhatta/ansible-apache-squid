@@ -4,7 +4,7 @@
     - define-deployment-variables.yml
     - opnstack_authfile_wp.yml
   remote_user: cloudy
-  become: true
+#  become: true
   
   tasks:
    - name: Display all variables/facts known for a host
