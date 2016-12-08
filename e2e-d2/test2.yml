@@ -14,15 +14,16 @@
           username: "{{ username_var }}"
           password: "{{ password_var }}"
           project_name: "{{ project_name_var }}"    
-       name: ext-router
-       network: ext-net
-       external_fixed_ips:  
-         - subnet: user-lan-subnet
+#       name: ext-router
+#       network: ext-net
+#       external_fixed_ips:  
+#         - subnet: user-lan-subnet
 #           ip: 10.1.0.20    
        interfaces:
 #         - user-lan-subnet
          - subnet1net3
-         - subnet1net4   
+         - subnet1net4
+         - net2   
 
 #- hosts: vm10
 #  vars_files: 
