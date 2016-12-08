@@ -34,10 +34,11 @@
        login_password: "{{ password_var }}"
        login_tenant_name: "{{ project_name_var }}"
        router_name: router1
-       subnet_name: subnet1net3
-#        - subnet1net3
-#        - subnet1net4
-#        - subnet1-net2  
+       subnet_name: {{item}}
+       with_items:
+        - subnet1net3
+        - subnet1net4
+        - subnet1-net2  
    
    
    
