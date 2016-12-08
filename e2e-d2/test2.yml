@@ -1,18 +1,42 @@
 ---
-- hosts: vm10
+- hosts: localhost
   vars_files: 
-    - roles/configure-webserver-apache/vars/main.yml
-  remote_user: cloudy
+    - define-deployment-variables.yml
+    - opnstack_authfile.yml
   become: true
-#  roles:
-#    - configure-db-mysql
-
+  
   tasks:
-   - name: Add host addresses  to /etc/hosts
-     blockinfile:
-      dest: /etc/hosts
-      block: |
-          {{ ansible_default_ipv4.address }} 	abcd
+   - name: Create a new (or update an existing) router to connect two subnets 
+     os_router:
+       state: present
+       auth:
+          auth_url: "{{ auth_url_var }}"
+          username: "{{ username_var }}"
+          password: "{{ password_var }}"
+          project_name: "{{ project_name_var }}"    
+       name: sz2-router
+       network: ext-net
+       external_fixed_ips:  
+         - subnet: user-lan-subnet
+           ip: 10.1.0.1    
+       interfaces:
+         - subnet1net3
+         - subnet1net4   
+
+#- hosts: vm10
+#  vars_files: 
+#    - roles/configure-webserver-apache/vars/main.yml
+#  remote_user: cloudy
+#  become: true
+##  roles:
+##    - configure-db-mysql
+#
+#  tasks:
+#   - name: Add host addresses  to /etc/hosts
+#     blockinfile:
+#      dest: /etc/hosts
+#      block: |
+#          {{ ansible_default_ipv4.address }} 	abcd
 ####################Celery task starting , with every change in code under @app.task ( in our case AnalyzeServer) celery restart is required   
 #   - name: Stop celery background tasks worker pool w1
 #     command: celery multi stop w1 -A djp1 -l info

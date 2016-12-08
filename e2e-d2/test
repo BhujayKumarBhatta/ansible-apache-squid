@@ -1,1 +1,5 @@
---protocol tcp --dst-port 3306:3306 --remote-ip 0.0.0.0/0
+- hosts: localhost
+  vars_files: 
+    - define-deployment-variables.yml
+    - opnstack_authfile.yml
+  become: true
