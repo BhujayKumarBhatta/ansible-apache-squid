@@ -175,7 +175,7 @@ app_server_pip_packages:
  - paramiko
 ## - pyodbc 
 ## - django-pyodbc-azure
-# - django==1.10.1
+ - django==1.10.1
  - celery==3.1.23
 ## - flower
  - django-celery
@@ -195,7 +195,7 @@ app_server_apache_config_files:
  - {name: apache2.conf, rnm: /etc/apache2/apache2.conf-ansible,fpath: /etc/apache2/apache2.conf, idn: A,x: 0, fsrc: files/apache2.conf.wsgi-ansible, fdest: /etc/apache2/apache2.conf}
  - {name: ports.conf, rnm: /etc/apache2/ports.conf-ansible,fpath: /etc/apache2/ports.conf, idn: B , x: 1,fsrc: files/ports.conf.ansible-file, fdest: /etc/apache2/ports.conf}
 
-
+ 
 #######################################################################################################
 
 #reverse proxy or the fron end web servers configuration 
