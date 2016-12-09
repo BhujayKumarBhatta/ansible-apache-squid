@@ -9,6 +9,7 @@
           password: "{{ password_var }}"
           project_name: "{{ project_name_var }}"    
     name: "{{router_name}}"        
-    interfaces: "{{subnet_names_tobeconnected}}"      
+    interfaces: "{{subnet_names_tobeconnected}}" 
+    ignore_errors: yes     
   
   
