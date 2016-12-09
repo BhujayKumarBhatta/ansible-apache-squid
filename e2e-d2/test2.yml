@@ -5,6 +5,8 @@
     - opnstack_authfile_wp.yml
   remote_user: cloudy
   become: true
+  become_user: root
+  sudo: yes
   
   tasks:
    - name: Display all variables/facts known for a host
