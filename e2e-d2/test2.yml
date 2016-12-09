@@ -6,7 +6,7 @@
   remote_user: cloudy
   become: true
   become_user: root
-  sudo: yes
+  become_method: sudo
   
   tasks:
    - name: Display all variables/facts known for a host

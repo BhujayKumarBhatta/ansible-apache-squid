@@ -1,16 +1,10 @@
 ---
-- name: install mysql package
-  apt:
-    name: "{{ item }}"
-    state: present
-    allow_unauthenticated: yes
-  with_items:
-   - mysql-server
-   - mysql-common
-   - python-mysqldb
-#   - MySQLdb
-#   - mysql
-#   - mysqldump
+#- name: install mysql package
+#  apt:
+#    name: "{{ item }}"
+#    state: present
+#    allow_unauthenticated: yes
+#  with_items: "{{db_server_apt_packages}}"   
 
 - name: Configure my sql to listen and bind on all IP address 
   lineinfile:
