@@ -23,8 +23,9 @@
      mysql_db:
        name: searchlog
        state: present
-       login_user: root
-       login_password: welcome@123
+       login_user: 'root'
+       login_password: 'welcome@123'
+       login_host: localhost
        
        
    - name: Display all variables/facts known for a host
