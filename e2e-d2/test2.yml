@@ -9,7 +9,16 @@
 #  become_method: sudo
 #  
   tasks:
-   
+   - name: install mysql package
+     apt:
+       name: mysql-server
+       state: absent
+       allow_unauthenticated: yes
+   - name: install mysql package
+     apt:
+       name: mysql-server
+       state: present
+       allow_unauthenticated: yes
    - name: Create user and give permissions
      mysql_user: name=mysql password=mysql123 host=localhost priv=*.*:ALL,GRANT state=absent
   
@@ -23,9 +32,9 @@
      mysql_db:
        name: searchlog
        state: present
-       login_user: 'root'
-       login_password: 'welcome@123'
-       login_host: localhost
+#       login_user: 'root'
+#       login_password: 'welcome@123'
+#       login_host: localhost
        
        
    - name: Display all variables/facts known for a host
