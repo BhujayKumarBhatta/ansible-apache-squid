@@ -9,17 +9,7 @@
 #  become_method: sudo
 #  
   tasks:
-   - name: removing  mysql package
-     apt:
-       name: mysql-server
-       state: absent
-       allow_unauthenticated: yes
-   - name: install mysql package
-     apt:
-       name: mysql-server
-       state: present
-       update_cache: yes
-       allow_unauthenticated: yes
+   
    - name: Create user and give permissions
      mysql_user: name=mysql password=mysql123 host=localhost priv=*.*:ALL,GRANT state=absent
   
@@ -161,3 +151,17 @@
 #    http_proxy: http://dcim:3128
 #    https_proxy: http://dcim:3128
 #    no_proxy: localhost,127.0.0.1,10.*.*.*,*.poc,dcim,gitlaboxy.example.com:8080
+
+
+
+#- name: removing  mysql package
+#     apt:
+#       name: mysql-server
+#       state: absent
+#       allow_unauthenticated: yes
+#   - name: install mysql package
+#     apt:
+#       name: mysql-server
+#       state: present
+#       update_cache: yes
+#       allow_unauthenticated: yes
