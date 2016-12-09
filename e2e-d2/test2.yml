@@ -1,14 +1,19 @@
 ---
-- hosts: django-appserver2
+- hosts: django-dbserver2
   vars_files: 
     - define-deployment-variables.yml
     - opnstack_authfile_wp.yml
   remote_user: cloudy
   become: true
-  become_user: root
-  become_method: sudo
-  
+#  become_user: root
+#  become_method: sudo
+#  
   tasks:
+   - name: Create database
+     mysql_db:
+       name: searchlog
+       state: present
+   
    - name: Display all variables/facts known for a host
      #debug: var=hostvars[inventory_hostname] verbosity=4
      debug: msg={{hostvars[inventory_hostname].ansible_default_ipv4}} 
