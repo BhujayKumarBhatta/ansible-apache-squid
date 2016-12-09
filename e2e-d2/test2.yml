@@ -23,7 +23,9 @@
      mysql_db:
        name: searchlog
        state: present
-   
+       login_user: mysql
+       login_password: mysql123
+       
    - name: Display all variables/facts known for a host
      #debug: var=hostvars[inventory_hostname] verbosity=4
      debug: msg={{hostvars[inventory_hostname].ansible_default_ipv4}} 
