@@ -5,7 +5,8 @@
    dest: /etc/hosts
    line: "{{item}}"
   with_items:
-       - "{{hostvars[db_servers.name].ansible_all_ipv4_addresses.0}}   {{hostvars[db_servers.name].ansible_hostname}}  {{db_hostname}}"
+       - "{{hostvars[db_servers.name].ansible_ssh_host}}   {{hostvars[db_servers.name].ansible_hostname}}  {{db_hostname}}"
+#       - "{{hostvars[db_servers.name].ansible_all_ipv4_addresses.0}}   {{hostvars[db_servers.name].ansible_hostname}}  {{db_hostname}}"
 #        - "{{ hostvars[vnm]['ansible_ssh_host'] }}       {{ hostvars[vnm]['ansible_hostname'] }}    {{rp_pointer_name_to_vm}}"
 #        - "{{hostvars[inventory_hostname].ansible_default_ipv4.address}}  {{rp_virtual_hostname_website}}    {{db_hostname}}"
 #        - "{{hostvars[inventory_hostname].ansible_all_ipv4_addresses.0}}  {{rp_virtual_hostname_website}}"  
@@ -23,12 +24,12 @@
 #    state: latest
 #  ignore_errors: true
 #
-#- name: pip  Install the software packages required for the application
-#  pip:
-#    name: "{{item}}"
-#    state: present
-#  with_items: "{{app_server_pip_packages}}"
-#  ignore_errors: true
+- name: pip  Install the software packages required for the application
+  pip:
+    name: "{{item}}"
+    state: present
+  with_items: "{{app_server_pip_packages}}"
+  ignore_errors: true
 
        
 #Deploy your code from github. No changes should be made in the server locally . All code to be changed in the development system and uploaded to github . This playbook will  checkout the latest code from git hub and keep the  server code syncronized.  

@@ -171,7 +171,7 @@ app_server_apt_packages:
 
  
 app_server_pip_packages:
- - mitmproxy
+# - mitmproxy
  - paramiko
 ## - pyodbc 
 ## - django-pyodbc-azure
