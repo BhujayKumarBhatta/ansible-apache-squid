@@ -10,9 +10,11 @@
 #  
   tasks:
    
-   - name: checkout latest  code from git hub - all the codes for my django and celery applications will be downloaded 
-     git: repo={{code_repo}}  dest={{app_dir}} accept_hostkey=True force=no
-     environment: "{{ proxy_env }}" 
+   - name: Configure my sql to listen and bind on all IP address 
+  lineinfile:
+   dest: /etc/mysql/my.cnf
+   regexp: '^bind-address    = 127.0.0.1'
+   line: "bind-address    = 0.0.0.0"
 #   - name: Create user and give permissions
 #     mysql_user: name=mysql password=mysql123 host=localhost priv=*.*:ALL,GRANT state=absent
 #  
