@@ -1,5 +1,5 @@
 ---
-- hosts: django-dbserver2
+- hosts: django-appserver2
   vars_files: 
     - define-deployment-variables.yml
     - opnstack_authfile_wp.yml
@@ -10,30 +10,32 @@
 #  
   tasks:
    
-   - name: Create user and give permissions
-     mysql_user: name=mysql password=mysql123 host=localhost priv=*.*:ALL,GRANT state=absent
-  
-   - name: Create user and give permissions
-     mysql_user: name=mysql password=mysql123 host=% priv=*.*:ALL,GRANT state=present
-  
-   - name: give permission to all hosts
-     mysql_user: name=mysql  host_all=yes
-      
-   - name: Create database
-     mysql_db:
-       name: searchlog
-       state: present
-#       login_user: 'root'
-#       login_password: 'welcome@123'
-#       login_host: localhost
-       
-       
-   - name: Display all variables/facts known for a host
-     #debug: var=hostvars[inventory_hostname] verbosity=4
-     debug: msg={{hostvars[inventory_hostname].ansible_default_ipv4}} 
-     debug: msg={{hostvars[inventory_hostname].ansible_eth0.ipv4.address}} 
-  
-  
+   - name: checkout latest  code from git hub - all the codes for my django and celery applications will be downloaded 
+     git: repo={{code_repo}}  dest={{app_dir}} accept_hostkey=True force=no
+#   - name: Create user and give permissions
+#     mysql_user: name=mysql password=mysql123 host=localhost priv=*.*:ALL,GRANT state=absent
+#  
+#   - name: Create user and give permissions
+#     mysql_user: name=mysql password=mysql123 host=% priv=*.*:ALL,GRANT state=present
+#  
+#   - name: give permission to all hosts
+#     mysql_user: name=mysql  host_all=yes
+#      
+#   - name: Create database
+#     mysql_db:
+#       name: searchlog
+#       state: present
+##       login_user: 'root'
+##       login_password: 'welcome@123'
+##       login_host: localhost
+#       
+#       
+#   - name: Display all variables/facts known for a host
+#     #debug: var=hostvars[inventory_hostname] verbosity=4
+#     debug: msg={{hostvars[inventory_hostname].ansible_default_ipv4}} 
+#     debug: msg={{hostvars[inventory_hostname].ansible_eth0.ipv4.address}} 
+#  
+#  
 #  tasks:
 #   
 #   
