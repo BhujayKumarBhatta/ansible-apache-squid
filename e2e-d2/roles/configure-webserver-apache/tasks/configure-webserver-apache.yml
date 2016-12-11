@@ -31,7 +31,7 @@
   with_items: "{{app_server_pip_packages}}"
   ignore_errors: true
 
-       
+#this is a test   
 #Deploy your code from github. No changes should be made in the server locally . All code to be changed in the development system and uploaded to github . This playbook will  checkout the latest code from git hub and keep the  server code syncronized.  
   
 - name: checkout latest  code from git hub - all the codes for my django and celery applications will be downloaded 
