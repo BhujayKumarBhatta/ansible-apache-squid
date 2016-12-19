@@ -127,7 +127,7 @@ database_user_password: "{{ mysql_db_user_password }}"
 database_host: localhost 
 database_priv: "*.*:ALL,GRANT"
 
-
+##
 ################################################################################
 
 #app server configuration
