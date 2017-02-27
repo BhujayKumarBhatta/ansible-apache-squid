@@ -30,6 +30,16 @@
     state: present
   with_items: "{{app_server_pip_packages}}"
   ignore_errors: true
+  
+- name: Inserted by bhujay -Upgarde the packages setuptools==34.0.1, packaging==16.8,pyparsing==2.1.10
+  pip:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - setuptools==34.0.1
+    - packaging==16.8
+    - pyparsing==2.1.10  
+  
 
 #this is a test   
 #Deploy your code from github. No changes should be made in the server locally . All code to be changed in the development system and uploaded to github . This playbook will  checkout the latest code from git hub and keep the  server code syncronized.  
