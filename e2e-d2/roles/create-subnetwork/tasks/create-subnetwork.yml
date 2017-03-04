@@ -8,6 +8,7 @@
           username: "{{ username_var }}"
           password: "{{ password_var }}"
           project_name: "{{ project_name_var }}"
+          endpoint_type: "{{ endpoint_type_var }}"
     network_name: "{{ network_name }}"
     name: "{{ subnet_name }}"
     cidr: "{{ subnet_address_in_cidr }}"   

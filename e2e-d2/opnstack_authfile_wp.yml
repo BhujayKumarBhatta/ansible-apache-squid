@@ -1,5 +1,8 @@
 ---
-auth_url_var: http://controller:35357/v2.0
+auth_url_var: http://10.0.0.14:5000/v3
 username_var: admin
-password_var: admin123
+password_var: welcome@123
 project_name_var: admin
+endpoint_type_var: internal
+mysql_db_user: mysql
+mysql_db_user_password: mysql123

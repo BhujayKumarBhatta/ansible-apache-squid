@@ -2,7 +2,7 @@
 - hosts: localhost
   vars_files: 
     - define-deployment-variables.yml
-    - opnstack_authfile.yml
+    - opnstack_authfile_wp.yml
   become: true
    
   roles:
@@ -64,12 +64,12 @@
             hostname={{reverseproxyservername}}
          
 
-- hosts: rpserver
-  vars_files: 
-    - define-deployment-variables.yml    
-  become: true
-  roles:
-    - configure-reverse-proxy
+#- hosts: rpserver
+#  vars_files: 
+#    - define-deployment-variables.yml    
+#  become: true
+#  roles:
+#    - configure-reverse-proxy
 
  #demo   
  #############################################################
