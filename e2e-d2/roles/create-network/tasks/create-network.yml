@@ -4,6 +4,9 @@
        state: present
        auth:
           auth_url: "{{ auth_url_var }}"
+          auth_version: 3
+          user_domian_name: default
+          project_domain_name: default
           username: "{{ username_var }}"
           password: "{{ password_var }}"
           project_name: "{{ project_name_var }}"
