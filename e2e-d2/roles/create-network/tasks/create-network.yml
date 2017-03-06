@@ -2,7 +2,7 @@
 - name: create a network
   os_network:
        state: present
-       auth:
+#       auth:
 #          auth_url: "{{ auth_url_var }}"
 #         auth_version: 3
 #          user_domian_name: default
@@ -10,7 +10,7 @@
 #          username: "{{ username_var }}"
 #          password: "{{ password_var }}"
 #          project_name: "{{ project_name_var }}"
-          endpoint_type: "{{ endpoint_type_var }}"
+       endpoint_type: "{{ endpoint_type_var }}"
        name: "{{ network_name }}"
        shared: "{{ is_the_network_shared_between_customers }}"       
        external: "{{ accessable_outside_openstack_virtual_network }}"
