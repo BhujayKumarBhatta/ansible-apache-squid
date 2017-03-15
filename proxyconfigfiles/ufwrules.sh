@@ -60,4 +60,6 @@ ufw allow 5000
 ufw allow out 5000
 ufw allow 27017
 ufw allow out 27017
+ufw allow 9418
+ufw allow out 9418
 
