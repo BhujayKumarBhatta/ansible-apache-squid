@@ -54,6 +54,6 @@
 ##    external_fixed_ips:  
 ##     - subnet: user-lan-subnet
 ##       ip: 10.1.0.1    
-#    interfaces: "{{subnet_names_tobeconnected}}"      
+    interfaces: "{{subnet_names_tobeconnected}}"      
   
   
