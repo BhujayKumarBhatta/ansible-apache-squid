@@ -62,8 +62,12 @@ subnetNamesTobeconnectedB:
  
 ##########################################
 #Define security group ( firewall)
-secgroupdb: dbsecgroup 
-secgroupapp: appsecgroup
+secgroupdb: 
+ - dbsecgroup
+ - itc-sec-common  
+secgroupapp: 
+ - appsecgroup
+ - itc-sec-common
 
 #define rules for security group
 ruleprot: tcp
