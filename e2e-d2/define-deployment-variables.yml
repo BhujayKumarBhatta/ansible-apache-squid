@@ -48,7 +48,7 @@ subnetNamesTobeconnectedA:
  
 #2nd  router is external  to connect net 3 and net4  to external net
 routerNameB: ext-router
-externalNetworkAttchedWithRouterB: ext-net
+externalNetworkAttchedWithRouterB: provider-303
 externalSubnetNgatewayIPB: 
  - subnet: user-lan-subnet
    ip: 10.1.0.1
