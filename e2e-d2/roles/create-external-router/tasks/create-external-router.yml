@@ -51,9 +51,9 @@
     name: "{{router_name}}"
     network: "{{external_network_attched_with_router}}"
 ##    external_fixed_ips: "{{external_subnet_n_gatewayIP}}" 
-##    external_fixed_ips:  
-##     - subnet: user-lan-subnet
-##       ip: 10.1.0.1    
+    external_fixed_ips:  
+     - subnet: provider-303-subnet
+       ip: 191.1.1.15    
     interfaces: "{{subnet_names_tobeconnected}}"      
   
   
