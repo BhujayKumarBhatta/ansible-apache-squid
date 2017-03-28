@@ -2,11 +2,11 @@
 - name: launch an nova instance 
   os_server: 
        state: present
-       auth:
-          auth_url: "{{ auth_url_var }}"
-          username: "{{ username_var }}"
-          password: "{{ password_var }}"
-          project_name: "{{ project_name_var }}"          
+#       auth:
+#          auth_url: "{{ auth_url_var }}"
+#          username: "{{ username_var }}"
+#          password: "{{ password_var }}"
+#          project_name: "{{ project_name_var }}"          
        endpoint_type: "{{ endpoint_type_var }}"
        name: "{{ vnm }}"
        image: "{{ vimage }}"
