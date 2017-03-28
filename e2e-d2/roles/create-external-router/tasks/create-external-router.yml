@@ -41,7 +41,7 @@
 ## Create a new (or update an existing) subnet on the specified network
 - name: Create a new (or update an existing) router to connect two subnets 
   os_router:
-#    state: present
+    state: present
 #    auth:
 #          auth_url: "{{ auth_url_var }}"
 #          username: "{{ username_var }}"
