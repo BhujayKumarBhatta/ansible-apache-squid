@@ -56,6 +56,9 @@ subnetNamesTobeconnectedB:
 # - provider-303-subnet
  - subnet1net3
  - subnet1net4
+ - 982840ed-cf8f-47fe-9459-8422d53ca5c3 # this is high availibility subnet fixed per installation
+# check with 'openstack port list --router <anyexisting router name> ' . the subnetid associated with 
+#HA network for the router is same.
  
 ##########################################
 #Define security group ( firewall)

@@ -36,7 +36,7 @@
 #       login_tenant_name: "{{ project_name_var }}"
 #       router_name: "{{router_name}}"
 #       subnet_name: "{{subNetNameB}}"
-   
+#   
 
 ## Create a new (or update an existing) subnet on the specified network
 - name: Create a new (or update an existing) router to connect two subnets 
@@ -51,9 +51,9 @@
     name: "{{router_name}}"
     network: "{{external_network_attched_with_router}}"
 ##    external_fixed_ips: "{{external_subnet_n_gatewayIP}}" 
-    external_fixed_ips:  
-     - subnet: provider-303-subnet
-       ip: 191.1.1.15    
+#    external_fixed_ips:  
+#     - subnet: provider-303-subnet
+#       ip: 191.1.1.15    
     interfaces: "{{subnet_names_tobeconnected}}"      
   
   
