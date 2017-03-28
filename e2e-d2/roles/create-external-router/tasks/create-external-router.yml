@@ -47,6 +47,7 @@
 #          username: "{{ username_var }}"
 #          password: "{{ password_var }}"
 #          project_name: "{{ project_name_var }}"    
+    endpoint_type: "{{ endpoint_type_var }}"
     name: "{{router_name}}"
     network: "{{external_network_attched_with_router}}"
 ##    external_fixed_ips: "{{external_subnet_n_gatewayIP}}" 
