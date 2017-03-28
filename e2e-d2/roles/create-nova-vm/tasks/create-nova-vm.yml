@@ -16,7 +16,7 @@
 #       nics:
 #          - net-id: "{{ vnetid }}"         
 #       auto_ip: yes
-       floating_ip_pools: ext-net
+       floating_ip_pools: "{{ vfloating_ip_pool }}"
        security_groups:
          - default
          - "{{ vsecurity_group }}"
