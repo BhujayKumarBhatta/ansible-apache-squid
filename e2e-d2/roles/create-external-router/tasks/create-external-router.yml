@@ -41,7 +41,7 @@
 ## Create a new (or update an existing) subnet on the specified network
 - name: Create a new (or update an existing) router to connect two subnets 
   os_router:
-    state: present
+#    state: present
 #    auth:
 #          auth_url: "{{ auth_url_var }}"
 #          username: "{{ username_var }}"
@@ -49,7 +49,7 @@
 #          project_name: "{{ project_name_var }}"    
     endpoint_type: "{{ endpoint_type_var }}"
     name: "{{router_name}}"
-    network: "{{external_network_attched_with_router}}"
+#    network: "{{external_network_attched_with_router}}"
 ##    external_fixed_ips: "{{external_subnet_n_gatewayIP}}" 
 ##    external_fixed_ips:  
 ##     - subnet: user-lan-subnet
