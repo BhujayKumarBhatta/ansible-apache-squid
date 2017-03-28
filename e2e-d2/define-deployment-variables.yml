@@ -53,6 +53,7 @@ externalSubnetNgatewayIPB:
  - subnet: user-lan-subnet
    ip: 10.1.0.1
 subnetNamesTobeconnectedB: 
+ - provider-303-subnet
  - subnet1net3
  - subnet1net4
  
