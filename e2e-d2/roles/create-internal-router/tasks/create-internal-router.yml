@@ -8,7 +8,7 @@
           username: "{{ username_var }}"
           password: "{{ password_var }}"
           project_name: "{{ project_name_var }}"
-          endpoint_type: "{{ endpoint_type_var }}"    
+    endpoint_type: "{{ endpoint_type_var }}"   
     name: "{{router_name}}"        
     interfaces: "{{subnet_names_tobeconnected}}" 
   ignore_errors: yes     
