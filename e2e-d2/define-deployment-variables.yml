@@ -73,7 +73,7 @@ dbSourceIP: 0.0.0.0/0
 appSourceIP: 0.0.0.0/0
 appPort: 80
 icmp_proto: ICMP
-icmp_port: Any
+icmp_port: -1
 icmp_source: 0.0.0.0/0
 ssh_proto: TCP
 ssh_port: 22
