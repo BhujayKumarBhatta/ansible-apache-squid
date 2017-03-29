@@ -72,10 +72,10 @@ mysqlport: 3306
 dbSourceIP: 0.0.0.0/0
 appSourceIP: 0.0.0.0/0
 appPort: 80
-icmp_proto: ICMP
+icmp_proto: icmp
 icmp_port: -1
 icmp_source: 0.0.0.0/0
-ssh_proto: TCP
+ssh_proto: tcp
 ssh_port: 22
 icmp_source: 0.0.0.0/0
 
