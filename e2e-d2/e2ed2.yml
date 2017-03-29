@@ -30,7 +30,15 @@
     - { role: create-security-rules, secgroupName: "{{secgroupdb}}",ruleprotocol: "{{ruleprot}}",
        startport: "{{mysqlport}}", endport: "{{mysqlport}}", ruleSourceIP: "{{dbSourceIP}}" }
     - { role: create-security-rules, secgroupName: "{{secgroupapp}}",ruleprotocol: "{{ruleprot}}",
-       startport: "{{appPort}}", endport: "{{appPort}}", ruleSourceIP: "{{appSourceIP}}" }      
+       startport: "{{appPort}}", endport: "{{appPort}}", ruleSourceIP: "{{appSourceIP}}" } 
+    - { role: create-security-rules, secgroupName: "{{secgroupapp}}",ruleprotocol: "{{icmp_proto}}",
+       startport: "{{icmp_port}}", endport: "{{icmp_port}}", ruleSourceIP: "{{icmp_source}}" }
+    - { role: create-security-rules, secgroupName: "{{secgroupdb}}",ruleprotocol: "{{icmp_proto}}",
+       startport: "{{icmp_port}}", endport: "{{icmp_port}}", ruleSourceIP: "{{icmp_source}}" } 
+    - { role: create-security-rules, secgroupName: "{{secgroupapp}}",ruleprotocol: "{{ssh_proto}}",
+       startport: "{{ssh_port}}", endport: "{{ssh_port}}", ruleSourceIP: "{{ssh_source}}" }
+    - { role: create-security-rules, secgroupName: "{{secgroupdb}}",ruleprotocol: "{{ssh_proto}}",
+       startport: "{{ssh_port}}", endport: "{{ssh_port}}", ruleSourceIP: "{{ssh_source}}" }       
     - { role: create-external-router, router_name: "{{routerNameB}}" ,
         external_network_attched_with_router: "{{externalNetworkAttchedWithRouterB}}" ,
          external_subnet_n_gatewayIP: "{{externalSubnetNgatewayIPB}}", 
