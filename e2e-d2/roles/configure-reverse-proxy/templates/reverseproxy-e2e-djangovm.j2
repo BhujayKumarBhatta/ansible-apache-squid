@@ -1,9 +1,9 @@
 ## Load the required modules.
 #LoadModule proxy_http_module modules/mod_proxy_http.so
 #LoadModule proxy_connect_module modules/mod_proxy_connect.so
-Listen 80
-Listen 443
-<VirtualHost {{ rpvirtualhostnamewebsite }}:80>
+Listen {{ rp_http_port }}
+Listen {{ rp_https_port }}
+<VirtualHost {{ rpvirtualhostnamewebsite }}:{{ rp_http_port }}>
 
         ServerName {{ rpvirtualhostnamewebsite }}
         ServerAdmin webmaster@localhost
@@ -15,7 +15,7 @@ Listen 443
         ProxyPassReverse /  http://{{ rppointernametovm }}/
 </VirtualHost>
 
-<VirtualHost {{ rpvirtualhostnamewebsite }}:443>
+<VirtualHost {{ rpvirtualhostnamewebsite }}:{{ rp_https_port }}>
 
         ServerName {{ rpvirtualhostnamewebsite }}
         ServerAdmin webmaster@localhost

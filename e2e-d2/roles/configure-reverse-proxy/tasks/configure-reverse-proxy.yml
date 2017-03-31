@@ -30,12 +30,18 @@
 #      - {source: "reverseproxy-e2ed1-djangovm.j2" , destination: "/etc/apache2/sites-enabled/reverseproxy-e2ed1-djangovm.conf", mode: 744}
       - {source: "cacert.pem" , destination: "/etc/apache2/ssl/", mode: 0644}
       - {source: "privkey.pem" , destination: "/etc/apache2/ssl/", mode: 0644}
-      - {source: "ufwrules.sh" , destination: "/home/admin/ufwrules.sh", mode: 775}
+#      - {source: "ufwrules.sh" , destination: "/home/admin/ufwrules.sh", mode: 775}
       
 - name: copy the virtuall host template with reverse proxy configuration
   template:
    src: reverseproxy-e2e-djangovm.j2
    dest: /etc/apache2/sites-enabled/reverseproxy-e2e-djangovm.conf
+   mode: 0744
+   
+- name: copy the ufwrules.sh to server to open reverse proxy custom http port
+  template:
+   src: ufwrules.j2
+   dest: /tmp/ufwrules.sh
    mode: 0744
    
 - name: Add host addresses  to /etc/hosts
@@ -53,9 +59,9 @@
 - name: open firewall ports  - considering the same server is using a ufw host based firewall
   command: "{{item}}"
   args:
-   chdir: /home/admin 
+   chdir: /tmp 
   with_items:
-     - /home/admin/ufwrules.sh
+     - /tmp/ufwrules.sh
 ######################################################
 #After restart the br config maight have been lost  so did it agin
 #==================================================

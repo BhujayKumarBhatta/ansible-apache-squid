@@ -1,63 +1,22 @@
 #!/bin/bash
-ufw allow 22
-ufw allow out 22
-ufw allow 2223
-ufw allow out 2223
-ufw allow 8008
-ufw allow http
-ufw allow out http
-ufw allow https
-ufw allow out https
-ufw allow 123
-ufw allow out 123
-ufw allow 53
-ufw allow out 53
-ufw allow 25
-ufw allow out 25
-ufw allow 3142
-ufw allow out 3142
-ufw allow 3148
-ufw allow out 3148
-ufw allow 3306
-ufw allow out 3306
-ufw allow 11211
-ufw allow out 11211
-ufw allow 9292
-ufw allow out 9292
-ufw allow 8080
-ufw allow out 8080
-ufw allow 28017
-ufw allow out 28017
-ufw allow 631
-ufw allow out 631
-ufw allow 36151
-ufw allow out 36151
-ufw allow 35357
-ufw allow out 35357
-ufw allow 9696
-ufw allow out 9696
-ufw allow 6080
-ufw allow out 6080
-ufw allow 8000
-ufw allow out 8000
-ufw allow 5672
-ufw allow out 5672
-ufw allow 4369
-ufw allow out 4369
-ufw allow 8004
-ufw allow out 8004
-ufw allow 8773
-ufw allow out 8773
-ufw allow 8774
-ufw allow out 8774
-ufw allow 8775
-ufw allow out 8775
-ufw allow 9191
-ufw allow out 9191
-ufw allow 8776
-ufw allow out 8776
-ufw allow 5000
-ufw allow out 5000
-ufw allow 27017
-ufw allow out 27017
+sudo ufw default deny incoming on {{ rp_internet_facing_nic }}
+sudo ufw default allow outgoing on {{ rp_internet_facing_nic }}
+ufw allow in on {{ rp_management_nic }}
+ufw allow out on {{ rp_management_nic }}
+ufw allow  in on {{ rp_internet_facing_nic }} from 220.225.15.126
+ufw allow in on {{ rp_internet_facing_nic }} from any to any  port https
+ufw allow out on {{ rp_internet_facing_nic }} from any to any  port https
+ufw allow in on {{ rp_internet_facing_nic }} from any to any  port http
+ufw allow out on {{ rp_internet_facing_nic }} from any to any  port http
+ufw allow in on {{ rp_internet_facing_nic }} from any to any  port http
+ufw allow out on {{ rp_internet_facing_nic }} from any to any  port http
+ufw allow in on {{ rp_internet_facing_nic }} from any to any  port 123 proto udp
+ufw allow out on {{ rp_internet_facing_nic }} from any to any  port 123 proto udp
+ufw allow in on {{ rp_internet_facing_nic }} from any to any  port 2223
+ufw allow in on {{ rp_internet_facing_nic }} from any to any  port 6080
+ufw allow in on {{ rp_internet_facing_nic }} from any to any  port 6081
+ufw allow in on {{ rp_internet_facing_nic }} from any to any  port 6082
+ufw allow in on {{ rp_internet_facing_nic }} from any to any  port {{ rp_http_port }}
+ufw allow in on {{ rp_internet_facing_nic }} from any to any  port {{ rp_https_port }}
+
 

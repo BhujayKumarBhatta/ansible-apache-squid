@@ -72,12 +72,12 @@
             hostname={{reverseproxyservername}}
          
 
-#- hosts: rpserver
-#  vars_files: 
-#    - define-deployment-variables.yml    
-#  become: true
-#  roles:
-#    - configure-reverse-proxy
+- hosts: rpserver
+  vars_files: 
+    - define-deployment-variables.yml    
+  become: true
+  roles:
+    - configure-reverse-proxy
 
  #demo   
  #############################################################
