@@ -99,17 +99,18 @@
   register: result
   with_items: "{{ app_server_apache_config_files }}"
 
-- name: keep a backup of the existing apache2.conf file
-  copy:
-      src: "{{ item.fpath }}"
-      dest: "{{ item.rnm }}"
-  when: "result.results[{{item.x}}].stat.exists"  
-  with_items: "{{ app_server_apache_config_files }}"
+#- name: keep a backup of the existing apache2.conf file
+#  copy:
+#      src: "{{ item.fpath }}"
+#      dest: "{{ item.rnm }}"
+#  when: "result.results[{{item.x}}].stat.exists"  
+#  with_items: "{{ app_server_apache_config_files }}"
 
 - name: copy apache2.conf for Apache2 wsgi configuration and ports.conf for port 80
   copy : 
        src: "{{ item.fsrc }}"
        dest: "{{ item.fdest }}"
+       backup: yes
   with_items: "{{ app_server_apache_config_files }}"
   notify:
       - stop apache 
