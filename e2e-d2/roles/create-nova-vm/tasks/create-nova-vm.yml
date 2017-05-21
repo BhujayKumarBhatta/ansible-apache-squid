@@ -36,12 +36,6 @@
         apt:
           #conf: "{{ vboot_apt_conf }}"  
            conf: |
-              APT {
-                  Get {
-                     Assume-Yes "true";
-                     Fix-Broken "true";
-                     }
-                  }
            proxy: "http://10.0.0.14:3128"
            http_proxy: "http://10.0.0.14:3128"
            https_proxy: "http://10.0.0.14:3128"         
