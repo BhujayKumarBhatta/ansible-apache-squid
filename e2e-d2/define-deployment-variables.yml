@@ -99,6 +99,7 @@ db_servers: {name: mysql-db, image: ubuntu16, keyname: k1,
              instance_logins: "{{ db_instance_logins }}" , pkg_during_boot: "{{ db_pkg_during_boot }}" } 
 
 db_instance_logins:
+ - default
  - cloudy
 db_pkg_during_boot:
  - python
@@ -106,6 +107,7 @@ db_pkg_during_boot:
 
 #config during boot through cloud-init
 instance_logins:
+ - default
  - cloudy
 pkg_during_boot:
  - python
