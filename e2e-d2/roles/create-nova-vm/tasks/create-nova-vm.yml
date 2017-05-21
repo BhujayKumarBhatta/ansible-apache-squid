@@ -52,23 +52,11 @@
        host: "{{ justcreatedvm.server.public_v4 }}"
        delay: 1
        timeout: 3000
-  delay: 60
+  delay: 60  
   retries: 50
   tags:
    - create-nova-vm
 
-- debug: var=result.rc
-
-- name: wait for python package installation by cloud init to be completed
-  shell: /usr/bin/python --version
-  register: result
-  #until: result.stdout.find("not found") != -1
-  until: result.rc == 0
-  retries: 10
-  delay: 30
-- debug: var=result
-  tags:
-   - create-nova-vm
 
 #in add host module dont quote  the variables , dont give space after equal to sign and no space before or after the 
 #variable name inside curly braces  

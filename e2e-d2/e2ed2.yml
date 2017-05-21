@@ -61,6 +61,17 @@
     - define-deployment-variables.yml
   remote_user: ubuntu
   become: true
+  pre_tasks:
+   - name: wait for python package installation by cloud init to be completed
+     shell: /usr/bin/python --version
+     register: result
+     #until: result.stdout.find("not found") != -1
+     until: result.rc == 0
+     retries: 10
+     delay: 30
+   - debug: var=result
+     tags:
+       - create-nova-vm
   roles:
     - apply-common-config
     - { role: configure-db-mysql, when: "server_role == 'dbserver'" }
