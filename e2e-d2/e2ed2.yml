@@ -46,11 +46,13 @@
     - { role: create-nova-vm, vnm: "{{ db_servers.name }}", vimage: "{{ db_servers.image }}", 
         vkeyname: "{{ db_servers.keyname }}", vflavor: "{{ db_servers.flavor }}",
          vnetid: "{{ db_servers.netid }}", vfloating_ip_pool: "{{ db_servers.floating_ip_pool }}", vsecurity_group: "{{ db_servers.security_group }}",
-         vservers_role: "{{ db_servers.server_role}}" }
+         vservers_role: "{{ db_servers.server_role}}" , vinstance_login_name: "{{ db_servers.instance_logins }}" ,
+         vpkg_during_boot: "{{ pkg_during_boot }}" }
     - { role: create-nova-vm, vnm: "{{ app_servers.name }}", vimage: "{{ app_servers.image }}", 
         vkeyname: "{{ app_servers.keyname }}", vflavor: "{{ app_servers.flavor }}",
          vnetid: "{{ app_servers.netid }}", vfloating_ip_pool: "{{ app_servers.floating_ip_pool }}", vsecurity_group: "{{ app_servers.security_group }}",
-         vservers_role: "{{ app_servers.server_role}}" }
+         vservers_role: "{{ app_servers.server_role}}" , vinstance_login_name: "{{ app_servers.instance_logins }}",
+         vpkg_during_boot: "{{ pkg_during_boot }}" }
               
 
 - hosts: groupofjustcreatedvm

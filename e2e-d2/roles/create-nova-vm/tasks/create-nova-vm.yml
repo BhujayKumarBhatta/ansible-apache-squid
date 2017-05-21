@@ -21,7 +21,21 @@
          - default
          - "{{ vsecurity_group }}"
        config_drive: yes
-       user_data: "{{ lookup('file', 'our-user-data-v3.txt') }}"
+       #user_data: "{{ lookup('file', 'our-user-data-v3.txt') }}"
+       user_data: |
+        #cloud-config
+        users: "{{ vinstance_login_name }}"
+        sudo: ALL=(ALL) NOPASSWD:ALL
+        manage_etc_hosts: true
+        hostname: "{{ vnm }}"
+        apt:
+          conf: 
+           proxy: "{{ proxy_url_boot }}"
+           http_proxy: "{{ http_proxy_url_boot }}"
+           https_proxy: "{{ https_proxy_url_boot }}"
+        packages: "{{ vpkg_during_boot }}"
+         
+       
        timeout: 1500
   register: justcreatedvm
 

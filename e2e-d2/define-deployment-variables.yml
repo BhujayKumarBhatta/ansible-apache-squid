@@ -86,31 +86,50 @@ ssh_source: 0.0.0.0/0
 ############################################################################################
 app_servers: {name: django-appserver2, image: itc-ubuntu4, keyname: admin-ansible,
               flavor: big, netid: "{{net1_network_name}}" , floating_ip_pool: "{{ externalNetworkAttchedWithRouterB }}", security_group: appsecgroup,
-              register-OpenStack-VM: newappserver, inmemory_inventory_group: django-app1-servers, server_role: appserver} 
+              register-OpenStack-VM: newappserver, inmemory_inventory_group: django-app1-servers, server_role: appserver,
+              instance_logins: "{{ app_instace_logins }}", pkg_during_boot: "{{ app_pkg_during_boot }}" } 
+app_instance_logins:
+ - cloudy
+app_pkg_during_boot:
+ - python
 
 db_servers: {name: mysql-dbserver2, image: itc-ubuntu4, keyname: admin-ansible,
              flavor: big, netid: "{{net2_network_name}}" , floating_ip_pool: "{{ externalNetworkAttchedWithRouterB }}", security_group: dbsecgroup,
-             register-OpenStack-VM: newdbserver, inmemory_inventory_group: mysql-db1-servers, server_role: dbserver} 
+             register-OpenStack-VM: newdbserver, inmemory_inventory_group: mysql-db1-servers, server_role: dbserver,
+             instance_logins: "{{ db_instace_logins }}" , pkg_during_boot: "{{ db_pkg_during_boot }}" } 
 
- 
+db_instance_logins:
+ - cloudy
+db_pkg_during_boot:
+ - python
+
+
+#config during boot through cloud-init
+instance_logins:
+ - cloudy
+pkg_during_boot:
+ - python
+proxy_url_boot: "http://10.0.0.14:3128"
+http_proxy_url_boot: "http://10.0.0.14:3128"
+https_proxy_url_boot: "http://10.0.0.14:3128"
 ############################################################################################
 
-#All the VM will have the following configurations 
+#All the VM will have the following configurations after boot , cganhed through ansible
 
 ####################################################################################################
 host_table_entry: |
-        10.0.0.52       dcim
-        10.0.0.50        dcim2
+        10.0.0.51       haproxy1
+        10.0.0.52       haproxy2
 etc_environment_entry: |
-        export https_proxy="http://dcim:3128"
-        export http_proxy="http://dcim:3128"
+        export https_proxy="http://10.0.0.14:3128"
+        export http_proxy="http://10.0.0.14:3128"
         no_proxy=localhost,127.0.0.1,10.*.*.*,*.poc,dcim,dcim2,gitlab
 apt_proxy_entry: |
-        Acquire::http { Proxy "http://dcim:3128";};
-        Acquire::https { Proxy "http://dcim:3128";};        
+        Acquire::http { Proxy "http://10.0.0.14:3128";};
+        Acquire::https { Proxy "http://10.0.0.14:3128";};        
 pip_proxy_entry: |
         [global]
-        proxy = dcim:3128
+        proxy = 10.0.0.14:3128
      
 
 ############################################################## 
