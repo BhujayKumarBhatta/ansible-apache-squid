@@ -24,8 +24,13 @@
        #user_data: "{{ lookup('file', 'our-user-data-v3.txt') }}"
        user_data: |
         #cloud-config
-        users: "{{ vinstance_login_name }}"
-        sudo: ALL=(ALL) NOPASSWD:ALL
+        users: 
+         - default
+         - name: "{{ vinstance_login_name }}"
+           homedir: "{{ vboot_login_home }}"
+           shell: "{{ vboot_login_shell }}"
+           ssh-authorized-keys: "{{ vboot_login_keys }}"
+           sudo: "{{ vboot_login_sudo }}"
         manage_etc_hosts: true
         hostname: "{{ vnm }}"
         apt:

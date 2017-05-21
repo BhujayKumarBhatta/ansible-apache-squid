@@ -87,7 +87,7 @@ ssh_source: 0.0.0.0/0
 app_servers: {name: django-app, image: ubuntu16, keyname: k1,
               flavor: 1c1g15, netid: "{{net1_network_name}}" , floating_ip_pool: "{{ externalNetworkAttchedWithRouterB }}", security_group: appsecgroup,
               register-OpenStack-VM: newappserver, inmemory_inventory_group: django-app1-servers, server_role: appserver,
-              instance_logins: "{{ app_instance_logins }}", pkg_during_boot: "{{ app_pkg_during_boot }}" } 
+               } 
 app_instance_logins:
  - cloudy
 app_pkg_during_boot:
@@ -96,19 +96,19 @@ app_pkg_during_boot:
 db_servers: {name: mysql-db, image: ubuntu16, keyname: k1,
              flavor: 1c1g15, netid: "{{net2_network_name}}" , floating_ip_pool: "{{ externalNetworkAttchedWithRouterB }}", security_group: dbsecgroup,
              register-OpenStack-VM: newdbserver, inmemory_inventory_group: mysql-db1-servers, server_role: dbserver,
-             instance_logins: "{{ db_instance_logins }}" , pkg_during_boot: "{{ db_pkg_during_boot }}" } 
+              } 
 
-db_instance_logins:
- - default
- - cloudy
-db_pkg_during_boot:
- - python
+
 
 
 #config during boot through cloud-init
-instance_logins:
- - default
- - cloudy
+
+vinstance_login_name: cloudy
+vboot_login_home: /home/cloudy
+vboot_login_shell: /bin/bash
+vboot_login_keys: 
+ - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDMWWdDhejxsMelAtTjywjFaeINP+jr1+LxeXQ6tHIe1TzYJxRqsnf6mQIF23g4O16+pf+a2Wexh2xSpZopsk5p3uGrAvXUmTl/R2MFnOFr/SgESR8VYy5nSSkqcX2/ogRjto1q6hwFpYYtQpCNbLmZ4qddqfmFBlJ1yiFyt15Z9eiYjfPO/L6yLMVxYFp5d2dBPH81U+KF3BfvarmyXl8GK5rzLrNO6K+XJTooXwY5eWKTHIyNAor0su3hxewBoc7m95GCpvvKnZPSvzHBpX9sG4aE9p/RmLJu/KfLwryHBc6HwxSqXWNQ7bCZxCaDNecBL/sH6ZTb6KMU0xfJ+sGr itss@kickstart
+vboot_login_sudo: ALL=(ALL) NOPASSWD:ALL
 pkg_during_boot:
  - python
 proxy_url_boot: "http://10.0.0.14:3128"
