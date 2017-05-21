@@ -58,7 +58,7 @@
 - hosts: groupofjustcreatedvm
   vars_files: 
     - define-deployment-variables.yml
-  remote_user: cloudy
+  remote_user: ubuntu
   become: true
   roles:
     - apply-common-config
