@@ -69,6 +69,8 @@
      until: result.rc == 0
      retries: 10
      delay: 30
+     tags:
+       - create-nova-vm
    - debug: var=result
      tags:
        - create-nova-vm

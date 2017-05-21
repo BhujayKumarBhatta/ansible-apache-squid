@@ -67,7 +67,7 @@
   tags:
    - create-nova-vm
 - name: pause for 5 minutes for cloud-init to complete python readiness
-  pause:
+  pause: 
     minutes: 5
   tags:
    - create-nova-vm
