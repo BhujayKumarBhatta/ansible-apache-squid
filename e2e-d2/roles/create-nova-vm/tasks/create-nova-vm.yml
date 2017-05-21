@@ -38,6 +38,8 @@
        
        timeout: 1500
   register: justcreatedvm
+  tags:
+   - create-nova-vm
 
 - name: 'Waiting OS boot and SSH readiness'
   wait_for: 
@@ -54,4 +56,5 @@
   add_host: name={{vnm}} groups=groupofjustcreatedvm
             ansible_ssh_host={{justcreatedvm.server.public_v4}}
             server_role={{vservers_role}}
-  
+  tags:
+   - create-nova-vm
