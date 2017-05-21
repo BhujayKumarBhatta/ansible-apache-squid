@@ -87,7 +87,7 @@ ssh_source: 0.0.0.0/0
 app_servers: {name: django-appserver2, image: itc-ubuntu4, keyname: admin-ansible,
               flavor: big, netid: "{{net1_network_name}}" , floating_ip_pool: "{{ externalNetworkAttchedWithRouterB }}", security_group: appsecgroup,
               register-OpenStack-VM: newappserver, inmemory_inventory_group: django-app1-servers, server_role: appserver,
-              instance_logins: "{{ app_instace_logins }}", pkg_during_boot: "{{ app_pkg_during_boot }}" } 
+              instance_logins: "{{ app_instance_logins }}", pkg_during_boot: "{{ app_pkg_during_boot }}" } 
 app_instance_logins:
  - cloudy
 app_pkg_during_boot:
@@ -96,7 +96,7 @@ app_pkg_during_boot:
 db_servers: {name: mysql-dbserver2, image: itc-ubuntu4, keyname: admin-ansible,
              flavor: big, netid: "{{net2_network_name}}" , floating_ip_pool: "{{ externalNetworkAttchedWithRouterB }}", security_group: dbsecgroup,
              register-OpenStack-VM: newdbserver, inmemory_inventory_group: mysql-db1-servers, server_role: dbserver,
-             instance_logins: "{{ db_instace_logins }}" , pkg_during_boot: "{{ db_pkg_during_boot }}" } 
+             instance_logins: "{{ db_instance_logins }}" , pkg_during_boot: "{{ db_pkg_during_boot }}" } 
 
 db_instance_logins:
  - cloudy
