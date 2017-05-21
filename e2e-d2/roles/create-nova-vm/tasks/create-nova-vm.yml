@@ -34,13 +34,12 @@
         manage_etc_hosts: true
         hostname: "{{ vnm }}"
         apt:
-          #conf: "{{ vboot_apt_conf }}"  
-           conf: |
-           proxy: "http://10.0.0.14:3128"
-           http_proxy: "http://10.0.0.14:3128"
-           https_proxy: "http://10.0.0.14:3128"         
-        packages: "{{ vpkg_during_boot }}"
-         
+          conf: |
+          proxy: "http://10.0.0.14:3128"
+          http_proxy: "http://10.0.0.14:3128"
+          https_proxy: "http://10.0.0.14:3128"
+        packages:
+         - python    
        
        timeout: 1500
   register: justcreatedvm
