@@ -55,6 +55,18 @@
   delay: 60
   retries: 50
 
+- debug: var=result.rc
+
+- name: wait for python package installation by cloud init to be completed
+  shell: /usr/bin/python --version
+  register: result
+  #until: result.stdout.find("not found") != -1
+  until: result.rc == 0
+  retries: 10
+  delay: 30
+- debug: var=result
+
+
 #in add host module dont quote  the variables , dont give space after equal to sign and no space before or after the 
 #variable name inside curly braces  
 - name: Add new  Instance  name to ansible  Inventory  
