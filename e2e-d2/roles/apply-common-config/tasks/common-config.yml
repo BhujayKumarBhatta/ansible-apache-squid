@@ -32,3 +32,21 @@
 - name: Run the equivalent of "apt-get update" as a separate step
   apt:
     update_cache: yes
+
+- name: Install pip 
+  apt:
+   name: python-pip
+   state: latest
+
+- name: upgrade pip
+  shell: pip install --upgrade pip
+     
+   
+   
+   
+       
+    
+    
+    
+    
+    

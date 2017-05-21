@@ -138,6 +138,7 @@ pip_proxy_entry: |
 #########################################################################
 
 db_server_apt_packages:
+ - python-pip
  - mysql-server
  - mysql-common
  - python-mysqldb
@@ -168,6 +169,7 @@ proxy_env:
     no_proxy: localhost,127.0.0.1,10.*.*.*,*.poc,dcim,dcim2,gitlaboxy.example.com:8080
 
 app_server_apt_packages:
+ - python-pip
  - apache2
  - apache2-dev
  - libapache2-mod-wsgi
