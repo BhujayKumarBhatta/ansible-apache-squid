@@ -109,7 +109,7 @@ vboot_login_shell: /bin/bash
 vboot_login_keys: 
  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDMWWdDhejxsMelAtTjywjFaeINP+jr1+LxeXQ6tHIe1TzYJxRqsnf6mQIF23g4O16+pf+a2Wexh2xSpZopsk5p3uGrAvXUmTl/R2MFnOFr/SgESR8VYy5nSSkqcX2/ogRjto1q6hwFpYYtQpCNbLmZ4qddqfmFBlJ1yiFyt15Z9eiYjfPO/L6yLMVxYFp5d2dBPH81U+KF3BfvarmyXl8GK5rzLrNO6K+XJTooXwY5eWKTHIyNAor0su3hxewBoc7m95GCpvvKnZPSvzHBpX9sG4aE9p/RmLJu/KfLwryHBc6HwxSqXWNQ7bCZxCaDNecBL/sH6ZTb6KMU0xfJ+sGr itss@kickstart
 vboot_login_sudo: ALL=(ALL) NOPASSWD:ALL
-pkg_during_boot:
+vpkg_during_boot:
  - python
 proxy_url_boot: "http://10.0.0.14:3128"
 http_proxy_url_boot: "http://10.0.0.14:3128"
