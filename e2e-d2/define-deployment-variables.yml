@@ -108,9 +108,9 @@ vboot_login_sudo: ALL=(ALL) NOPASSWD:ALL
 vpkg_during_boot:
  - python
 vboot_apt_conf: |
-proxy: "http://10.0.0.14:3128"
-http_proxy: "http://10.0.0.14:3128"
-https_proxy: "http://10.0.0.14:3128"
+  proxy: "http://10.0.0.14:3128"
+  http_proxy: "http://10.0.0.14:3128"
+  https_proxy: "http://10.0.0.14:3128"
 ############################################################################################
 
 #All the VM will have the following configurations after boot , cganhed through ansible
