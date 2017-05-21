@@ -35,7 +35,7 @@
         hostname: "{{ vnm }}"
         apt:
           conf: |
-          proxy: "{{ vboot_apt_ proxy }}"
+          proxy: "{{ vboot_apt_proxy }}"
           http_proxy: "{{ vboot_http_proxy }}"
           https_proxy: "{{ vobot_https_proxy }}"
         packages: "{{ vpkg_during_boot }}"         

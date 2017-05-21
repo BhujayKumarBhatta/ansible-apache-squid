@@ -108,7 +108,7 @@ vboot_login_sudo: ALL=(ALL) NOPASSWD:ALL
 vpkg_during_boot:
  - python
 vboot_apt_conf: |
-vboot_apt_ proxy: "http://10.0.0.14:3128"
+vboot_apt_proxy: "http://10.0.0.14:3128"
 vboot_http_proxy: "http://10.0.0.14:3128"
 vobot_https_proxy: "http://10.0.0.14:3128"
 ############################################################################################
