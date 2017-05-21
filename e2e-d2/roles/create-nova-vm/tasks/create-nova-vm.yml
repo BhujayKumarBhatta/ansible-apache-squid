@@ -34,10 +34,7 @@
         manage_etc_hosts: true
         hostname: "{{ vnm }}"
         apt:
-          conf: 
-           proxy: "{{ proxy_url_boot }}"
-           http_proxy: "{{ http_proxy_url_boot }}"
-           https_proxy: "{{ https_proxy_url_boot }}"
+          conf: "{{ vboot_apt_conf }}"           
         packages: "{{ vpkg_during_boot }}"
          
        

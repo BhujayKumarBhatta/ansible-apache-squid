@@ -88,10 +88,6 @@ app_servers: {name: django-app, image: ubuntu16, keyname: k1,
               flavor: 1c1g15, netid: "{{net1_network_name}}" , floating_ip_pool: "{{ externalNetworkAttchedWithRouterB }}", security_group: appsecgroup,
               register-OpenStack-VM: newappserver, inmemory_inventory_group: django-app1-servers, server_role: appserver,
                } 
-app_instance_logins:
- - cloudy
-app_pkg_during_boot:
- - python
 
 db_servers: {name: mysql-db, image: ubuntu16, keyname: k1,
              flavor: 1c1g15, netid: "{{net2_network_name}}" , floating_ip_pool: "{{ externalNetworkAttchedWithRouterB }}", security_group: dbsecgroup,
@@ -111,9 +107,10 @@ vboot_login_keys:
 vboot_login_sudo: ALL=(ALL) NOPASSWD:ALL
 vpkg_during_boot:
  - python
-proxy_url_boot: "http://10.0.0.14:3128"
-http_proxy_url_boot: "http://10.0.0.14:3128"
-https_proxy_url_boot: "http://10.0.0.14:3128"
+vboot_apt_conf: |
+proxy: "http://10.0.0.14:3128"
+http_proxy: "http://10.0.0.14:3128"
+https_proxy: "http://10.0.0.14:3128"
 ############################################################################################
 
 #All the VM will have the following configurations after boot , cganhed through ansible
