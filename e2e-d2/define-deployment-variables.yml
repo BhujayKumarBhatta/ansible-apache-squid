@@ -56,7 +56,7 @@ subnetNamesTobeconnectedB:
 # - provider-303-subnet
  - subnet1net5
  - subnet1net6
- - 982840ed-cf8f-47fe-9459-8422d53ca5c3 # this is high availibility subnet fixed per installation
+# - 982840ed-cf8f-47fe-9459-8422d53ca5c3 # this is high availibility subnet fixed per installation
 # check with 'openstack port list --router <anyexisting router name> ' . the subnetid associated with 
 #HA network for the router is same.
  
@@ -84,12 +84,12 @@ ssh_source: 0.0.0.0/0
 #create openstacck VM 
 
 ############################################################################################
-app_servers: {name: django-appserver2, image: itc-ubuntu4, keyname: admin-ansible,
-              flavor: big, netid: "{{net1_network_name}}" , floating_ip_pool: "{{ externalNetworkAttchedWithRouterB }}", security_group: appsecgroup,
+app_servers: {name: django-appserver2, image: ubuntu16, keyname: k1,
+              flavor: 1c1g15, netid: "{{net1_network_name}}" , floating_ip_pool: "{{ externalNetworkAttchedWithRouterB }}", security_group: appsecgroup,
               register-OpenStack-VM: newappserver, inmemory_inventory_group: django-app1-servers, server_role: appserver} 
 
-db_servers: {name: mysql-dbserver2, image: itc-ubuntu4, keyname: admin-ansible,
-             flavor: big, netid: "{{net2_network_name}}" , floating_ip_pool: "{{ externalNetworkAttchedWithRouterB }}", security_group: dbsecgroup,
+db_servers: {name: mysql-dbserver2, image: ubuntu16, keyname: k1,
+             flavor: 1c1g15, netid: "{{net2_network_name}}" , floating_ip_pool: "{{ externalNetworkAttchedWithRouterB }}", security_group: dbsecgroup,
              register-OpenStack-VM: newdbserver, inmemory_inventory_group: mysql-db1-servers, server_role: dbserver} 
 
  
