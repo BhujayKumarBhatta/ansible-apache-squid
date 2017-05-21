@@ -38,7 +38,8 @@
           proxy: "{{ vboot_apt_proxy }}"
           http_proxy: "{{ vboot_http_proxy }}"
           https_proxy: "{{ vobot_https_proxy }}"
-        packages: "{{ vpkg_during_boot }}"         
+        packages:
+         - python         
        
        timeout: 1500
   register: justcreatedvm
