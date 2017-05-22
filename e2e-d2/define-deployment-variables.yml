@@ -140,7 +140,7 @@ pip_proxy_entry: |
 db_server_apt_packages:
  - python-pip
  - mysql-server
- - mysql-common
+# - mysql-common
  - python-mysqldb
 #   - MySQLdb
 #   - mysql
@@ -170,23 +170,6 @@ proxy_env:
 
 app_server_apt_packages:
  - python-pip
- - apache2
- - apache2-dev
- - libapache2-mod-wsgi
- - python-setuptools
- - build-essential
- - python-dev
- - g++
-# - unixodbc
-# - unixodbc-dev  
-# - freetds-dev
-# - freetds-bin
-# - tdsodbc   
- - python-virtualenv
- - curl    
- - rabbitmq-server  
- - git
- - python-pip
  - libevent-dev
  - libffi-dev
  - libssl-dev
@@ -196,12 +179,31 @@ app_server_apt_packages:
  - zlib1g-dev
  - libevent-dev
  - libffi-dev
+ - python-setuptools
+ - build-essential
+ - python-dev
+ - g++
+ - apache2
+ - apache2-dev
+ - libapache2-mod-wsgi 
+# - unixodbc
+# - unixodbc-dev  
+# - freetds-dev
+# - freetds-bin
+# - tdsodbc   
+ - python-virtualenv
+ - curl   
+ - git
+ - python-pip 
  - python-mysqldb
  - mysql-client-core-5.6
-
+ - rabbitmq-server 
+################## paramiko need mitmproxy , actually cryptography , which require the following
+### apt packges 
+### apt install -y  libevent-dev  libffi-dev  libssl-dev  libxml2-dev  libxslt1-dev  libjpeg8-dev  zlib1g-dev  libevent-dev  libffi-dev
  
 app_server_pip_packages:
-# - mitmproxy
+ - mitmproxy
  - paramiko
 ## - pyodbc 
 ## - django-pyodbc-azure
