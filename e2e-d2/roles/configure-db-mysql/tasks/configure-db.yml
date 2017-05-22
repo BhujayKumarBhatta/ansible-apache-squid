@@ -2,15 +2,15 @@
 - name: install mysql package
   apt:
     name: "{{ item }}"
-    state: present
+    state: latest
     allow_unauthenticated: yes
   with_items: "{{db_server_apt_packages}}"   
 
 - name: Configure my sql to listen and bind on all IP address 
   lineinfile:
-        dest: /etc/mysql/my.cnf
+        dest: /etc/mysql/mysql.conf.d/mysqld.cnf
         regexp: 'bind-address'
-        line: "bind-address = 0.0.0.0"
+        line: "bind-address            = 0.0.0.0"
    
 #- name: copy my.cnf to /etc/mysql/my.cnf Configure my sql to listen and bind on all IP address 
 #  copy : 
