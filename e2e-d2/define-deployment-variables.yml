@@ -219,7 +219,7 @@ app_server_pip_packages:
 code_repo: https://github.com/BhujayKumarBhatta/CloudSpacewithSearchLog-Python
 
 #the application will be installed in this directory
-app_dir: /apt/djangoproject
+app_dir: /opt/djangoproject
  
 
 # in the app server the http service will be served by apache. apache  uses wsgi for serving django python codes. Configuration files are as follows
