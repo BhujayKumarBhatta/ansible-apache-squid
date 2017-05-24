@@ -73,8 +73,7 @@
      backup: yes
   with_items:
       - {searchtxt: "Listen 80" , replacetxt: "Listen {{ rp_http_port }}" }
-      - {searchtxt: "Listen 443" , replacetxt: "Listen {{ rp_https_port }}" }
-      - {searchtxt: "Listen 443" , replacetxt: "Listen {{ rp_https_port }}" }   
+      - {searchtxt: "<Listen 443>" , replacetxt: "Listen {{ rp_https_port }}" }         
   tags:
     - reverse-proxy
     - reverse-proxy-config 
