@@ -63,6 +63,22 @@
   tags:
     - reverse-proxy
     - reverse-proxy-config 
+    
+- name: Change default configurations to alter Listen ports in  /etc/apache2/ports.conf and /etc/apache2/sites-enabled/000-default.conf
+  lineinfile:
+     dest: /etc/apache2/sites-available\000-default.conf     
+     state: present 
+     regexp: "{{ item.searchtxt }}"      
+     line: "{{ item.replacetxt }}"
+     backup: yes
+  with_items:
+      - {searchtxt: "<VirtualHost *:80>" , 
+          replacetxt: "<VirtualHost *:{{ rp_http_port }}> " }
+      - {searchtxt: "<VirtualHost *:443>" , 
+          replacetxt: "<VirtualHost *:{{ rp_https_port }}> " }
+  tags:
+    - reverse-proxy
+    - reverse-proxy-config 
       
 - name: copy the virtuall host template with reverse proxy configuration
   template:
@@ -85,11 +101,15 @@
 - name: Add host addresses  to /etc/hosts
   lineinfile:
    dest: /etc/hosts
-   line: "{{item}}"
+   line: "{{ item.replacetxt }}"
    state: present
+   regexp: "{{ item.searchtxt }}"
   with_items:
-       - "{{ hostvars[app_servers.name]['ansible_ssh_host'] }}       {{ hostvars[app_servers.name]['ansible_hostname'] }}    {{rppointernametovm}}"
-       - "{{hostvars[inventory_hostname].ansible_all_ipv4_addresses.0}}  {{rpvirtualhostnamewebsite}}"
+   - {searchtxt: "{{ hostvars[app_servers.name]['ansible_ssh_host'] }}" ,
+          replacetxt: "{{ hostvars[app_servers.name]['ansible_ssh_host'] }}   {{ hostvars[app_servers.name]['ansible_hostname'] }}    {{rppointernametovm}}" }
+         
+   - {searchtxt: "{{hostvars[inventory_hostname].ansible_all_ipv4_addresses.0}}", 
+          replacetxt: "{{hostvars[inventory_hostname].ansible_all_ipv4_addresses.0}}  {{rpvirtualhostnamewebsite}}" }
   tags:
     - reverse-proxy
     - reverse-proxy-config        
