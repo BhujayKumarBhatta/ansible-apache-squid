@@ -19,6 +19,15 @@
   tags:
     - reverse-proxy
     - reverse-proxy-install
+    
+- name: stop apache service after installation to remove conflict with existing port 80 and 443
+  service:
+   name: apache2
+   state: restarted
+  tags:
+    - reverse-proxy
+    - reverse-proxy-install
+    
 - name: create a ssl directory  /etc/apache2/ssl
   file: 
    path: /etc/apache2/ssl
@@ -27,18 +36,29 @@
   tags:
     - reverse-proxy
     - reverse-proxy-install
-- name: Configure reverse proxy directives by copying the preconfigured files in /etc/apache2/ports.conf and /etc/apache2/sites-enabled/000-default.conf
+    
+- name: Copy  pre genereated certificates  from local host
   copy:
    backup: yes
    src: "{{item.source}}"
    dest: "{{item.destination}}"
    mode: "{{item.mode}}"
   with_items:
-#      - {source: "ports.conf" , destination: "/etc/apache2/ports.conf", mode: 744}
-#      - {source: "reverseproxy-e2ed1-djangovm.j2" , destination: "/etc/apache2/sites-enabled/reverseproxy-e2ed1-djangovm.conf", mode: 744}
       - {source: "cacert.pem" , destination: "/etc/apache2/ssl/", mode: 0644}
       - {source: "privkey.pem" , destination: "/etc/apache2/ssl/", mode: 0644}
-#      - {source: "ufwrules.sh" , destination: "/home/admin/ufwrules.sh", mode: 775}
+  tags:
+    - reverse-proxy
+    - reverse-proxy-config 
+    
+- name: Change default configurations to alter Listen ports in  /etc/apache2/ports.conf and /etc/apache2/sites-enabled/000-default.conf
+  lineinfile:
+     dest: /etc/apache2/ports.conf     
+     state: present 
+     regexp: "{{ item.searchtxt }}"      
+     line: "{{ item.replacetxt }}"
+  with_items:
+      - {searchtxt: "Listen 80" , replacetxt: "Listen {{ rp_http_port }}" }
+      - {searchtxt: "Listen 443" , replacetxt: "Listen {{ rp_https_port }}" }  
   tags:
     - reverse-proxy
     - reverse-proxy-config 
@@ -65,6 +85,7 @@
   lineinfile:
    dest: /etc/hosts
    line: "{{item}}"
+   state: present
   with_items:
        - "{{ hostvars[app_servers.name]['ansible_ssh_host'] }}       {{ hostvars[app_servers.name]['ansible_hostname'] }}    {{rppointernametovm}}"
        - "{{hostvars[inventory_hostname].ansible_all_ipv4_addresses.0}}  {{rpvirtualhostnamewebsite}}"
