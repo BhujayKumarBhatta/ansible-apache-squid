@@ -65,7 +65,7 @@
 #    - reverse-proxy
 #    - reverse-proxy-config 
     
-- name: Repeat to chage 2nd line in ports.conf
+- name: Change Listening port from 80 and 443 to custom port defiend in defination file
   replace:
      path: /etc/apache2/ports.conf 
      regexp: "{{ item.searchtxt }}"      
@@ -81,14 +81,10 @@
 - name: Change default configurations to alter Listen ports in  /etc/apache2/ports.conf and /etc/apache2/sites-enabled/000-default.conf
   replace:
      path: /etc/apache2/sites-available/000-default.conf 
-     regexp: "{{ item.searchtxt }}"      
-     replace: "{{ item.replacetxt }}"
+     #regexp: "{{ item.searchtxt }}" 
+     regexp:  '\<VirtualHost \*\:80\>'  
+     replace: "<VirtualHost *:{{ rp_http_port }}>"
      backup: yes
-  with_items:
-      - {searchtxt: "<VirtualHost *:80>" , 
-          replacetxt: "<VirtualHost *:{{ rp_http_port }}> " }
-      - {searchtxt: "<VirtualHost *:443>" , 
-          replacetxt: "<VirtualHost *:{{ rp_https_port }}> " }
   tags:
     - reverse-proxy
     - reverse-proxy-config 
