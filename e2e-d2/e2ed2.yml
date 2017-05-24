@@ -56,7 +56,7 @@
     - name: creating an inventory file with the justcreated hostnames for later run
       template:
          src: e2d-inventory.j2
-         dest: e2d-inventory.txt
+         dest: ./e2d-inventory.txt
                      
 
 - hosts: groupofjustcreatedvm
