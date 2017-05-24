@@ -23,7 +23,7 @@
 - name: stop apache service after installation to remove conflict with existing port 80 and 443
   service:
    name: apache2
-   state: restarted
+   state: stopped
   tags:
     - reverse-proxy
     - reverse-proxy-install
