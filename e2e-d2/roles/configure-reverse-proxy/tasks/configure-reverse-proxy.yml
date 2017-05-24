@@ -67,8 +67,7 @@
     
 - name: Repeat to chage 2nd line in ports.conf
   replace:
-     path: /etc/apache2/ports.conf     
-     state: present 
+     path: /etc/apache2/ports.conf 
      regexp: "{{ item.searchtxt }}"      
      replace: "{{ item.replacetxt }}"
      backup: yes
@@ -82,8 +81,7 @@
     
 - name: Change default configurations to alter Listen ports in  /etc/apache2/ports.conf and /etc/apache2/sites-enabled/000-default.conf
   replace:
-     path: /etc/apache2/sites-available/000-default.conf    
-     state: present 
+     path: /etc/apache2/sites-available/000-default.conf 
      regexp: "{{ item.searchtxt }}"      
      replace: "{{ item.replacetxt }}"
      backup: yes
