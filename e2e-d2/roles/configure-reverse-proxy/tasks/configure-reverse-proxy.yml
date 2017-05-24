@@ -1,54 +1,54 @@
 ---
-#- name: install apache2 package
-#  apt:
-#   name: "{{item}}" 
-#   state: present
-#  with_items:
-#     - apache2
-#     - build-essential
-##     - lib-apache2-mod-proxy-html
-#  tags:
-#    - reverse-proxy
-#    - reverse-proxy-install
-#- name: enable proxy modules in apache
-#  command: "{{item}}"
-#  with_items:
-#     - a2enmod proxy
-#     - a2enmod proxy_http
-#     - a2enmod ssl
-#  tags:
-#    - reverse-proxy
-#    - reverse-proxy-install
-#    
-#- name: stop apache service after installation to remove conflict with existing port 80 and 443
-#  service:
-#   name: apache2
-#   state: stopped
-#  tags:
-#    - reverse-proxy
-#    - reverse-proxy-install
-#    
-#- name: create a ssl directory  /etc/apache2/ssl
-#  file: 
-#   path: /etc/apache2/ssl
-#   state: directory 
-#   mode: 0755
-#  tags:
-#    - reverse-proxy
-#    - reverse-proxy-install
-#    
-#- name: Copy  pre genereated certificates  from local host
-#  copy:
-#   backup: yes
-#   src: "{{item.source}}"
-#   dest: "{{item.destination}}"
-#   mode: "{{item.mode}}"
-#  with_items:
-#      - {source: "cacert.pem" , destination: "/etc/apache2/ssl/", mode: 0644}
-#      - {source: "privkey.pem" , destination: "/etc/apache2/ssl/", mode: 0644}
-#  tags:
-#    - reverse-proxy
-#    - reverse-proxy-config 
+- name: install apache2 package
+  apt:
+   name: "{{item}}" 
+   state: present
+  with_items:
+     - apache2
+     - build-essential
+#     - lib-apache2-mod-proxy-html
+  tags:
+    - reverse-proxy
+    - reverse-proxy-install
+- name: enable proxy modules in apache
+  command: "{{item}}"
+  with_items:
+     - a2enmod proxy
+     - a2enmod proxy_http
+     - a2enmod ssl
+  tags:
+    - reverse-proxy
+    - reverse-proxy-install
+    
+- name: stop apache service after installation to remove conflict with existing port 80 and 443
+  service:
+   name: apache2
+   state: stopped
+  tags:
+    - reverse-proxy
+    - reverse-proxy-install
+    
+- name: create a ssl directory  /etc/apache2/ssl
+  file: 
+   path: /etc/apache2/ssl
+   state: directory 
+   mode: 0755
+  tags:
+    - reverse-proxy
+    - reverse-proxy-install
+    
+- name: Copy  pre genereated certificates  from local host
+  copy:
+   backup: yes
+   src: "{{item.source}}"
+   dest: "{{item.destination}}"
+   mode: "{{item.mode}}"
+  with_items:
+      - {source: "cacert.pem" , destination: "/etc/apache2/ssl/", mode: 0644}
+      - {source: "privkey.pem" , destination: "/etc/apache2/ssl/", mode: 0644}
+  tags:
+    - reverse-proxy
+    - reverse-proxy-config 
     
 #- name: Change default configurations to alter Listen ports in  /etc/apache2/ports.conf and /etc/apache2/sites-enabled/000-default.conf
 #  lineinfile:
@@ -82,7 +82,6 @@
 - name: Change default configurations to alter Listen ports in  /etc/apache2/ports.conf and /etc/apache2/sites-enabled/000-default.conf
   replace:
      path: /etc/apache2/sites-available/000-default.conf 
-     #regexp: "{{ item.searchtxt }}" 
      regexp:  '\<VirtualHost \*\:80\>'  
      replace: "<VirtualHost *:{{ rp_http_port }}>"
      backup: yes 
@@ -90,55 +89,55 @@
     - reverse-proxy
     - reverse-proxy-config 
       
-#- name: copy the virtuall host template with reverse proxy configuration
-#  template:
-#   src: reverseproxy-e2e-djangovm.j2
-#   dest: /etc/apache2/sites-enabled/reverseproxy-e2e-djangovm.conf
-#   mode: 0744
-#  tags:
-#    - reverse-proxy
-#    - reverse-proxy-config
-#   
-#- name: copy the ufwrules.sh to server to open reverse proxy custom http port
-#  template:
-#   src: ufwrules.j2
-#   dest: /tmp/ufwrules.sh
-#   mode: 0744
-#  tags:
-#    - reverse-proxy
-#    - reverse-proxy-config
-#     
-#- name: Add host addresses  to /etc/hosts
-#  lineinfile:
-#   dest: /etc/hosts
-#   line: "{{ item.replacetxt }}"
-#   state: present
-#   regexp: "{{ item.searchtxt }}"
-#  with_items:
-#   - {searchtxt: "{{ hostvars[app_servers.name]['ansible_ssh_host'] }}" ,
-#          replacetxt: "{{ hostvars[app_servers.name]['ansible_ssh_host'] }}   {{ hostvars[app_servers.name]['ansible_hostname'] }}    {{rppointernametovm}}" }
-#         
-#   - {searchtxt: "{{hostvars[inventory_hostname].ansible_all_ipv4_addresses.0}}", 
-#          replacetxt: "{{hostvars[inventory_hostname].ansible_all_ipv4_addresses.0}}  {{rpvirtualhostnamewebsite}}" }
-#  tags:
-#    - reverse-proxy
-#    - reverse-proxy-config        
-#- name: start apache2 httpd  service
-#  service:
-#   name: apache2
-#   state: restarted
-#  tags:
-#    - reverse-proxy
-#    - reverse-proxy-config
-#- name: open firewall ports  - considering the same server is using a ufw host based firewall
-#  command: "{{item}}"
-#  args:
-#   chdir: /tmp 
-#  with_items:
-#     - /tmp/ufwrules.sh
-#  tags:
-#    - reverse-proxy
-#    - reverse-proxy-config
+- name: copy the virtuall host template with reverse proxy configuration
+  template:
+   src: reverseproxy-e2e-djangovm.j2
+   dest: /etc/apache2/sites-enabled/reverseproxy-e2e-djangovm.conf
+   mode: 0744
+  tags:
+    - reverse-proxy
+    - reverse-proxy-config
+   
+- name: copy the ufwrules.sh to server to open reverse proxy custom http port
+  template:
+   src: ufwrules.j2
+   dest: /tmp/ufwrules.sh
+   mode: 0744
+  tags:
+    - reverse-proxy
+    - reverse-proxy-config
+     
+- name: Add host addresses  to /etc/hosts
+  lineinfile:
+   dest: /etc/hosts
+   line: "{{ item.replacetxt }}"
+   state: present
+   regexp: "{{ item.searchtxt }}"
+  with_items:
+   - {searchtxt: "{{ hostvars[app_servers.name]['ansible_ssh_host'] }}" ,
+          replacetxt: "{{ hostvars[app_servers.name]['ansible_ssh_host'] }}   {{ hostvars[app_servers.name]['ansible_hostname'] }}    {{rppointernametovm}}" }
+         
+   - {searchtxt: "{{hostvars[inventory_hostname].ansible_all_ipv4_addresses.0}}", 
+          replacetxt: "{{hostvars[inventory_hostname].ansible_all_ipv4_addresses.0}}  {{rpvirtualhostnamewebsite}}" }
+  tags:
+    - reverse-proxy
+    - reverse-proxy-config        
+- name: start apache2 httpd  service
+  service:
+   name: apache2
+   state: restarted
+  tags:
+    - reverse-proxy
+    - reverse-proxy-config
+- name: open firewall ports  - considering the same server is using a ufw host based firewall
+  command: "{{item}}"
+  args:
+   chdir: /tmp 
+  with_items:
+     - /tmp/ufwrules.sh
+  tags:
+    - reverse-proxy
+    - reverse-proxy-config
 ######################################################
 #After restart the br config maight have been lost  so did it agin
 #==================================================
