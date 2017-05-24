@@ -84,7 +84,7 @@
      #regexp: "{{ item.searchtxt }}" 
      regexp:  '\<VirtualHost \*\:80\>'  
      replace: "<VirtualHost *:{{ rp_http_port }}>"
-     backup: yes
+     backup: yes 
   tags:
     - reverse-proxy
     - reverse-proxy-config 
