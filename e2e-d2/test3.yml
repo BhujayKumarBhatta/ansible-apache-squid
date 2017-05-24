@@ -16,56 +16,23 @@
         vkeyname: "{{ app_servers.keyname }}", vflavor: "{{ app_servers.flavor }}",
          vnetid: "{{ app_servers.netid }}", vfloating_ip_pool: "{{ app_servers.floating_ip_pool }}", 
          vsecurity_group: "{{ app_servers.security_group }}",vservers_role: "{{ app_servers.server_role}}"  }
+
+#- hosts: groupofjustcreatedvm
+#  vars_files:
+#    - define-deployment-variables.yml
+#  remote_user: ubuntu
+#  become: true
+
   tasks:
+    - debug:
+         msg:  " {{ item }}  ansible_ssh_host={{ hostvars[item]['ansible_ssh_host'] }} "
+         #msg:  " {{ hostvars[item]['ansible_hostname'] }}  {{ hostvars[item]['ansible_ssh_host'] }} "
+         #msg:  " {{ item }} "
+      with_items: "{{ groups['groupofjustcreatedvm'] }}"
+
     - name: creating an inventory file with the justcreated hostnames for later run
       template:
          src: e2d-inventory.j2
          dest: ./e2d-inventory.txt
                      
 
-- hosts: groupofjustcreatedvm
-  vars_files: 
-    - define-deployment-variables.yml
-  remote_user: ubuntu
-  become: true
-  pre_tasks:
-   - name: wait for python package installation by cloud init to be completed
-     shell: /usr/bin/python --version
-     register: result
-     #until: result.stdout.find("not found") != -1
-     until: result.rc == 0
-     retries: 10
-     delay: 30
-     tags:
-       - create-nova-vm
-   - debug: var=result
-     tags:
-       - create-nova-vm
-  roles:
-    - apply-common-config
-    - { role: configure-db-mysql, when: "server_role == 'dbserver'" }
-    - { role: configure-webserver-apache, when: "server_role == 'appserver'" }
-  environment: "{{ proxy_env }}"
-   
-  tasks:
-     - name: add the pre existing reverse proxy server name to inmemroy inventroy
-       add_host: name=rpserver groups=groupofrpserver
-            ansible_ssh_host={{reverseproxyserverip}}
-            ansible_ssh_port={{reverseproxyserversshport}}
-            hostname={{reverseproxyservername}}
-         
-
-- hosts: rpserver
-  vars_files: 
-    - define-deployment-variables.yml    
-  become: true
-  roles:
-    - configure-reverse-proxy
-
- #demo   
- #############################################################
-  
-#  tasks:
-#    - name: show the servers role 
-#      debug: msg={{hostvars[inventory_hostname].server_role}}    
-  

@@ -1,7 +1,8 @@
 [groupofjustcreatedvm]
-{% for i in play_hosts %}
-name={{i.name}}  ansible_ssh_host={{i.server.public_v4}} server_role={{i.vservers_role}}
+{% for item in groups['groupofjustcreatedvm']  %}
+{{ item }}  ansible_ssh_host={{ hostvars[item]['ansible_ssh_host'] }} 
 {% endfor %}
+
 
 [rpserver]
 hostname={{reverseproxyservername}} ansible_ssh_host={{reverseproxyserverip}}     ansible_ssh_port={{reverseproxyserversshport}}
