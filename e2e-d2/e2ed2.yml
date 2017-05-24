@@ -6,48 +6,48 @@
 #  become: true 
    
   roles:
-#    - { role: create-network, network_name: "{{net1_network_name}}", 
-#         is_the_network_shared_between_customers: "{{net1_is_the_network_shared_between_customers}}" , 
-#        accessable_outside_openstack_virtual_network: "{{net1_accessable_outside_openstack_virtual_network}}" }        
-#    - { role: create-network, network_name: "{{net2_network_name}}", 
-#         is_the_network_shared_between_customers: "{{net2_is_the_network_shared_between_customers}}" , 
-#        accessable_outside_openstack_virtual_network: "{{net2_accessable_outside_openstack_virtual_network}}" }     
-#    - { role: create-subnetwork, subnet_name: "{{subNetNameA}}", network_name: "{{net1_network_name}}", subnet_address_in_cidr: "{{subnetAddressInCidrA}}" , 
-#        dns_server_for_subnet: "{{dnsserverForSubnetA}}", 
-#        additional_routing_for_subnet: "{{additionalRoutingForSubnetA}}",
-#        dhcp_to_be_enabled: "{{dhcpToBeEnabledA}}",
-#        dhcp_ip_allocation_pool_start: "{{dhcpIpAllocationPoolStartA}}", 
-#        dhcp_ip_allocation_pool_end: "{{dhcpIpAllocationPoolEndA}}", }
-#    - { role: create-subnetwork, subnet_name: "{{subNetNameB}}", network_name: "{{net2_network_name}}", subnet_address_in_cidr: "{{subnetAddressInCidrB}}" , 
-#        dns_server_for_subnet: "{{dnsserverForSubnetB}}", 
-#        additional_routing_for_subnet: "{{additionalRoutingForSubnetB}}",
-#        dhcp_to_be_enabled: "{{dhcpToBeEnabledB}}",
-#        dhcp_ip_allocation_pool_start: "{{dhcpIpAllocationPoolStartB}}", 
-#        dhcp_ip_allocation_pool_end: "{{dhcpIpAllocationPoolEndB}}", }
-##    - { role: create-internal-router, router_name: "{{routerNameA}}", subnet_names_tobeconnected: "{{subnetNamesTobeconnectedA}}" } 
-#    - { role: create-security-group, secgroupName: "{{secgroupdb}}" }
-#    - { role: create-security-group, secgroupName: "{{secgroupapp}}" }
-#    - { role: create-security-rules, secgroupName: "{{secgroupdb}}",ruleprotocol: "{{ruleprot}}",
-#       startport: "{{mysqlport}}", endport: "{{mysqlport}}", ruleSourceIP: "{{dbSourceIP}}" }
-#    - { role: create-security-rules, secgroupName: "{{secgroupapp}}",ruleprotocol: "{{ruleprot}}",
-#       startport: "{{appPort}}", endport: "{{appPort}}", ruleSourceIP: "{{appSourceIP}}" } 
-#    - { role: create-security-rules, secgroupName: "{{secgroupapp}}",ruleprotocol: "{{icmp_proto}}",
-#       startport: "{{icmp_port}}", endport: "{{icmp_port}}", ruleSourceIP: "{{icmp_source}}" }
-#    - { role: create-security-rules, secgroupName: "{{secgroupdb}}",ruleprotocol: "{{icmp_proto}}",
-#       startport: "{{icmp_port}}", endport: "{{icmp_port}}", ruleSourceIP: "{{icmp_source}}" } 
-#    - { role: create-security-rules, secgroupName: "{{secgroupapp}}",ruleprotocol: "{{ssh_proto}}",
-#       startport: "{{ssh_port}}", endport: "{{ssh_port}}", ruleSourceIP: "{{ssh_source}}" }
-#    - { role: create-security-rules, secgroupName: "{{secgroupdb}}",ruleprotocol: "{{ssh_proto}}",
-#       startport: "{{ssh_port}}", endport: "{{ssh_port}}", ruleSourceIP: "{{ssh_source}}" }       
-#    - { role: create-external-router, router_name: "{{routerNameB}}" ,
-#        external_network_attched_with_router: "{{externalNetworkAttchedWithRouterB}}" ,
-#         external_subnet_n_gatewayIP: "{{externalSubnetNgatewayIPB}}", 
-#         subnet_names_tobeconnected: "{{subnetNamesTobeconnectedB}}" }   
-#    - { role: create-nova-vm, vnm: "{{ db_servers.name }}", vimage: "{{ db_servers.image }}", 
-#        vkeyname: "{{ db_servers.keyname }}", vflavor: "{{ db_servers.flavor }}",
-#         vnetid: "{{ db_servers.netid }}", vfloating_ip_pool: "{{ db_servers.floating_ip_pool }}", 
-#         vsecurity_group: "{{ db_servers.security_group }}",  vservers_role: "{{ db_servers.server_role}}"  }
-#         
+    - { role: create-network, network_name: "{{net1_network_name}}", 
+         is_the_network_shared_between_customers: "{{net1_is_the_network_shared_between_customers}}" , 
+        accessable_outside_openstack_virtual_network: "{{net1_accessable_outside_openstack_virtual_network}}" }        
+    - { role: create-network, network_name: "{{net2_network_name}}", 
+         is_the_network_shared_between_customers: "{{net2_is_the_network_shared_between_customers}}" , 
+        accessable_outside_openstack_virtual_network: "{{net2_accessable_outside_openstack_virtual_network}}" }     
+    - { role: create-subnetwork, subnet_name: "{{subNetNameA}}", network_name: "{{net1_network_name}}", subnet_address_in_cidr: "{{subnetAddressInCidrA}}" , 
+        dns_server_for_subnet: "{{dnsserverForSubnetA}}", 
+        additional_routing_for_subnet: "{{additionalRoutingForSubnetA}}",
+        dhcp_to_be_enabled: "{{dhcpToBeEnabledA}}",
+        dhcp_ip_allocation_pool_start: "{{dhcpIpAllocationPoolStartA}}", 
+        dhcp_ip_allocation_pool_end: "{{dhcpIpAllocationPoolEndA}}", }
+    - { role: create-subnetwork, subnet_name: "{{subNetNameB}}", network_name: "{{net2_network_name}}", subnet_address_in_cidr: "{{subnetAddressInCidrB}}" , 
+        dns_server_for_subnet: "{{dnsserverForSubnetB}}", 
+        additional_routing_for_subnet: "{{additionalRoutingForSubnetB}}",
+        dhcp_to_be_enabled: "{{dhcpToBeEnabledB}}",
+        dhcp_ip_allocation_pool_start: "{{dhcpIpAllocationPoolStartB}}", 
+        dhcp_ip_allocation_pool_end: "{{dhcpIpAllocationPoolEndB}}", }
+#    - { role: create-internal-router, router_name: "{{routerNameA}}", subnet_names_tobeconnected: "{{subnetNamesTobeconnectedA}}" } 
+    - { role: create-security-group, secgroupName: "{{secgroupdb}}" }
+    - { role: create-security-group, secgroupName: "{{secgroupapp}}" }
+    - { role: create-security-rules, secgroupName: "{{secgroupdb}}",ruleprotocol: "{{ruleprot}}",
+       startport: "{{mysqlport}}", endport: "{{mysqlport}}", ruleSourceIP: "{{dbSourceIP}}" }
+    - { role: create-security-rules, secgroupName: "{{secgroupapp}}",ruleprotocol: "{{ruleprot}}",
+       startport: "{{appPort}}", endport: "{{appPort}}", ruleSourceIP: "{{appSourceIP}}" } 
+    - { role: create-security-rules, secgroupName: "{{secgroupapp}}",ruleprotocol: "{{icmp_proto}}",
+       startport: "{{icmp_port}}", endport: "{{icmp_port}}", ruleSourceIP: "{{icmp_source}}" }
+    - { role: create-security-rules, secgroupName: "{{secgroupdb}}",ruleprotocol: "{{icmp_proto}}",
+       startport: "{{icmp_port}}", endport: "{{icmp_port}}", ruleSourceIP: "{{icmp_source}}" } 
+    - { role: create-security-rules, secgroupName: "{{secgroupapp}}",ruleprotocol: "{{ssh_proto}}",
+       startport: "{{ssh_port}}", endport: "{{ssh_port}}", ruleSourceIP: "{{ssh_source}}" }
+    - { role: create-security-rules, secgroupName: "{{secgroupdb}}",ruleprotocol: "{{ssh_proto}}",
+       startport: "{{ssh_port}}", endport: "{{ssh_port}}", ruleSourceIP: "{{ssh_source}}" }       
+    - { role: create-external-router, router_name: "{{routerNameB}}" ,
+        external_network_attched_with_router: "{{externalNetworkAttchedWithRouterB}}" ,
+         external_subnet_n_gatewayIP: "{{externalSubnetNgatewayIPB}}", 
+         subnet_names_tobeconnected: "{{subnetNamesTobeconnectedB}}" }   
+    - { role: create-nova-vm, vnm: "{{ db_servers.name }}", vimage: "{{ db_servers.image }}", 
+        vkeyname: "{{ db_servers.keyname }}", vflavor: "{{ db_servers.flavor }}",
+         vnetid: "{{ db_servers.netid }}", vfloating_ip_pool: "{{ db_servers.floating_ip_pool }}", 
+         vsecurity_group: "{{ db_servers.security_group }}",  vservers_role: "{{ db_servers.server_role}}"  }
+         
     - { role: create-nova-vm, vnm: "{{ app_servers.name }}", vimage: "{{ app_servers.image }}", 
         vkeyname: "{{ app_servers.keyname }}", vflavor: "{{ app_servers.flavor }}",
          vnetid: "{{ app_servers.netid }}", vfloating_ip_pool: "{{ app_servers.floating_ip_pool }}", 
