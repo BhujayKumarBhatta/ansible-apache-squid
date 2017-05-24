@@ -94,6 +94,7 @@
 - hosts: rpserver
   vars_files: 
     - define-deployment-variables.yml    
+  remote_user: cloud
   become: true
   roles:
     - configure-reverse-proxy
