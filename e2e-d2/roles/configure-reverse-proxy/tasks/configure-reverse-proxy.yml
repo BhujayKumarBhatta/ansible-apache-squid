@@ -107,6 +107,12 @@
     - reverse-proxy
     - reverse-proxy-config
      
+- name: find out the ip address of reverse proxy internet facing bridge ( normally br-internet defined in define-deployment-var)
+  set_fact:
+         rp_internet_address: >-
+                    {%-   set rp_int_bridge = rp_internet_facing_nic | replace('-', '_') -%}
+                    {{ hostvars[inventory_hostname]['ansible_' + rp_int_bridge]['ipv4']['address'] }}
+
 - name: Add host addresses  to /etc/hosts
   lineinfile:
    dest: /etc/hosts
@@ -118,7 +124,10 @@
           replacetxt: "{{ hostvars[app_servers.name]['ansible_ssh_host'] }}   {{ hostvars[app_servers.name]['ansible_hostname'] }}    {{rppointernametovm}}" }
          
    - {searchtxt: "{{hostvars[inventory_hostname].ansible_all_ipv4_addresses.0}}", 
-          replacetxt: "{{hostvars[inventory_hostname].ansible_all_ipv4_addresses.0}}  {{rpvirtualhostnamewebsite}}" }
+          replacetxt: "{{rp_internet_address}}  {{rpvirtualhostnamewebsite}}" }
+   
+#   - {searchtxt: "{{hostvars[inventory_hostname].ansible_all_ipv4_addresses.0}}", 
+#          replacetxt: "{{hostvars[inventory_hostname].ansible_all_ipv4_addresses.0}}  {{rpvirtualhostnamewebsite}}" }
   tags:
     - reverse-proxy
     - reverse-proxy-config        
