@@ -3,11 +3,13 @@ networks_to_create:
   - {network_name: net5, is_the_network_shared_between_customers: false, accessable_outside_openstack_virtual_network: false}
   - {network_name: net6, is_the_network_shared_between_customers: false, accessable_outside_openstack_virtual_network: false}
 subnetworks_to_create :
-  - {network_name: net5, subnet_name: subnet1net5 , subnet_address_in_cidr: "185.1.1.0/24" , dns_server_for_subnet: "185.1.1.10,185.1.1.11" , 
+  - {network_name: net5, subnet_name: subnet1net5 , subnet_address_in_cidr: "185.1.1.0/24" , 
+     dns_server_for_subnet: "185.1.1.10" , 
      additional_routing_for_subnet: ,
      dhcp_to_be_enabled: True, dhcp_ip_allocation_pool_start: 185.1.1.20 , dhcp_ip_allocation_pool_end: 185.1.1.240}
      
-  - {network_name: net6,subnet_name: subnet1net6 , subnet_address_in_cidr: "186.1.1.0/24", dns_server_for_subnet: "186.1.1.10,186.1.1.11" , 
+  - {network_name: net6,subnet_name: subnet1net6 , subnet_address_in_cidr: "186.1.1.0/24", 
+     dns_server_for_subnet: "186.1.1.10" , 
      additional_routing_for_subnet: ,
      dhcp_to_be_enabled: True, dhcp_ip_allocation_pool_start: 186.1.1.20 , dhcp_ip_allocation_pool_end: 186.1.1.240}
 #additionalRoutingForSubnetA: 
