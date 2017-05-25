@@ -10,13 +10,17 @@
 #        - "{{ hostvars[vnm]['ansible_ssh_host'] }}       {{ hostvars[vnm]['ansible_hostname'] }}    {{rp_pointer_name_to_vm}}"
 #        - "{{hostvars[inventory_hostname].ansible_default_ipv4.address}}  {{rp_virtual_hostname_website}}    {{db_hostname}}"
 #        - "{{hostvars[inventory_hostname].ansible_all_ipv4_addresses.0}}  {{rp_virtual_hostname_website}}"  
-
+  tags:
+    - app-server
 - name: apt Install the software packages required for the application
   apt:
     name: "{{item}}"
     state: latest
   with_items: "{{app_server_apt_packages}}"
   ignore_errors: true
+  tags: 
+    - app-server-apt
+    - app-server
 #
 #- name: Install pip for installing python packages
 #  apt:
@@ -30,7 +34,9 @@
     state: present
   with_items: "{{app_server_pip_packages}}"
   ignore_errors: true
-  
+  tags: 
+    - app-server-pip
+    - app-server
 #- name: Inserted by bhujay -Upgarde the packages setuptools==34.0.1, packaging==16.8,pyparsing==2.1.10
 #  pip:
 #    name: "{{item}}"
@@ -46,23 +52,35 @@
   
 - name: checkout latest  code from git hub - all the codes for my django and celery applications will be downloaded 
   git: repo={{code_repo}}  dest={{app_dir}} accept_hostkey=True force=no
- 
+  tags: 
+    - app-server-gitpull
+    - app-server-django
+    - app-server
 # Assumtion is a fresh searchlog database in mssql server  with no records in django_migration table  . There is no migration folder ro files  in our app1 directory . Hence we will do a fresh initial migration. 
 - name: django model file need to be activated by makemigrations
   django_manage: command="makemigrations app1 -noinput" app_path={{app_dir}}/djp1 settings=djp1.settings
-
+  tags: 
+    - app-server-django
+    - app-server
 - name: use migration command to actually create the database tables
   django_manage: command=migrate  app_path={{app_dir}}/djp1 settings=djp1.settings
-
+  tags: 
+    - app-server-django
+    - app-server
 #- django_manage: command="createsuperuser --noinput --username=admin  --email=admin@example.com" app_path={{app_dir}}/djp1
 
 - name: restart rabbitmq-server
   service: name=rabbitmq-server state=started enabled=yes
-
+  tags: 
+    - app-server-rabbit
+    - app-server
 - name: enable rabbitmq plugins
   rabbitmq_plugin: names=rabbitmq_management,rabbitmq_tracing,rabbitmq_federation state=enabled
   notify:
     - restart rabbitmq
+  tags: 
+    - app-server-rabbit
+    - app-server
 
 - name: add users
   rabbitmq_user:
@@ -75,6 +93,9 @@
     read_priv: {{item.read_priv}}
     state: present
   with_items: "{{rabbit_mq_users}"
+  tags: 
+    - app-server-rabbit
+    - app-server
     
 
 #  - name: remove default guest user
@@ -84,6 +105,9 @@
   rabbitmq_vhost: 
      name: {{rabbit_vhost_name}} 
      state: present
+  tags: 
+    - app-server-rabbit
+    - app-server
 
 #  - name: set federation local-username
 #    rabbitmq_parameter: component=federation name=local-username value='"user1"' state=present
@@ -93,13 +117,18 @@
   command: celery multi stop w1 -A djp1 -l info
   args: 
       chdir:{{app_dir}}/djp1
+  tags: 
+    - app-server-celery
+    - app-server
 
 - name: start celery in background mode - worker pool w1
   command: celery multi start w1 -A djp1 -l info
   args: 
       chdir:{{app_dir}}/djp1
   ignore_errors: true
-
+  tags: 
+    - app-server-celery
+    - app-server
 #####################Apache Configuration and starting the service , this overwirites any existing configuration ans is suitable for  a dedicated apache for our app ##############################################
 
 #never give a space after  the equal to sign. For example path=<filename> is ok however  path= <filename> wont work.
@@ -107,6 +136,9 @@
   stat: path="{{item.fpath}}"    
   register: result
   with_items: "{{ app_server_apache_config_files }}"
+  tags: 
+    - app-server-apache
+    - app-server
 
 #- name: keep a backup of the existing apache2.conf file
 #  copy:
@@ -124,5 +156,8 @@
   notify:
       - stop apache 
       - start apace
+  tags: 
+    - app-server-apache
+    - app-server
 
  #mysql -h HOST -u USERNAME -pPASSWORD 
