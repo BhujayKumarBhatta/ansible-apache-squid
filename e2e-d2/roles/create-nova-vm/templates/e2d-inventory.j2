@@ -1,0 +1,11 @@
+[groupofjustcreatedvm]
+{% for item in groups['groupofjustcreatedvm']  %}
+{{ item }}  ansible_ssh_host={{ hostvars[item]['ansible_ssh_host'] }}  ansible_host={{ hostvars[item]['ansible_ssh_host'] }} 
+{% endfor %}
+
+
+[rpserver]
+{{reverseproxyservername}} ansible_ssh_host={{reverseproxyserverip}}  ansible_host={{reverseproxyserverip}}   ansible_ssh_port={{reverseproxyserversshport}}
+           
+[groupofrpserver:children]
+rpserver

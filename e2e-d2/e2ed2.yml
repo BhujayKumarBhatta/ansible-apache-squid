@@ -2,9 +2,8 @@
 - hosts: localhost
   vars_files: 
     - define-deployment-variables.yml
-    - opnstack_authfile_wp.yml
-#  become: true 
-   
+    - opnstack_authfile_wp.yml   
+    
   roles:
     - create-network
     - create-subnetwork
@@ -16,21 +15,6 @@
     - create-security-group
     - create-security-rules
     - create-nova-vm
-#    - { role: create-nova-vm, vnm: "{{ db_servers.name }}", vimage: "{{ db_servers.image }}", 
-#        vkeyname: "{{ db_servers.keyname }}", vflavor: "{{ db_servers.flavor }}",
-#         vnetid: "{{ db_servers.netid }}", vfloating_ip_pool: "{{ db_servers.floating_ip_pool }}", 
-#         vsecurity_group: "{{ db_servers.security_group }}",  vservers_role: "{{ db_servers.server_role}}"  }
-#         
-#    - { role: create-nova-vm, vnm: "{{ app_servers.name }}", vimage: "{{ app_servers.image }}", 
-#        vkeyname: "{{ app_servers.keyname }}", vflavor: "{{ app_servers.flavor }}",
-#         vnetid: "{{ app_servers.netid }}", vfloating_ip_pool: "{{ app_servers.floating_ip_pool }}", 
-#         vsecurity_group: "{{ app_servers.security_group }}",vservers_role: "{{ app_servers.server_role}}"  }
-  tasks:
-    - name: creating an inventory file with the justcreated hostnames for later run
-      template:
-         src: e2d-inventory.j2
-         dest: ./e2d-inventory.txt
-                     
 
 - hosts: groupofjustcreatedvm
   vars_files: 
@@ -44,14 +28,9 @@
      #until: result.stdout.find("not found") != -1
      until: result.rc == 0
      retries: 10
-     delay: 30
-     tags:
-       - create-nova-vm
-       - vm
+     delay: 30     
    - debug: var=result
-     tags:
-       - create-nova-vm
-       - vm
+     
   roles:
     - apply-common-config
     - { role: configure-db-mysql, when: "server_role == 'dbserver'" }
@@ -64,20 +43,10 @@
             ansible_ssh_host={{reverseproxyserverip}}
             ansible_ssh_port={{reverseproxyserversshport}}
             hostname={{reverseproxyservername}}
-         
-
+   
 - hosts: rpserver
   vars_files: 
     - define-deployment-variables.yml    
   remote_user: cloud
   become: true
-  roles:
-    - configure-reverse-proxy
-
- #demo   
- #############################################################
-  
-#  tasks:
-#    - name: show the servers role 
-#      debug: msg={{hostvars[inventory_hostname].server_role}}    
-  
+ 

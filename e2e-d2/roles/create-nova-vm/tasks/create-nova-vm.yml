@@ -71,6 +71,15 @@
   tags:
    - create-nova-vm
    - vm
+
+- name: creating an inventory file with the justcreated hostnames for later run
+  template:
+         src: e2d-inventory.j2
+         dest: ./host-list.txt
+  tags:
+       - create-nova-vm
+       - vm
+       
 - name: pause for 5 minutes for cloud-init to complete python readiness
   pause: 
     minutes: 5
