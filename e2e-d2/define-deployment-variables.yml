@@ -242,6 +242,7 @@ rppointernametovm: e2e-djangovm
 rpvirtualhostnamewebsite: e2e-django
 rp_http_port: 8080
 rp_https_port: 4433
+rp_rabbit_port: 8081
 rp_internet_facing_nic: br-internet
 rp_management_nic: br-mgmt
 #############

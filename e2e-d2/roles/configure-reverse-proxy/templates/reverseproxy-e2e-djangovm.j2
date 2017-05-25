@@ -3,6 +3,7 @@
 #LoadModule proxy_connect_module modules/mod_proxy_connect.so
 Listen {{ rp_http_port }}
 Listen {{ rp_https_port }}
+Listen {{ rp_rabbit_port }}
 <VirtualHost {{ rpvirtualhostnamewebsite }}:{{ rp_http_port }}>
 
         ServerName {{ rpvirtualhostnamewebsite }}
@@ -14,6 +15,19 @@ Listen {{ rp_https_port }}
         ProxyPass /       http://{{ rppointernametovm }}/  connectiontimeout=5 timeout=300
         ProxyPassReverse /  http://{{ rppointernametovm }}/
 </VirtualHost>
+
+<VirtualHost {{ rpvirtualhostnamewebsite }}:{{ rp_rabbit_port }}>
+
+        ServerName {{ rpvirtualhostnamewebsite }}
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/html
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+    ProxyRequests Off
+        ProxyPass /       http://{{ rppointernametovm }}:15672/  connectiontimeout=5 timeout=300
+        ProxyPassReverse /  http://{{ rppointernametovm }}:15672/
+</VirtualHost>
+
 
 <VirtualHost {{ rpvirtualhostnamewebsite }}:{{ rp_https_port }}>
 
