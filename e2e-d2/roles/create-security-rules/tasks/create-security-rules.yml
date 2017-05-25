@@ -8,11 +8,14 @@
 #          password: "{{ password_var }}"
 #          project_name: "{{ project_name_var }}"
        endpoint_type: "{{ endpoint_type_var }}"
-       security_group: "{{secgroupName}}"
-       protocol: "{{ruleprotocol}}"
-       port_range_min: "{{startport}}"
-       port_range_max: "{{endport}}"
-       remote_ip_prefix: "{{ruleSourceIP}}"
-        
+       security_group: "{{item.secgroupName}}"
+       protocol: "{{item.ruleprotocol}}"
+       port_range_min: "{{item.startport}}"
+       port_range_max: "{{item.endport}}"
+       remote_ip_prefix: "{{item.ruleSourceIP}}"
+  with_items: "{{ security_groups }}"
+  tags:
+     - sec-rule
+     - security         
 
   

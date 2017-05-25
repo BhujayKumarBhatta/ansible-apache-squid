@@ -79,6 +79,19 @@ ssh_proto: tcp
 ssh_port: 22
 ssh_source: 0.0.0.0/0
 
+security_groups:
+  - {secgroupName: sec-app, ruleprotocol: tcp , startport: 22 , endport: 22 , ruleSourceIP: 0.0.0.0/0 }
+  - {secgroupName: sec-db, ruleprotocol: tcp , startport: 80 , endport: 80 , ruleSourceIP: 0.0.0.0/0 }
+  - {secgroupName: sec-app, ruleprotocol: tcp , startport: 80 , endport: 80 , ruleSourceIP: 0.0.0.0/0 }
+  - {secgroupName: sec-app, ruleprotocol: tcp , startport: 15672 , endport: 15672 , ruleSourceIP: 0.0.0.0/0 }
+  - {secgroupName: sec-app, ruleprotocol: icmp , startport: -1 , endport: -1 , ruleSourceIP: 0.0.0.0/0 }
+  
+  - {secgroupName: sec-db, ruleprotocol: icmp , startport: -1 , endport: -1 , ruleSourceIP: 0.0.0.0/0 }
+  - {secgroupName: sec-db, ruleprotocol: tcp , startport: 22 , endport: 22 , ruleSourceIP: 0.0.0.0/0 }
+  - {secgroupName: sec-db, ruleprotocol: tcp , startport: 3306 , endport: 3306 , ruleSourceIP: 0.0.0.0/0 }
+  
+  
+
 ###################################################################################
 
 #create openstacck VM 

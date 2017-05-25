@@ -8,7 +8,11 @@
 #          password: "{{ password_var }}"
 #          project_name: "{{ project_name_var }}"
        endpoint_type: "{{ endpoint_type_var }}"
-       name: "{{secgroupName}}"
+       name: "{{item.secgroupName}}"
+  with_items: "{{ security_groups }}"
+  tags:
+     - sec-group
+     - security     
         
 
   

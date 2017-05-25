@@ -25,20 +25,22 @@
         dhcp_ip_allocation_pool_start: "{{dhcpIpAllocationPoolStartB}}", 
         dhcp_ip_allocation_pool_end: "{{dhcpIpAllocationPoolEndB}}", }
 #    - { role: create-internal-router, router_name: "{{routerNameA}}", subnet_names_tobeconnected: "{{subnetNamesTobeconnectedA}}" } 
-    - { role: create-security-group, secgroupName: "{{secgroupdb}}" }
-    - { role: create-security-group, secgroupName: "{{secgroupapp}}" }
-    - { role: create-security-rules, secgroupName: "{{secgroupdb}}",ruleprotocol: "{{ruleprot}}",
-       startport: "{{mysqlport}}", endport: "{{mysqlport}}", ruleSourceIP: "{{dbSourceIP}}" }
-    - { role: create-security-rules, secgroupName: "{{secgroupapp}}",ruleprotocol: "{{ruleprot}}",
-       startport: "{{appPort}}", endport: "{{appPort}}", ruleSourceIP: "{{appSourceIP}}" } 
-    - { role: create-security-rules, secgroupName: "{{secgroupapp}}",ruleprotocol: "{{icmp_proto}}",
-       startport: "{{icmp_port}}", endport: "{{icmp_port}}", ruleSourceIP: "{{icmp_source}}" }
-    - { role: create-security-rules, secgroupName: "{{secgroupdb}}",ruleprotocol: "{{icmp_proto}}",
-       startport: "{{icmp_port}}", endport: "{{icmp_port}}", ruleSourceIP: "{{icmp_source}}" } 
-    - { role: create-security-rules, secgroupName: "{{secgroupapp}}",ruleprotocol: "{{ssh_proto}}",
-       startport: "{{ssh_port}}", endport: "{{ssh_port}}", ruleSourceIP: "{{ssh_source}}" }
-    - { role: create-security-rules, secgroupName: "{{secgroupdb}}",ruleprotocol: "{{ssh_proto}}",
-       startport: "{{ssh_port}}", endport: "{{ssh_port}}", ruleSourceIP: "{{ssh_source}}" }       
+    - create-security-group
+    - create-security-rules
+#    - { role: create-security-group, secgroupName: "{{secgroupdb}}" }
+#    - { role: create-security-group, secgroupName: "{{secgroupapp}}" }
+#    - { role: create-security-rules, secgroupName: "{{secgroupdb}}",ruleprotocol: "{{ruleprot}}",
+#       startport: "{{mysqlport}}", endport: "{{mysqlport}}", ruleSourceIP: "{{dbSourceIP}}" }
+#    - { role: create-security-rules, secgroupName: "{{secgroupapp}}",ruleprotocol: "{{ruleprot}}",
+#       startport: "{{appPort}}", endport: "{{appPort}}", ruleSourceIP: "{{appSourceIP}}" } 
+#    - { role: create-security-rules, secgroupName: "{{secgroupapp}}",ruleprotocol: "{{icmp_proto}}",
+#       startport: "{{icmp_port}}", endport: "{{icmp_port}}", ruleSourceIP: "{{icmp_source}}" }
+#    - { role: create-security-rules, secgroupName: "{{secgroupdb}}",ruleprotocol: "{{icmp_proto}}",
+#       startport: "{{icmp_port}}", endport: "{{icmp_port}}", ruleSourceIP: "{{icmp_source}}" } 
+#    - { role: create-security-rules, secgroupName: "{{secgroupapp}}",ruleprotocol: "{{ssh_proto}}",
+#       startport: "{{ssh_port}}", endport: "{{ssh_port}}", ruleSourceIP: "{{ssh_source}}" }
+#    - { role: create-security-rules, secgroupName: "{{secgroupdb}}",ruleprotocol: "{{ssh_proto}}",
+#       startport: "{{ssh_port}}", endport: "{{ssh_port}}", ruleSourceIP: "{{ssh_source}}" }       
     - { role: create-external-router, router_name: "{{routerNameB}}" ,
         external_network_attched_with_router: "{{externalNetworkAttchedWithRouterB}}" ,
          external_subnet_n_gatewayIP: "{{externalSubnetNgatewayIPB}}", 
