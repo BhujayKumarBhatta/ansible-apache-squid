@@ -41,10 +41,16 @@ subnetNamesTobeconnectedB:
 # - provider-303-subnet
  - subnet1net5
  - subnet1net6
+
+external_router:
+     router_name: net5-net6-ext
+     external_network_attched_with_router: provider-303
+     subnet_names_tobeconnected:
+       - subnet1net5
+       - subnet1net6
 # - 982840ed-cf8f-47fe-9459-8422d53ca5c3 # this is high availibility subnet fixed per installation
 # check with 'openstack port list --router <anyexisting router name> ' . the subnetid associated with 
-#HA network for the router is same.
- 
+#HA network for the router is same.   
 ##########################################
 #Define security group ( firewall)
 security_groups:
@@ -61,6 +67,14 @@ security_groups:
 ###################################################################################
 #create openstacck VM 
 ############################################################################################
+vms_to_create: 
+   - {vnm: django-app, vimage: ubuntu16, vkeyname: k1,vflavor: 1c1g15, vnetid: net5, 
+      vfloating_ip_pool: provider-303, vsecurity_group: sec-app } 
+
+
+   - {vname: mysql-db, vimage: ubuntu16, vkeyname: k1,vflavor: 1c1g15, vnetid: net6 , 
+      vfloating_ip_pool: provider-303, vsecurity_group: sec-db } 
+   
 app_servers: {name: django-app, image: ubuntu16, keyname: k1,
               flavor: 1c1g15, netid: "{{net1_network_name}}" , floating_ip_pool: "{{ externalNetworkAttchedWithRouterB }}", 
               security_group: sec-app,register-OpenStack-VM: newappserver, inmemory_inventory_group: django-app1-servers, 
@@ -72,9 +86,6 @@ db_servers: {name: mysql-db, image: ubuntu16, keyname: k1,
              security_group: sec-db,register-OpenStack-VM: newdbserver, inmemory_inventory_group: mysql-db1-servers, 
              server_role: dbserver,
               } 
-
-
-
 
 #config during boot through cloud-init
 
@@ -106,14 +117,10 @@ apt_proxy_entry: |
 pip_proxy_entry: |
         [global]
         proxy = 10.0.0.14:3128
-     
 
 ############################################################## 
-
 #db server configuration 
-
 #########################################################################
-
 db_server_apt_packages:
  - python-pip
  - mysql-server
@@ -122,29 +129,20 @@ db_server_apt_packages:
 #   - MySQLdb
 #   - mysql
 #   - mysqldump
-
 db_server_pip_packages:
-
 db_hostname: mysqldb-server1
 db_names: searchlog
-
 database_user_name: "{{ mysql_db_user }}"
 database_user_password: "{{ mysql_db_user_password }}"
 database_host: localhost 
 database_priv: "*.*:ALL,GRANT"
-
-##
 ################################################################################
-
 #app server configuration
-
 ###################################################################################
-
 proxy_env:
     http_proxy: http://10.0.0.14:3128
     https_proxy: http://10.0.0.14:3128
     no_proxy: localhost,127.0.0.1,10.*.*.*,*.poc,dcim,dcim2,gitlaboxy.example.com:8080
-
 app_server_apt_packages:
  - python-pip
  - libevent-dev
@@ -212,16 +210,8 @@ rabbit_mq_users:
        write_priv: .* , read_priv: .* }
 
 rabbit_vhost_name: /myvhost
-
- 
-     
-    
-    
- 
 #######################################################################################################
-
 #reverse proxy or the fron end web servers configuration 
-
 #########################################################################################################
 #considering there is a pre eisting reverse proxy server 
 reverseproxyservername: haproxy2
@@ -234,46 +224,4 @@ rp_https_port: 4433
 rp_rabbit_port: 8081
 rp_internet_facing_nic: br-internet
 rp_management_nic: br-mgmt
-#############
-
-
-
-#####################################################################################################################3
-#Openstack VM Details
-#give a vm name in the following format 
-#vnm: vm11
-
-# OS images  name that are avilable in open stack  .The image options are 
-#   vimage: our-ubuntu16   , this image was created by installing iso on a kvm and conerting it as openstack image manually. 
-#   vimage: ubuntu14-downloadedfrom-internet , this image was downloaded from ubuntu site . This is ready made openstack image. 
-#vimage: ubuntu14-downloadedfrom-internet
-#vkeynm: ubuntu-controller2-key
-
-#vfalvor is vm size availbale options are 
-#     m1.r1d2  ,  1 cpu , 1 gb RAM and 20 gb disk 
-#vflavor: m1.r1d2
-
-# There are preexisting networks  with id as below . Check from horizon which network is required 
-#   305c14fa-5c44-4cc6-969d-259333562249
-#   a2310efa-6b42-41ce-b409-f7f522949de7 
-#vnetid: 305c14fa-5c44-4cc6-969d-259333562249 
-
-#Security groups are   
-#vsecurity_group: 
-#default: open ssh port , icmp 
-#webserver: open http and httts
-#mysql-db1-servers: open mysql 3306
-
-#Once the vm is launched , store its openstack values such as floating ip etc. in a temporary varibale
-#register-OpenStack-VM: newserver
-
-
-
-        
-#######################################################################
-# avilable subnet in  external network    
-# user-lan-subnet 10.1.0.0/24 
-# Internet-1 14.142.104.136/29 
-# ext-subnet 203.0.113.0/24 
-#
 ########################################################################################

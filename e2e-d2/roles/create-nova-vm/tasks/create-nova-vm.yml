@@ -8,18 +8,18 @@
 #          password: "{{ password_var }}"
 #          project_name: "{{ project_name_var }}"          
        endpoint_type: "{{ endpoint_type_var }}"
-       name: "{{ vnm }}"
-       image: "{{ vimage }}"
-       key_name: "{{ vkeyname }}"
-       flavor: "{{ vflavor }}"
-       network: "{{ vnetid }}"
+       name: "{{ item.vnm }}"
+       image: "{{ item.vimage }}"
+       key_name: "{{ item.vkeyname }}"
+       flavor: "{{ item.vflavor }}"
+       network: "{{ item.vnetid }}"
 #       nics:
 #          - net-id: "{{ vnetid }}"         
 #       auto_ip: yes
-       floating_ip_pools: "{{ vfloating_ip_pool }}"
+       floating_ip_pools: "{{ item.vfloating_ip_pool }}"
        security_groups:
          - default
-         - "{{ vsecurity_group }}"
+         - "{{ item.vsecurity_group }}"
        config_drive: yes
        #user_data: "{{ lookup('file', 'our-user-data-v3.txt') }}"
        user_data: |
@@ -43,6 +43,7 @@
        
        timeout: 1500
   register: justcreatedvm
+  with_items: "{{ vms_to_create }}"
   tags:
    - create-nova-vm
 
@@ -55,7 +56,7 @@
   delay: 300 
   retries: 50
   tags:
-   - create-nova-vm
+   - vm
 
 
 #in add host module dont quote  the variables , dont give space after equal to sign and no space before or after the 
@@ -70,4 +71,4 @@
   pause: 
     minutes: 5
   tags:
-   - create-nova-vm
+   - vm
