@@ -65,7 +65,7 @@
 #variable name inside curly braces  
 - name: Add new  Instance  name to ansible  Inventory  
   add_host: name= "{{ item.server.name }}"  groups=groupofjustcreatedvm
-            ansible_ssh_host={{justcreatedvm.server.public_v4}}
+            ansible_ssh_host={{item.server.public_v4}}
             server_role={{item.vservers_role}}
   with_items: "{{ justcreatedvm.results }}"
   tags:
