@@ -51,11 +51,12 @@
 - name: 'Waiting OS boot and SSH readiness'
   wait_for: 
        port: 22        
-       host: "{{ justcreatedvm.server.public_v4 }}"
+       host: "{{ item.server.public_v4 }}"
        delay: 1
        timeout: 3000
   delay: 300 
   retries: 50
+  with_items: "{{ justcreatedvm }}"
   tags:
    - vm
    - create-nova-vm
