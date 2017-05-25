@@ -1,43 +1,26 @@
 #network defination 
+networks_to_create:
+  - {network_name: net5, is_the_network_shared_between_customers: false, accessable_outside_openstack_virtual_network: false}
+  - {network_name: net6, is_the_network_shared_between_customers: false, accessable_outside_openstack_virtual_network: false}
+subnetworks_to_create :
+  - {subnet_name: subnet1net5 , subnet_address_in_cidr: "185.1.1.0/24" , dns_server_for_subnet: "185.1.1.10,185.1.1.11" , 
+     additional_routing_for_subnet: ,
+     dhcp_to_be_enabled: True, dhcp_ip_allocation_pool_start: 185.1.1.20 , dhcp_ip_allocation_pool_end: 185.1.1.240}
+     
+  - {subnet_name: subnet1net6 , subnet_address_in_cidr: "186.1.1.0/24", dns_server_for_subnet: "186.1.1.10,186.1.1.11" , 
+     additional_routing_for_subnet: ,
+     dhcp_to_be_enabled: True, dhcp_ip_allocation_pool_start: 186.1.1.20 , dhcp_ip_allocation_pool_end: 186.1.1.240}
+#additionalRoutingForSubnetA: 
+#{ destination: "186.1.1.0/24",nexthop: 185.1.1.2},
+#   
+# - destination: 187.1.1.0/24
+#   nexthop: 185.1.1.3
+##subnet on the net4  network
+#additionalRoutingForSubnetB: 
+# - destination: 185.1.1.0/24
+#   nexthop: 186.1.1.2
+# 
 
-#for first network 
-net1_network_name: net5
-net1_is_the_network_shared_between_customers: false
-net1_accessable_outside_openstack_virtual_network: false
-
-#subnet on the first   network
-subNetNameA: subnet1net5
-subnetAddressInCidrA: "185.1.1.0/24" 
-dnsserverForSubnetA: 
- - "185.1.1.10"
- - "185.1.1.11"    
-additionalRoutingForSubnetA: 
- - destination: 186.1.1.0/24
-   nexthop: 185.1.1.2
- - destination: 187.1.1.0/24
-   nexthop: 185.1.1.3
-dhcpToBeEnabledA: True
-dhcpIpAllocationPoolStartA: 185.1.1.20 
-dhcpIpAllocationPoolEndA: 185.1.1.240
-
-#for second  network 
-net2_network_name: net6
-net2_is_the_network_shared_between_customers: false  
-net2_accessable_outside_openstack_virtual_network: false  
-
-#subnet on the net4  network
-subNetNameB: subnet1net6
-subnetAddressInCidrB: 186.1.1.0/24 
-dnsserverForSubnetB: 
- - 186.1.1.10
- - 186.1.1.11 
-additionalRoutingForSubnetB: 
- - destination: 185.1.1.0/24
-   nexthop: 186.1.1.2
- 
-dhcpToBeEnabledB: True
-dhcpIpAllocationPoolStartB: 186.1.1.20
-dhcpIpAllocationPoolEndB: 186.1.1.240
 
 #First internal router to connect net3 to net4  
 routerNameA: net5-net6

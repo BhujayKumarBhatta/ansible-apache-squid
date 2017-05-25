@@ -10,13 +10,16 @@
 #          project_name: "{{ project_name_var }}"
 #          endpoint_type: "{{ endpoint_type_var }}"
     endpoint_type: "{{ endpoint_type_var }}"
-    network_name: "{{ network_name }}"
-    name: "{{ subnet_name }}"
-    cidr: "{{ subnet_address_in_cidr }}"   
-    dns_nameservers: "{{dns_server_for_subnet}}"       
-    host_routes: "{{additional_routing_for_subnet}}"
-    enable_dhcp: "{{dhcp_to_be_enabled}}"
-    allocation_pool_start: "{{dhcp_ip_allocation_pool_start}}"
-    allocation_pool_end: "{{dhcp_ip_allocation_pool_end}}"
+    network_name: "{{ item.network_name }}"
+    name: "{{ item.subnet_name }}"
+    cidr: "{{ item.subnet_address_in_cidr }}"   
+    dns_nameservers: "{{item.dns_server_for_subnet}}"       
+    host_routes: "{{item.additional_routing_for_subnet}}"
+    enable_dhcp: "{{item.dhcp_to_be_enabled}}"
+    allocation_pool_start: "{{item.dhcp_ip_allocation_pool_start}}"
+    allocation_pool_end: "{{item.dhcp_ip_allocation_pool_end}}"
   register: justcreatedsubnetwork
-  
+  with_items: "{{ subnetworks_to_create }}"
+  tags:
+    - subnet
+    - net-subnet
