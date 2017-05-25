@@ -1,5 +1,5 @@
 ---
-- name: Create security group
+- name: Create security rules for the security groups
   os_security_group_rule: 
        state: present
 #       auth:

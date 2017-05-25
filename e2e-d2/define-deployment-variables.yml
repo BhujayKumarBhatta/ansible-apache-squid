@@ -62,23 +62,6 @@ subnetNamesTobeconnectedB:
  
 ##########################################
 #Define security group ( firewall)
-secgroupdb: dbsecgroup 
-secgroupapp: appsecgroup
-
-
-#define rules for security group
-ruleprot: tcp
-mysqlport: 3306
-dbSourceIP: 0.0.0.0/0
-appSourceIP: 0.0.0.0/0
-appPort: 80
-icmp_proto: icmp
-icmp_port: -1
-icmp_source: 0.0.0.0/0
-ssh_proto: tcp
-ssh_port: 22
-ssh_source: 0.0.0.0/0
-
 security_groups:
   - {secgroupName: sec-app, ruleprotocol: tcp , startport: 22 , endport: 22 , ruleSourceIP: 0.0.0.0/0 }
   - {secgroupName: sec-db, ruleprotocol: tcp , startport: 80 , endport: 80 , ruleSourceIP: 0.0.0.0/0 }
@@ -89,22 +72,20 @@ security_groups:
   - {secgroupName: sec-db, ruleprotocol: icmp , startport: -1 , endport: -1 , ruleSourceIP: 0.0.0.0/0 }
   - {secgroupName: sec-db, ruleprotocol: tcp , startport: 22 , endport: 22 , ruleSourceIP: 0.0.0.0/0 }
   - {secgroupName: sec-db, ruleprotocol: tcp , startport: 3306 , endport: 3306 , ruleSourceIP: 0.0.0.0/0 }
-  
-  
-
+    
 ###################################################################################
-
 #create openstacck VM 
-
 ############################################################################################
 app_servers: {name: django-app, image: ubuntu16, keyname: k1,
-              flavor: 1c1g15, netid: "{{net1_network_name}}" , floating_ip_pool: "{{ externalNetworkAttchedWithRouterB }}", security_group: appsecgroup,
-              register-OpenStack-VM: newappserver, inmemory_inventory_group: django-app1-servers, server_role: appserver,
+              flavor: 1c1g15, netid: "{{net1_network_name}}" , floating_ip_pool: "{{ externalNetworkAttchedWithRouterB }}", 
+              security_group: sec-app,register-OpenStack-VM: newappserver, inmemory_inventory_group: django-app1-servers, 
+              server_role: appserver,
                } 
 
 db_servers: {name: mysql-db, image: ubuntu16, keyname: k1,
-             flavor: 1c1g15, netid: "{{net2_network_name}}" , floating_ip_pool: "{{ externalNetworkAttchedWithRouterB }}", security_group: dbsecgroup,
-             register-OpenStack-VM: newdbserver, inmemory_inventory_group: mysql-db1-servers, server_role: dbserver,
+             flavor: 1c1g15, netid: "{{net2_network_name}}" , floating_ip_pool: "{{ externalNetworkAttchedWithRouterB }}", 
+             security_group: sec-db,register-OpenStack-VM: newdbserver, inmemory_inventory_group: mysql-db1-servers, 
+             server_role: dbserver,
               } 
 
 
@@ -125,9 +106,7 @@ vboot_apt_proxy: "http://10.0.0.14:3128"
 vboot_http_proxy: "http://10.0.0.14:3128"
 vobot_https_proxy: "http://10.0.0.14:3128"
 ############################################################################################
-
 #All the VM will have the following configurations after boot , cganhed through ansible
-
 ####################################################################################################
 host_table_entry: |
         10.0.0.51       haproxy1
