@@ -47,9 +47,11 @@
      delay: 30
      tags:
        - create-nova-vm
+       - vm
    - debug: var=result
      tags:
        - create-nova-vm
+       - vm
   roles:
     - apply-common-config
     - { role: configure-db-mysql, when: "server_role == 'dbserver'" }
