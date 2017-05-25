@@ -112,6 +112,8 @@
          rp_internet_address: >-
                     {%-   set rp_int_bridge = rp_internet_facing_nic | replace('-', '_') -%}
                     {{ hostvars[inventory_hostname]['ansible_' + rp_int_bridge]['ipv4']['address'] }}
+- debug:
+          msg: rp internet address is "{{rp_internet_address}}"
 
 - name: Add host addresses  to /etc/hosts
   lineinfile:
@@ -123,7 +125,7 @@
    - {searchtxt: "{{ hostvars[app_servers.name]['ansible_ssh_host'] }}" ,
           replacetxt: "{{ hostvars[app_servers.name]['ansible_ssh_host'] }}   {{ hostvars[app_servers.name]['ansible_hostname'] }}    {{rppointernametovm}}" }
          
-   - {searchtxt: "{{hostvars[inventory_hostname].ansible_all_ipv4_addresses.0}}", 
+   - {searchtxt: "{{rp_internet_address}}", 
           replacetxt: "{{rp_internet_address}}  {{rpvirtualhostnamewebsite}}" }
    
 #   - {searchtxt: "{{hostvars[inventory_hostname].ansible_all_ipv4_addresses.0}}", 
