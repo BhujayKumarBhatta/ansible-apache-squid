@@ -81,7 +81,9 @@
 #    rabbitmq_user: user=guest state=absent
 
 - name: ensure vhost /test is present
-  rabbitmq_vhost: name=/myvhost state=present
+  rabbitmq_vhost: 
+     name: {{rabbit_vhost_name}} 
+     state: present
 
 #  - name: set federation local-username
 #    rabbitmq_parameter: component=federation name=local-username value='"user1"' state=present

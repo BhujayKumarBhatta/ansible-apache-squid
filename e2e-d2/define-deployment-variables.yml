@@ -234,6 +234,7 @@ rabbit_mq_users:
    - {name: ubuntu, pwd: changeme, role: 'administrator,ubuntu', vhost: / , configure_priv: .*, 
        write_priv: .* , read_priv: .* }
 
+rabbit_vhost_name: /myvhost
 
  
      
