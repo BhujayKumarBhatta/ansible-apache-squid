@@ -112,9 +112,15 @@
          rp_internet_address: >-
                     {%-   set rp_int_bridge = rp_internet_facing_nic | replace('-', '_') -%}
                     {{ hostvars[inventory_hostname]['ansible_' + rp_int_bridge]['ipv4']['address'] }}
+  tags:
+    - reverse-proxy
+    - reverse-proxy-config
 - name: Displaying the  internet IP of rp
   debug:
       msg: rp internet address is "{{rp_internet_address}}"
+  tags:
+    - reverse-proxy
+    - reverse-proxy-config
 
 - name: Add host addresses  to /etc/hosts
   lineinfile:
