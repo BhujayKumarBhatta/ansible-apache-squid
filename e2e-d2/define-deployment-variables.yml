@@ -68,12 +68,11 @@ security_groups:
 #create openstacck VM 
 ############################################################################################
 vms_to_create: 
+   - {vnm: mysql-db, vimage: ubuntu16, vkeyname: k1,vflavor: 1c1g15, vnetid: net6 , 
+      vfloating_ip_pool: provider-303, vsecurity_group: sec-db } 
+    
    - {vnm: django-app, vimage: ubuntu16, vkeyname: k1,vflavor: 1c1g15, vnetid: net5, 
       vfloating_ip_pool: provider-303, vsecurity_group: sec-app } 
-
-
-   - {vname: mysql-db, vimage: ubuntu16, vkeyname: k1,vflavor: 1c1g15, vnetid: net6 , 
-      vfloating_ip_pool: provider-303, vsecurity_group: sec-db } 
    
 app_servers: {name: django-app, image: ubuntu16, keyname: k1,
               flavor: 1c1g15, netid: "{{net1_network_name}}" , floating_ip_pool: "{{ externalNetworkAttchedWithRouterB }}", 
