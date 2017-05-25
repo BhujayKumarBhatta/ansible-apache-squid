@@ -32,7 +32,7 @@
            ssh-authorized-keys: "{{ vboot_login_keys }}"
            sudo: "{{ vboot_login_sudo }}"
         manage_etc_hosts: true
-        hostname: "{{ vnm }}"
+        hostname: "{{ item.vnm }}"
         apt:
           conf: |
           proxy: "{{ vboot_apt_proxy }}"
