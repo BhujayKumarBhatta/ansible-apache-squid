@@ -103,7 +103,7 @@
 
 - name: ensure vhost /test is present
   rabbitmq_vhost: 
-     name: {{rabbit_vhost_name}} 
+     name: "{{rabbit_vhost_name}}"
      state: present
   tags: 
     - app-server-rabbit
