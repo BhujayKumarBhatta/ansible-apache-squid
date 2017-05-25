@@ -46,6 +46,7 @@
   with_items: "{{ vms_to_create }}"
   tags:
    - create-nova-vm
+   - vm
 
 - name: 'Waiting OS boot and SSH readiness'
   wait_for: 
@@ -57,7 +58,7 @@
   retries: 50
   tags:
    - vm
-
+   - create-nova-vm
 
 #in add host module dont quote  the variables , dont give space after equal to sign and no space before or after the 
 #variable name inside curly braces  
