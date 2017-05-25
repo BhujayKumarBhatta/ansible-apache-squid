@@ -68,6 +68,7 @@
             server_role={{vservers_role}}
   tags:
    - create-nova-vm
+   - vm
 - name: pause for 5 minutes for cloud-init to complete python readiness
   pause: 
     minutes: 5
