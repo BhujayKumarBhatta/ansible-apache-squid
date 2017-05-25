@@ -56,7 +56,7 @@
        timeout: 3000
   delay: 300 
   retries: 50
-  with_items: "{{ justcreatedvm }}"
+  with_items: "{{ justcreatedvm.results }}"
   tags:
    - vm
    - create-nova-vm
