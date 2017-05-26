@@ -98,14 +98,7 @@
     - reverse-proxy
     - reverse-proxy-config
    
-- name: copy the ufwrules.sh to server to open reverse proxy custom http port
-  template:
-   src: ufwrules.j2
-   dest: /tmp/ufwrules.sh
-   mode: 0744
-  tags:
-    - reverse-proxy
-    - reverse-proxy-config
+
      
 - name: find out the ip address of reverse proxy internet facing bridge ( normally br-internet defined in define-deployment-var)
   set_fact:
@@ -147,6 +140,17 @@
   tags:
     - reverse-proxy
     - reverse-proxy-config
+
+- name: copy the ufwrules.sh to server to open reverse proxy custom http port
+  template:
+   src: ufwrules.j2
+   dest: /tmp/ufwrules.sh
+   mode: 0744
+  tags:
+    - reverse-proxy
+    - reverse-proxy-config
+    - ufw
+
 - name: open firewall ports  - considering the same server is using a ufw host based firewall
   command: "{{item}}"
   args:
@@ -156,6 +160,7 @@
   tags:
     - reverse-proxy
     - reverse-proxy-config
+    - ufw
 ######################################################
 #After restart the br config maight have been lost  so did it agin
 #==================================================

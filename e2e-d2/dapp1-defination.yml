@@ -1,17 +1,17 @@
 #network defination 
 networks_to_create:
-  - {network_name: net5, is_the_network_shared_between_customers: false, accessable_outside_openstack_virtual_network: false}
-  - {network_name: net6, is_the_netwofilename_inventory_list_to_be_createdrk_shared_between_customers: false, accessable_outside_openstack_virtual_network: false}
+  - {network_name: net7, is_the_network_shared_between_customers: false, accessable_outside_openstack_virtual_network: false}
+  - {network_name: net8, is_the_network_shared_between_customers: false, accessable_outside_openstack_virtual_network: false}
 subnetworks_to_create :
-  - {network_name: net5, subnet_name: subnet1net5 , subnet_address_in_cidr: "185.1.1.0/24" , 
-     dns_server_for_subnet: "185.1.1.10" , 
+  - {network_name: net7, subnet_name: subnet7 , subnet_address_in_cidr: "120.1.1.0/24" , 
+     dns_server_for_subnet: "120.1.1.10" , 
      additional_routing_for_subnet: ,
-     dhcp_to_be_enabled: True, dhcp_ip_allocation_pool_start: 185.1.1.20 , dhcp_ip_allocation_pool_end: 185.1.1.240}
+     dhcp_to_be_enabled: True, dhcp_ip_allocation_pool_start: 120.1.1.20 , dhcp_ip_allocation_pool_end: 120.1.1.240}
      
-  - {network_name: net6,subnet_name: subnet1net6 , subnet_address_in_cidr: "186.1.1.0/24", 
-     dns_server_for_subnet: "186.1.1.10" , 
+  - {network_name: net6,subnet_name: subnet8 , subnet_address_in_cidr: "130.1.1.0/24", 
+     dns_server_for_subnet: "130.1.1.10" , 
      additional_routing_for_subnet: ,
-     dhcp_to_be_enabled: True, dhcp_ip_allocation_pool_start: 186.1.1.20 , dhcp_ip_allocation_pool_end: 186.1.1.240}
+     dhcp_to_be_enabled: True, dhcp_ip_allocation_pool_start: 130.1.1.20 , dhcp_ip_allocation_pool_end: 130.1.1.240}
 #additionalRoutingForSubnetA: 
 #{ destination: "186.1.1.0/24",nexthop: 185.1.1.2},
 #   
@@ -25,22 +25,22 @@ subnetworks_to_create :
 
 
 #First internal router to connect net3 to net4  
-routerNameA: net5-net6
+routerNameA: net7-net8
 externalNetworkAttchedWithRouterA: 
 subnetNamesTobeconnectedA: 
- - subnet1net5
- - subnet1net6
+ - subnet7
+ - subnet8
  
 #2nd  router is external  to connect net 3 and net4  to external net
-routerNameB: net5-net6-ext
+routerNameB: net7-net8-ext
 externalNetworkAttchedWithRouterB: provider-303
 externalSubnetNgatewayIPB: 
  - subnet: user-lan-subnet
    ip: 10.1.0.1
 subnetNamesTobeconnectedB: 
 # - provider-303-subnet
- - subnet1net5
- - subnet1net6
+ - subnet7
+ - subnet8
 
 external_router:
      router_name: net5-net6-ext
@@ -70,23 +70,11 @@ security_groups:
 filename_inventory_list_to_be_created: host-list.txt
 
 vms_to_create: 
-   - {vnm: mysql-db, vimage: ubuntu16, vkeyname: k1,vflavor: 1c1g15, vnetid: net6 , 
+   - {vnm: app1-db, vimage: ubuntu16, vkeyname: k1,vflavor: 1c1g15, vnetid: net7 , 
       vfloating_ip_pool: provider-303, vsecurity_group: sec-db } 
     
-   - {vnm: django-app, vimage: ubuntu16, vkeyname: k1,vflavor: 1c1g15, vnetid: net5, 
+   - {vnm: app1-app, vimage: ubuntu16, vkeyname: k1,vflavor: 1c1g15, vnetid: net8, 
       vfloating_ip_pool: provider-303, vsecurity_group: sec-app } 
-   
-app_servers: {name: django-app, image: ubuntu16, keyname: k1,
-              flavor: 1c1g15, netid: "{{net1_network_name}}" , floating_ip_pool: "{{ externalNetworkAttchedWithRouterB }}", 
-              security_group: sec-app,register-OpenStack-VM: newappserver, inmemory_inventory_group: django-app1-servers, 
-              server_role: appserver,
-               } 
-
-db_servers: {name: mysql-db, image: ubuntu16, keyname: k1,
-             flavor: 1c1g15, netid: "{{net2_network_name}}" , floating_ip_pool: "{{ externalNetworkAttchedWithRouterB }}", 
-             security_group: sec-db,register-OpenStack-VM: newdbserver, inmemory_inventory_group: mysql-db1-servers, 
-             server_role: dbserver,
-              } 
 
 #config during boot through cloud-init
 
@@ -220,8 +208,8 @@ rabbit_vhost_name: /myvhost
 reverseproxyservername: haproxy2
 reverseproxyserverip: 10.0.0.52
 reverseproxyserversshport: 2223
-rppointernametovm: e2e-djangovm
-rpvirtualhostnamewebsite: e2e-django
+rppointernametovm: app1-app
+rpvirtualhostnamewebsite: django-app1
 rp_http_port: 8080
 rp_https_port: 4433
 rp_rabbit_port: 8081

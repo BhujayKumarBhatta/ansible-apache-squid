@@ -18,6 +18,5 @@ ufw allow in on {{ rp_internet_facing_nic }} from any to any  port 6081
 ufw allow in on {{ rp_internet_facing_nic }} from any to any  port 6082
 ufw allow in on {{ rp_internet_facing_nic }} from any to any  port {{ rp_http_port }}
 ufw allow in on {{ rp_internet_facing_nic }} from any to any  port {{ rp_https_port }}
-ufw allow in on {{ rp_internet_facing_nic }} from any to any  port {{ rp_rabbit_port }}
 
 
