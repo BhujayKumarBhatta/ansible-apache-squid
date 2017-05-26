@@ -75,7 +75,7 @@
 - name: creating an inventory file with the justcreated hostnames for later run
   template:
          src: e2d-inventory.j2
-         dest: ./host-list.txt
+         dest: ./"{{ filename_inventory_list_to_be_created }}"
   tags:
        - create-nova-vm
        - vm

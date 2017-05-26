@@ -67,6 +67,8 @@ security_groups:
 ###################################################################################
 #create openstacck VM 
 ############################################################################################
+filename_inventory_list_to_be_created: host-list.txt
+
 vms_to_create: 
    - {vnm: mysql-db, vimage: ubuntu16, vkeyname: k1,vflavor: 1c1g15, vnetid: net6 , 
       vfloating_ip_pool: provider-303, vsecurity_group: sec-db } 
@@ -100,6 +102,8 @@ vboot_apt_conf: |
 vboot_apt_proxy: "http://10.0.0.14:3128"
 vboot_http_proxy: "http://10.0.0.14:3128"
 vobot_https_proxy: "http://10.0.0.14:3128"
+
+
 ############################################################################################
 #All the VM will have the following configurations after boot , cganhed through ansible
 ####################################################################################################
