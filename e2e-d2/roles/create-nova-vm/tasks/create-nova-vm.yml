@@ -42,14 +42,11 @@
          - python         
        
        timeout: 1500
-  vars: "{{ item.server_role }}"
   register: justcreatedvm
   with_items: "{{ vms_to_create }}"
   tags:
    - create-nova-vm
    - vm
-- debug:
-     msg: "{{ justcreatedvm.results.server_role }}"
      
 - name: 'Waiting OS boot and SSH readiness'
   wait_for: 
@@ -67,7 +64,7 @@
 #in add host module dont quote  the variables , dont give space after equal to sign and no space before or after the 
 #variable name inside curly braces  
 - name: Add new  Instance  name to ansible  Inventory  
-  add_host: name= "{{ item.server.name }}"  groups=groupofjustcreatedvm
+  add_host: name= "{{ item.vnm }}"  groups=groupofjustcreatedvm
             ansible_ssh_host={{item.server.public_v4}}
             #server_role={{item.vservers_role}}
   with_items: "{{ justcreatedvm.results }}"
