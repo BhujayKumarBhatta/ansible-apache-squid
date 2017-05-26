@@ -67,7 +67,7 @@ security_groups:
 ###################################################################################
 #create openstacck VM 
 ############################################################################################
-filename_inventory_list_to_be_created: host-list.txt
+filename_inventory_list_to_be_created: dapp1.txt
 
 vms_to_create: 
    - {vnm: app1-db, vimage: ubuntu16, vkeyname: k1,vflavor: 1c1g15, vnetid: net7 , 
