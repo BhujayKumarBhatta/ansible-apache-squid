@@ -71,10 +71,10 @@ filename_inventory_list_to_be_created: dapp1.txt
 
 vms_to_create: 
    - {vnm: app1-db, vimage: ubuntu16, vkeyname: k1,vflavor: 1c1g15, vnetid: net7 , 
-      vfloating_ip_pool: provider-303, vsecurity_group: sec-db } 
+      vfloating_ip_pool: provider-303, vsecurity_group: sec-db , server_role: dbserver } 
     
    - {vnm: app1-app, vimage: ubuntu16, vkeyname: k1,vflavor: 1c1g15, vnetid: net8, 
-      vfloating_ip_pool: provider-303, vsecurity_group: sec-app } 
+      vfloating_ip_pool: provider-303, vsecurity_group: sec-app, server_role: appserver } 
 
 #config during boot through cloud-init
 

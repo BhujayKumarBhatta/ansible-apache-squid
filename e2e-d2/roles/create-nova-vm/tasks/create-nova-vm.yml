@@ -42,12 +42,15 @@
          - python         
        
        timeout: 1500
+  vars: "{{ item.server_role }}"
   register: justcreatedvm
   with_items: "{{ vms_to_create }}"
   tags:
    - create-nova-vm
    - vm
-  
+- debug:
+     msg: "{{ justcreatedvm.results.server_role }}"
+     
 - name: 'Waiting OS boot and SSH readiness'
   wait_for: 
        port: 22        
@@ -75,7 +78,7 @@
 - name: creating an inventory file with the justcreated hostnames for later run
   template:
          src: e2d-inventory.j2
-         dest: ./"{{ filename_inventory_list_to_be_created }}"
+         dest: "{{ filename_inventory_list_to_be_created }}"
   tags:
        - create-nova-vm
        - vm
