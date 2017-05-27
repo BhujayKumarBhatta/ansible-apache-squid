@@ -47,6 +47,12 @@
   tags:
    - create-nova-vm
    - vm
+- name: debugging the item values
+  debug: msg= "{{ item.openstack.name }}"
+  with_items: "{{ justcreatedvm.results }}"
+  tags:
+   - create-nova-vm
+   - vm
      
 - name: 'Waiting OS boot and SSH readiness'
   wait_for: 
