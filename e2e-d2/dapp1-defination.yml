@@ -195,9 +195,9 @@ app_server_apache_config_files:
  - {name: ports.conf, rnm: /etc/apache2/ports.conf-ansible,fpath: /etc/apache2/ports.conf, idn: B , x: 1,fsrc: files/ports.conf.ansible-file, fdest: /etc/apache2/ports.conf}
 
 rabbit_mq_users:
-   - {name: onepk, pwd: changeme, role: 'administrator, onepk', vhost: / , configure_priv: .*, 
+   - {name: onepk, pwd: changeme, role: 'administrator', vhost: / , configure_priv: .*, 
        write_priv: .* , read_priv: .* }
-   - {name: ubuntu, pwd: changeme, role: 'administrator,ubuntu', vhost: / , configure_priv: .*, 
+   - {name: ubuntu, pwd: changeme, role: 'administrator', vhost: / , configure_priv: .*, 
        write_priv: .* , read_priv: .* }
 
 rabbit_vhost_name: /myvhost
