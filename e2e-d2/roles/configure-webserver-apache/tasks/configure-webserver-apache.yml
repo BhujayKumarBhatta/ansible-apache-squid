@@ -103,6 +103,7 @@
   with_items: "{{rabbit_mq_users}"
   tags: 
     - rabbit
+    - rabbit-users
     - app-server
     
 
