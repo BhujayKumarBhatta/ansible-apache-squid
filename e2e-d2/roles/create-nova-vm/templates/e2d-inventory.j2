@@ -1,6 +1,6 @@
 [groupofjustcreatedvm]
 {% for item in groups['groupofjustcreatedvm']  %}
-{{ item }}  ansible_ssh_host={{ hostvars[item]['ansible_ssh_host'] }}  ansible_host={{ hostvars[item]['ansible_ssh_host'] }} server_role={{ [item][item]['server_role'] }}
+{{ item }}  ansible_ssh_host={{ hostvars[item]['ansible_ssh_host'] }}  ansible_host={{ hostvars[item]['ansible_ssh_host'] }} server_role={{ item.item.server_role }}
 {% endfor %}
 
 
