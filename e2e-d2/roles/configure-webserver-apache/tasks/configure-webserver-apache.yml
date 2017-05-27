@@ -3,7 +3,7 @@
 - name: Add IP address and host names of the DB server  to /etc/hosts
   lineinfile:
    dest: /etc/hosts
-   line: "{{hostvars[item][vnm].ansible_ssh_host}}   {{hostvars[item.vnm].ansible_hostname}}  {{item.vnm}}"
+   line: "{{hostvars[item][vnm].ansible_ssh_host}}   {{hostvars[item][vnm].ansible_hostname}}  {{item.vnm}}"
   with_items: "{{ vms_to_create }}"
     
       # - "{{hostvars[db_servers.name].ansible_ssh_host}}   {{hostvars[db_servers.name].ansible_hostname}}  {{db_hostname}}"
