@@ -54,41 +54,41 @@
    - create-nova-vm
    - vm
      
-- name: 'Waiting OS boot and SSH readiness'
-  wait_for: 
-       port: 22        
-       host: "{{ item.server.public_v4 }}"
-       delay: 1
-       timeout: 3000
-  delay: 300 
-  retries: 50
-  with_items: "{{ justcreatedvm.results }}"
-  tags:
-   - vm
-   - create-nova-vm
-
-#in add host module dont quote  the variables , dont give space after equal to sign and no space before or after the 
-#variable name inside curly braces  
-- name: Add new  Instance  name to ansible  Inventory  
-  add_host: name= "{{ item.server.name }}"  groups=groupofjustcreatedvm
-            ansible_ssh_host={{item.server.public_v4}}
-            #server_role={{item.vservers_role}}
-  with_items: "{{ justcreatedvm.results }}"
-  tags:
-   - create-nova-vm
-   - vm
-
-- name: creating an inventory file with the justcreated hostnames for later run
-  template:
-         src: e2d-inventory.j2
-         dest: "./{{ filename_inventory_list_to_be_created }}"
-  tags:
-       - create-nova-vm
-       - vm
-       
-- name: pause for 5 minutes for cloud-init to complete python readiness
-  pause: 
-    minutes: 5
-  tags:
-   - vm
-   - create-nova-vm
+#- name: 'Waiting OS boot and SSH readiness'
+#  wait_for: 
+#       port: 22        
+#       host: "{{ item.server.public_v4 }}"
+#       delay: 1
+#       timeout: 3000
+#  delay: 300 
+#  retries: 50
+#  with_items: "{{ justcreatedvm.results }}"
+#  tags:
+#   - vm
+#   - create-nova-vm
+#
+##in add host module dont quote  the variables , dont give space after equal to sign and no space before or after the 
+##variable name inside curly braces  
+#- name: Add new  Instance  name to ansible  Inventory  
+#  add_host: name= "{{ item.server.name }}"  groups=groupofjustcreatedvm
+#            ansible_ssh_host={{item.server.public_v4}}
+#            #server_role={{item.vservers_role}}
+#  with_items: "{{ justcreatedvm.results }}"
+#  tags:
+#   - create-nova-vm
+#   - vm
+#
+#- name: creating an inventory file with the justcreated hostnames for later run
+#  template:
+#         src: e2d-inventory.j2
+#         dest: "./{{ filename_inventory_list_to_be_created }}"
+#  tags:
+#       - create-nova-vm
+#       - vm
+#       
+#- name: pause for 5 minutes for cloud-init to complete python readiness
+#  pause: 
+#    minutes: 5
+#  tags:
+#   - vm
+#   - create-nova-vm
