@@ -5,8 +5,12 @@
    #dest: /etc/hosts
    #line: "{{hostvars[item.vnm].ansible_ssh_host}}   {{hostvars[item][vnm].ansible_hostname}}  {{item.vnm}}"
   debug:
+     #msg: "{{hostvars[item.vnm].ansible_ssh_host}}"
      msg: "{{hostvars[item.vnm].ansible_ssh_host}}"
   with_items: "{{ vms_to_create }}"
+  #debug:
+   #  msg: "{{ item.vnm }}"
+  #with_items: "{{ vms_to_create }}"
     
       # - "{{hostvars[db_servers.name].ansible_ssh_host}}   {{hostvars[db_servers.name].ansible_hostname}}  {{db_hostname}}"
 #       - "{{hostvars[db_servers.name].ansible_all_ipv4_addresses.0}}   {{hostvars[db_servers.name].ansible_hostname}}  {{db_hostname}}"
