@@ -18,7 +18,7 @@
 
 - hosts: groupofjustcreatedvm
   vars_files: 
-    - define-deployment-variables.yml
+    - dapp1-defination.yml
   remote_user: ubuntu
   become: true
   pre_tasks:
@@ -46,7 +46,7 @@
    
 - hosts: rpserver
   vars_files: 
-    - define-deployment-variables.yml    
+    - dapp1-defination.yml    
   remote_user: cloud
   become: true
  
