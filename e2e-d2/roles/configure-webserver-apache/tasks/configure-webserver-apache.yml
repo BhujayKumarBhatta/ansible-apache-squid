@@ -140,14 +140,14 @@
     - app-server
 #####################Apache Configuration and starting the service , this overwirites any existing configuration ans is suitable for  a dedicated apache for our app ##############################################
 
-#never give a space after  the equal to sign. For example path=<filename> is ok however  path= <filename> wont work.
-- name: Check Apache2.conf file exists
-  stat: path="{{item.fpath}}"    
-  register: result
-  with_items: "{{ app_server_apache_config_files }}"
-  tags: 
-    - app-server-apache
-    - app-server
+##never give a space after  the equal to sign. For example path=<filename> is ok however  path= <filename> wont work.
+#- name: Check Apache2.conf file exists
+#  stat: path="{{item.fpath}}"    
+#  register: result
+#  with_items: "{{ app_server_apache_config_files }}"
+#  tags: 
+#    - app-server-apache
+#    - app-server
 
 #- name: keep a backup of the existing apache2.conf file
 #  copy:
