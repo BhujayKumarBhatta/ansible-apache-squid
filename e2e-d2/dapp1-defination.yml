@@ -164,6 +164,7 @@ app_server_apt_packages:
  - python-mysqldb
  - mysql-common
 # - mysql-client-core-5.6
+# - mysql-client-core-5.7
  - rabbitmq-server 
 ################## paramiko need mitmproxy , actually cryptography , which require the following
 ### apt packges 
