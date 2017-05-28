@@ -29,17 +29,31 @@
 
 - name: Create database
   mysql_db:
-    name: searchlog
+    name: "{{ item }}"
     state: present
+  with_items: "{{ db_names }}"
 
 
-- name: Create user and give permissions
-  mysql_user: name=mysql password=mysql123 host=localhost priv=*.*:ALL,GRANT state=absent
+- name: Remove  user  with host = localhost , wrong entries and give permissions
+  mysql_user: 
+    name: "{{ item.name }}"
+    password: "{{ item.password }}" 
+    host: localhost 
+    priv: "*.*:ALL,GRANT"
+    state: absent
+  with_items: "{{ database_users }}"
   
-- name: Create user and give permissions
-  mysql_user: name=mysql password=mysql123 host=% priv=*.*:ALL,GRANT state=present
+- name: Create user and give permissions with host = %
+  mysql_user: 
+    name: "{{ item.name }}"
+    password: "{{ item.password }}" 
+    host: "% priv=*.*:ALL,GRANT"
+    state: present
+  with_items: "{{ database_users }}"
   
 - name: give permission to all hosts
-  mysql_user: name=mysql  host_all=yes 
-
+  mysql_user: 
+     name: "{{ item.name }}"
+     host_all: yes 
+  with_items: "{{ database_users }}"
   

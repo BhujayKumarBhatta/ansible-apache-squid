@@ -121,12 +121,13 @@ db_server_apt_packages:
 #   - mysql
 #   - mysqldump
 db_server_pip_packages:
-db_hostname: mysqldb-server1
-db_names: searchlog
-database_user_name: "{{ mysql_db_user }}"
-database_user_password: "{{ mysql_db_user_password }}"
-database_host: localhost 
-database_priv: "*.*:ALL,GRANT"
+db_hostname: app1-db   #remember to change this db name in django settings 
+db_names: 
+ - searchlog
+database_users: 
+ - {name: mysql, password: mysql123, host: "% priv=*.*:ALL,GRANT" }
+
+
 ################################################################################
 #app server configuration
 ###################################################################################
@@ -188,12 +189,17 @@ code_repo: https://github.com/BhujayKumarBhatta/CloudSpacewithSearchLog-Python
 
 #the application will be installed in this directory
 app_dir: /opt/djangoproject
+django_project_name: djp1
+django_app_name: 
+#apache configuration for wsgi amd ports
+app_server_apache_listen_port_http: 80
+app_server_apache_listen_port_https: 443
  
 
-# in the app server the http service will be served by apache. apache  uses wsgi for serving django python codes. Configuration files are as follows
-app_server_apache_config_files:
- - {name: apache2.conf, rnm: /etc/apache2/apache2.conf-ansible,fpath: /etc/apache2/apache2.conf, idn: A,x: 0, fsrc: files/apache2.conf.wsgi-ansible, fdest: /etc/apache2/apache2.conf}
- - {name: ports.conf, rnm: /etc/apache2/ports.conf-ansible,fpath: /etc/apache2/ports.conf, idn: B , x: 1,fsrc: files/ports.conf.ansible-file, fdest: /etc/apache2/ports.conf}
+## in the app server the http service will be served by apache. apache  uses wsgi for serving django python codes. Configuration files are as follows
+#app_server_apache_config_files:
+# - {name: apache2.conf, rnm: /etc/apache2/apache2.conf-ansible,fpath: /etc/apache2/apache2.conf, idn: A,x: 0, fsrc: files/apache2.conf.wsgi-ansible, fdest: /etc/apache2/apache2.conf}
+# - {name: ports.conf, rnm: /etc/apache2/ports.conf-ansible,fpath: /etc/apache2/ports.conf, idn: B , x: 1,fsrc: files/ports.conf.ansible-file, fdest: /etc/apache2/ports.conf}
 
 rabbit_mq_users:
    - {name: onepk, pwd: changeme, role: 'administrator, onepk', vhost: / , configure_priv: .*, write_priv: .* , read_priv: .* }
