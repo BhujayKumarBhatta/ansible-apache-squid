@@ -161,6 +161,10 @@
        src: apache2.conf.wsgi-ansible.j2
        dest: /etc/apache/apache2.conf
        backup: yes
+  tags: 
+    - app-server-apache
+    - app-server
+    
 - name: copy  ports.conf forlisten port http and https
   template : 
        src: ports.conf.ansible-file.j2
