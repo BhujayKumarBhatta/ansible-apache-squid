@@ -159,7 +159,7 @@
 - name: copy apache2.conf for Apache2 wsgi configuration and ports.conf for port 80
   template : 
        src: apache2.conf.wsgi-ansible.j2
-       dest: /etc/apache/apache2.conf
+       dest: /etc/apache2/apache2.conf
        backup: yes
   tags: 
     - app-server-apache
@@ -168,7 +168,7 @@
 - name: copy  ports.conf forlisten port http and https
   template : 
        src: ports.conf.ansible-file.j2
-       dest: /etc/apache/ports.conf
+       dest: /etc/apache2/ports.conf
        backup: yes  
   notify:
       - stop apache 
