@@ -195,12 +195,7 @@ django_app_name:
 app_server_apache_listen_port_http: 80
 app_server_apache_listen_port_https: 443
  
-
-## in the app server the http service will be served by apache. apache  uses wsgi for serving django python codes. Configuration files are as follows
-#app_server_apache_config_files:
-# - {name: apache2.conf, rnm: /etc/apache2/apache2.conf-ansible,fpath: /etc/apache2/apache2.conf, idn: A,x: 0, fsrc: files/apache2.conf.wsgi-ansible, fdest: /etc/apache2/apache2.conf}
-# - {name: ports.conf, rnm: /etc/apache2/ports.conf-ansible,fpath: /etc/apache2/ports.conf, idn: B , x: 1,fsrc: files/ports.conf.ansible-file, fdest: /etc/apache2/ports.conf}
-
+#rabbit MQ configuration
 rabbit_mq_users:
    - {name: onepk, pwd: changeme, role: 'administrator, onepk', vhost: / , configure_priv: .*, write_priv: .* , read_priv: .* }
    - {name: ubuntu, pwd: changeme, role: 'administrator, onepk', vhost: / , configure_priv: .*,  write_priv: .* , read_priv: .* }

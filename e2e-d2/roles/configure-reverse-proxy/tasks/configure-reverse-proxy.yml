@@ -115,7 +115,7 @@
     - reverse-proxy
     - reverse-proxy-config
 
-- name: Add host addresses  to /etc/hosts
+- name: Add the newly created app servers IP in the  /etc/hosts file
   lineinfile:
    dest: /etc/hosts
    line: "{{ item.replacetxt }}"
@@ -123,16 +123,27 @@
    regexp: "{{ item.searchtxt }}"
   with_items:
    - {searchtxt: "{{ hostvars[app_servers.name]['ansible_ssh_host'] }}" ,
-          replacetxt: "{{ hostvars[app_servers.name]['ansible_ssh_host'] }}   {{ hostvars[app_servers.name]['ansible_hostname'] }}    {{rppointernametovm}}" }
-         
-   - {searchtxt: "{{rp_internet_address}}", 
-          replacetxt: "{{rp_internet_address}}  {{rpvirtualhostnamewebsite}}" }
-   
-#   - {searchtxt: "{{hostvars[inventory_hostname].ansible_all_ipv4_addresses.0}}", 
-#          replacetxt: "{{hostvars[inventory_hostname].ansible_all_ipv4_addresses.0}}  {{rpvirtualhostnamewebsite}}" }
+      replacetxt: "{{ hostvars[app_servers.name]['ansible_ssh_host'] }}   {{ hostvars[app_servers.name]['ansible_hostname'] }}  {{rppointernametovm}}" }
   tags:
     - reverse-proxy
-    - reverse-proxy-config        
+    - reverse-proxy-config      
+    
+- name: prepare the script file  to update hosts file with internet ip and virtual site name 
+  template:
+   src: add-virtual-sitename-in-hosts.j2
+   dest: /tmp/add-virtual-sitename-in-hosts.sh
+   mode: 0754
+  tags:
+    - reverse-proxy
+    - reverse-proxy-config
+    
+- name: run script   to update hosts file with internet ip and virtual site name 
+  command: "/tmp/add-virtual-sitename-in-hosts.sh"
+  register: update_hosts
+  tags:
+    - reverse-proxy
+    - reverse-proxy-config
+          
 - name: start apache2 httpd  service
   service:
    name: apache2
@@ -173,3 +184,8 @@
 #virbr0    8000.00188b4344a4 yes   enp9s0 
 #sudo ip route add 10.1.0.0/24 via 10.0.0.53
  
+   #- {searchtxt: "{{rp_internet_address}}", 
+    #      replacetxt: "{{rp_internet_address}}  {{rpvirtualhostnamewebsite}}" }
+   
+#   - {searchtxt: "{{hostvars[inventory_hostname].ansible_all_ipv4_addresses.0}}", 
+#          replacetxt: "{{hostvars[inventory_hostname].ansible_all_ipv4_addresses.0}}  {{rpvirtualhostnamewebsite}}" }
