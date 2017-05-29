@@ -210,7 +210,8 @@ rabbit_vhost_name: /myvhost
 reverseproxyservername: haproxy2
 reverseproxyserverip: 10.0.0.52
 reverseproxyserversshport: 2223
-rppointernametovm: app1-app
+# rp poiter name to vm has to match with app server name created previously . 
+rppointernametovm: app1-app 
 rpvirtualhostnamewebsite: django-app1
 rp_http_port: 8080
 rp_https_port: 4433

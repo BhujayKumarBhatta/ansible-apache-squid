@@ -50,21 +50,6 @@
     - reverse-proxy
     - reverse-proxy-config 
     
-#- name: Change default configurations to alter Listen ports in  /etc/apache2/ports.conf and /etc/apache2/sites-enabled/000-default.conf
-#  lineinfile:
-#     dest: /etc/apache2/ports.conf     
-#     state: present 
-#     regexp: "{{ item.searchtxt }}"      
-#     line: "{{ item.replacetxt }}"
-#     backup: yes
-#  with_items:
-#      - {searchtxt: "Listen 80" , replacetxt: "Listen {{ rp_http_port }}" }
-#      - {searchtxt: "Listen 443" , replacetxt: "Listen {{ rp_https_port }}" }
-#      - {searchtxt: "Listen 443" , replacetxt: "Listen {{ rp_https_port }}" }   
-#  tags:
-#    - reverse-proxy
-#    - reverse-proxy-config 
-    
 - name: Change Listening port from 80 and 443 to custom port defiend in defination file
   replace:
      path: /etc/apache2/ports.conf 
@@ -113,20 +98,19 @@
       msg: rp internet address is "{{rp_internet_address}}"
   tags:
     - reverse-proxy
-    - reverse-proxy-config
-
+    - reverse-proxy-config  
+    
 - name: Add the newly created app servers IP in the  /etc/hosts file
   lineinfile:
    dest: /etc/hosts
-   line: "{{ item.replacetxt }}"
+   line: "{{hostvars[item.vnm].ansible_ssh_host}}   {{hostvars[item.vnm].ansible_hostname}}  {{item.vnm}}"
+   regexp: "{{hostvars[item.vnm].ansible_ssh_host}}"
    state: present
-   regexp: "{{ item.searchtxt }}"
-  with_items:
-   - {searchtxt: "{{ hostvars[app_servers.name]['ansible_ssh_host'] }}" ,
-      replacetxt: "{{ hostvars[app_servers.name]['ansible_ssh_host'] }}   {{ hostvars[app_servers.name]['ansible_hostname'] }}  {{rppointernametovm}}" }
+  when:  ("{{item.vnm}}" ==  "{{rpvirtualhostnamewebsite}}")
+  with_items: "{{ vms_to_create }}"   
   tags:
     - reverse-proxy
-    - reverse-proxy-config      
+    - reverse-proxy-config  
     
 - name: prepare the script file  to update hosts file with internet ip and virtual site name 
   template:
@@ -189,3 +173,32 @@
    
 #   - {searchtxt: "{{hostvars[inventory_hostname].ansible_all_ipv4_addresses.0}}", 
 #          replacetxt: "{{hostvars[inventory_hostname].ansible_all_ipv4_addresses.0}}  {{rpvirtualhostnamewebsite}}" }
+
+
+#- name: Change default configurations to alter Listen ports in  /etc/apache2/ports.conf and /etc/apache2/sites-enabled/000-default.conf
+#  lineinfile:
+#     dest: /etc/apache2/ports.conf     
+#     state: present 
+#     regexp: "{{ item.searchtxt }}"      
+#     line: "{{ item.replacetxt }}"
+#     backup: yes
+#  with_items:
+#      - {searchtxt: "Listen 80" , replacetxt: "Listen {{ rp_http_port }}" }
+#      - {searchtxt: "Listen 443" , replacetxt: "Listen {{ rp_https_port }}" }
+#      - {searchtxt: "Listen 443" , replacetxt: "Listen {{ rp_https_port }}" }   
+#  tags:
+#    - reverse-proxy
+#    - reverse-proxy-config 
+
+#- name: Add the newly created app servers IP in the  /etc/hosts file
+#  lineinfile:
+#   dest: /etc/hosts
+#   line: "{{ item.replacetxt }}"
+#   state: present
+#   regexp: "{{ item.searchtxt }}"
+#  with_items:
+#   - {searchtxt: "{{ hostvars[item.vnm].ansible_ssh_host}}" ,
+#      replacetxt: "{{ hostvars[app_servers.name]['ansible_ssh_host'] }}   {{ hostvars[app_servers.name]['ansible_hostname'] }}  {{rppointernametovm}}" }
+#  tags:
+#    - reverse-proxy
+#    - reverse-proxy-config    
