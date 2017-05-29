@@ -2,17 +2,12 @@
 
 #network defination 
 networks_to_create:
-  - {network_name: net7, is_the_network_shared_between_customers: false, accessable_outside_openstack_virtual_network: false}
-  - {network_name: net8, is_the_network_shared_between_customers: false, accessable_outside_openstack_virtual_network: false}
-#subnetworks_to_create :
-#  - {network_name: net7, subnet_name: subnet7 , subnet_address_in_cidr: "120.1.1.0/24" , 
-#     dns_server_for_subnet: "120.1.1.10" , aadl_route_dest: "130.1.1.0/24", addl_routing_gw: 120.1.1.2,
-#     dhcp_to_be_enabled: True, dhcp_ip_allocation_pool_start: 120.1.1.20 , dhcp_ip_allocation_pool_end: 120.1.1.240}
-#     
-#  - {network_name: net8,subnet_name: subnet8 , subnet_address_in_cidr: "130.1.1.0/24", 
-#     dns_server_for_subnet: "130.1.1.10" , aadl_route_dest: "120.1.1.0/24", addl_routing_gw: 130.1.1.2,
-#     dhcp_to_be_enabled: True, dhcp_ip_allocation_pool_start: 130.1.1.20 , dhcp_ip_allocation_pool_end: 130.1.1.240}
-
+  - network_name: net7
+    is_the_network_shared_between_customers: false
+    accessable_outside_openstack_virtual_network: false
+  - network_name: net8
+    is_the_network_shared_between_customers: false
+    accessable_outside_openstack_virtual_network: false
 subnetworks_to_create :
   - network_name: net7
     subnet_name: subnet7
@@ -24,8 +19,6 @@ subnetworks_to_create :
     additional_routing_for_subnet:
       - destination: "130.1.1.0/24"
         nexthop: 120.1.1.2
-      
-     
   - network_name: net8
     subnet_name: subnet8
     subnet_address_in_cidr: "130.1.1.0/24"
@@ -36,16 +29,24 @@ subnetworks_to_create :
     additional_routing_for_subnet: 
       - destination:  "120.1.1.0/24"
         nexthop: 130.1.1.2
-      
-
-
 #First internal router to connect net3 to net4  
+internal_routers:
+ - internal_router_name: r1
+   internal_subnets_ip_to_be_connected: 
+     - 120.1.1.2
+     - 130.1.1.2
+     
+name: "{{ item.portname }}"
+    network: "{{ item.net}}"
+    device_id: "{{routers.results[0].device_id}}"
+    fixed_ips:
+        - ip_address: 
+   
 routerNameA: net7-net8
 externalNetworkAttchedWithRouterA: 
 subnetNamesTobeconnectedA: 
  - subnet7
  - subnet8
- 
 #2nd  router is external  to connect net 3 and net4  to external net
 routerNameB: net7-net8-ext
 externalNetworkAttchedWithRouterB: provider-303

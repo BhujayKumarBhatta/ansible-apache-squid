@@ -3,14 +3,27 @@
 - name: Create a new (or update an existing) router to connect two subnets 
   os_router:
     state: present
-    auth:
-          auth_url: "{{ auth_url_var }}"
-          username: "{{ username_var }}"
-          password: "{{ password_var }}"
-          project_name: "{{ project_name_var }}"
+#    auth:
+#          auth_url: "{{ auth_url_var }}"
+#          username: "{{ username_var }}"
+#          password: "{{ password_var }}"
+#          project_name: "{{ project_name_var }}"
     endpoint_type: "{{ endpoint_type_var }}"   
-    name: "{{router_name}}"        
-    interfaces: "{{subnet_names_tobeconnected}}" 
-  ignore_errors: yes     
+    name: "{{item.internal_router_name}}" 
+    register: routers
+ #   network:   used for extranal network     
+ #   interfaces: "{{internal_subnets_to_be_connected}}" 
+ #coukld not be completed due to lack of fixed ip support ,the default gatway of the subnet is already connected 
+ #wsith the external router, hence there has to be an option to give 2nd ip that is used for addl host route
+  with_items: "{{ internal_routers }}"    
   
-  
+#- name: Adding ports in the router   
+#  os_port:
+#    state: present
+#    endpoint_type: "{{ endpoint_type_var }}"
+#    name: "{{ item.portname }}"
+#    network: "{{ item.net}}"
+#    device_id: "{{routers.results[0].device_id}}"
+#    fixed_ips:
+#        - ip_address: "{{item.internal_subnets_ip_to_be_connected}}"
+    
