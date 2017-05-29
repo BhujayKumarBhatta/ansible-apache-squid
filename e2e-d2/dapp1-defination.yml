@@ -15,27 +15,27 @@ networks_to_create:
 
 subnetworks_to_create :
   - network_name: net7
-    subnet_name: subnet40
-    subnet_address_in_cidr: "140.1.1.0/24"
-    dns_server_for_subnet: "140.1.1.10"    
+    subnet_name: subnet7
+    subnet_address_in_cidr: "120.1.1.0/24"
+    dns_server_for_subnet: "120.1.1.10"    
     dhcp_to_be_enabled: True
-    dhcp_ip_allocation_pool_start: 140.1.1.20
-    dhcp_ip_allocation_pool_end: 140.1.1.240
+    dhcp_ip_allocation_pool_start: 120.1.1.20
+    dhcp_ip_allocation_pool_end: 120.1.1.240
     additional_routing_for_subnet:
-      - destination: "150.1.1.0/24"
-        nexthop: 140.1.1.2
+      - destination: "130.1.1.0/24"
+        nexthop: 120.1.1.2
       
      
   - network_name: net8
-    subnet_name: subnet50
-    subnet_address_in_cidr: "150.1.1.0/24"
-    dns_server_for_subnet: "150.1.1.10"    
+    subnet_name: subnet8
+    subnet_address_in_cidr: "130.1.1.0/24"
+    dns_server_for_subnet: "130.1.1.10"    
     dhcp_to_be_enabled: True
-    dhcp_ip_allocation_pool_start: 150.1.1.20
-    dhcp_ip_allocation_pool_end: 150.1.1.240
+    dhcp_ip_allocation_pool_start: 130.1.1.20
+    dhcp_ip_allocation_pool_end: 130.1.1.240
     additional_routing_for_subnet: 
-      - destination:  "140.1.1.0/24"
-        nexthop: 150.1.1.2
+      - destination:  "120.1.1.0/24"
+        nexthop: 130.1.1.2
       
 
 
