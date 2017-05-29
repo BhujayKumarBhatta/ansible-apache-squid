@@ -1,3 +1,5 @@
+#note the file name of this yml and dont forget to change the variable file name in main deploy playbbok e.g. dapp1.yml
+
 #network defination 
 networks_to_create:
   - {network_name: net7, is_the_network_shared_between_customers: false, accessable_outside_openstack_virtual_network: false}

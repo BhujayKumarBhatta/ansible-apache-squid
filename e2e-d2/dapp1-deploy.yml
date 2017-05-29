@@ -1,7 +1,7 @@
 ---
 - hosts: localhost
   vars_files: 
-    - dapp1-defination.yml
+    - dapp1-defination.yml   # dont forget to change the file name as per differenet environment
     - opnstack_authfile_wp.yml   
     
   roles:
@@ -20,17 +20,7 @@
   vars_files: 
     - dapp1-defination.yml
   remote_user: ubuntu
-  become: true
-  pre_tasks:
-   - name: wait for python package installation by cloud init to be completed
-     shell: /usr/bin/python --version
-     register: result
-     #until: result.stdout.find("not found") != -1
-     until: result.rc == 0
-     retries: 10
-     delay: 30     
-   - debug: var=result
-     
+  become: true  
   roles:
     - apply-common-config
     - { role: configure-db-mysql, when: "server_role == 'dbserver'" }
@@ -49,4 +39,17 @@
     - dapp1-defination.yml    
   remote_user: cloud
   become: true
- 
+  roles:
+    - configure-reverse-proxy
+
+    
+#pre_tasks:
+#   - name: wait for python package installation by cloud init to be completed
+#     shell: /usr/bin/python --version
+#     register: result
+#     #until: result.stdout.find("not found") != -1
+#     until: result.rc == 0
+#     retries: 10
+#     delay: 30     
+#   - debug: var=result
+#     
