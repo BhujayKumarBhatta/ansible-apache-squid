@@ -106,7 +106,7 @@
    line: "{{hostvars[item.vnm].ansible_ssh_host}}   {{hostvars[item.vnm].ansible_hostname}}  {{item.vnm}}"
    regexp: "{{hostvars[item.vnm].ansible_ssh_host}}"
    state: present
-  when:  ("{{item.vnm}}" ==  "{{rpvirtualhostnamewebsite}}")
+  when:  ("{{item.vnm}}" ==  "{{rppointernametovm}}")
   with_items: "{{ vms_to_create }}"   
   tags:
     - reverse-proxy
