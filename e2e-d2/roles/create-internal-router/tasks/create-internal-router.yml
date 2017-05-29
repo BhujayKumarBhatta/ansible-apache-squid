@@ -16,7 +16,10 @@
  #coukld not be completed due to lack of fixed ip support ,the default gatway of the subnet is already connected 
  #wsith the external router, hence there has to be an option to give 2nd ip that is used for addl host route
   with_items: "{{ internal_routers }}"    
-  
+  tags:
+    - internal-router
+    - routers
+    
 #- name: Adding ports in the router   
 #  os_port:
 #    state: present
