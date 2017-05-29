@@ -3,15 +3,15 @@ function update_host {
   IP=$1
   SERVER=$2
 
-line=$(grep "^${IP}\b" hosts)
+line=$(grep "^${IP}\b" /etc/hosts)
 #echo "found a line in hosts file with internet IP: $line"
 if !   grep  "\b\s${SERVER}\b" <<<$line; then
 line1="$line $SERVER"
 #echo "Appended new app server to be proxied in that line: $line1"
 #echo "deleting the existing line in the host file "
-sed -i "/^${IP}\b/d" hosts
+sed -i "/^${IP}\b/d" /etc/hosts
 #echo "deleted existing line"
-echo $line1 |tee -a hosts
+echo $line1 |tee -a /etc/hosts
 echo "Virtual site  name added in the host file   "
 fi
 }
