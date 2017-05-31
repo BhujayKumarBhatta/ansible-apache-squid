@@ -36,11 +36,11 @@ internal_routers:
      - 120.1.1.2
      - 130.1.1.2
      
-name: "{{ item.portname }}"
-    network: "{{ item.net}}"
-    device_id: "{{routers.results[0].device_id}}"
-    fixed_ips:
-        - ip_address: 
+#name: "{{ item.portname }}"
+#    network: "{{ item.net}}"
+#    device_id: "{{routers.results[0].device_id}}"
+#    fixed_ips:
+#        - ip_address: 
    
 routerNameA: net7-net8
 externalNetworkAttchedWithRouterA: 
