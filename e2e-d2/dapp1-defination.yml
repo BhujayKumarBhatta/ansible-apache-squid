@@ -206,7 +206,7 @@ code_repo: https://github.com/BhujayKumarBhatta/CloudSpacewithSearchLog-Python
 #the application will be installed in this directory
 app_dir: /opt/djangoproject
 django_project_name: djp1
-django_app_name: 
+django_app_name: app1
 #apache configuration for wsgi amd ports
 app_server_apache_listen_port_http: 80
 app_server_apache_listen_port_https: 443
