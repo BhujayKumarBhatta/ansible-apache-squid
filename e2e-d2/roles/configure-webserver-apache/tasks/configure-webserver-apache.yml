@@ -112,7 +112,7 @@
 
 ####################Celery task starting , with every change in code under @app.task ( in our case AnalyzeServer) celery restart is required   
 - name: Stop celery background tasks worker pool w1
-  command: celery multi stop w1 -A djp1 -l info
+  command: celery multi stop w1 -A {{django_project_name}} -l info
   args: 
       chdir: "{{app_dir}}/{{django_project_name}}"
   tags: 
@@ -120,7 +120,7 @@
     - app-server
 
 - name: start celery in background mode - worker pool w1
-  command: celery multi start w1 -A djp1 -l info
+  command: celery multi start w1 -A {{django_project_name}} -l info
   args: 
       chdir: "{{app_dir}}/{{django_project_name}}"
   ignore_errors: true
