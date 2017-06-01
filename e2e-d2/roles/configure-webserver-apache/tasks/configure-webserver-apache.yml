@@ -127,23 +127,7 @@
   tags: 
     - app-server-celery
     - app-server
-#####################Apache Configuration and starting the service , this overwirites any existing configuration ans is suitable for  a dedicated apache for our app ##############################################
 
-##never give a space after  the equal to sign. For example path=<filename> is ok however  path= <filename> wont work.
-#- name: Check Apache2.conf file exists
-#  stat: path="{{item.fpath}}"    
-#  register: result
-#  with_items: "{{ app_server_apache_config_files }}"
-#  tags: 
-#    - app-server-apache
-#    - app-server
-
-#- name: keep a backup of the existing apache2.conf file
-#  copy:
-#      src: "{{ item.fpath }}"
-#      dest: "{{ item.rnm }}"
-#  when: "result.results[{{item.x}}].stat.exists"  
-#  with_items: "{{ app_server_apache_config_files }}"
 
 - name: copy apache2.conf for Apache2 wsgi configuration and ports.conf for port 80
   template : 
@@ -179,3 +163,20 @@
 #debug:
      #msg: "{{hostvars[item.vnm].ansible_ssh_host}}"
      #msg: "{{hostvars[item.vnm].ansible_ssh_host}}"
+#####################Apache Configuration and starting the service , this overwirites any existing configuration ans is suitable for  a dedicated apache for our app ##############################################
+
+##never give a space after  the equal to sign. For example path=<filename> is ok however  path= <filename> wont work.
+#- name: Check Apache2.conf file exists
+#  stat: path="{{item.fpath}}"    
+#  register: result
+#  with_items: "{{ app_server_apache_config_files }}"
+#  tags: 
+#    - app-server-apache
+#    - app-server
+
+#- name: keep a backup of the existing apache2.conf file
+#  copy:
+#      src: "{{ item.fpath }}"
+#      dest: "{{ item.rnm }}"
+#  when: "result.results[{{item.x}}].stat.exists"  
+#  with_items: "{{ app_server_apache_config_files }}"
